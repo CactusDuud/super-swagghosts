@@ -61,6 +61,11 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     
 
      #region Pun Callbacks
+    private void OnConnectedToServer()
+    {
+        Debug.Log($"{name}: Connected to Photon servers ({PhotonNetwork.CloudRegion}).");
+    }
+
     public override void OnJoinedLobby()
     {
         Debug.Log($"{name}: Joined lobby for Super Swagghosts.");
