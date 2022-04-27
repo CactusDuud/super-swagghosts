@@ -7,7 +7,8 @@ using Photon.Realtime;
 public class NetworkMainManager : MonoBehaviourPunCallbacks
 {
     [SerializeField] private Button _joinButton;
-    /// <summary> TextMeshPro InputField for players to write their desired room name into. </summary>
+    [SerializeField] private TMP_InputField _nickname;
+    [SerializeField] private string _defaultName = "player";
     [SerializeField] private TMP_InputField _roomName;
     [SerializeField] private byte _maxPlayersPerRoom = 5;
 
@@ -57,12 +58,26 @@ public class NetworkMainManager : MonoBehaviourPunCallbacks
 
     public override void OnCreatedRoom()
     {
-        Debug.Log($"{name}: Created new room \"{_roomName}\"");
+        Debug.Log($"{name}: Created new room \"{_roomName.text}\"");
     }
 
     public override void OnJoinedRoom()
     {
-        Debug.Log($"{name}: Joined room \"{_roomName}\"");
+        Debug.Log($"{name}: Joined room \"{_roomName.text}\"");
+    }
+
+    public override void OnPlayerEnteredRoom(Player newPlayer)
+    {
+        base.OnPlayerEnteredRoom(newPlayer);
+
+        Debug.Log($"{name}: Player \"{newPlayer.NickName}\" has entered the room.");
+
+        if (PhotonNetwork.IsMasterClient)
+        {
+            // Load play area for the master client (automatically synced with all players)
+            //Debug.Log($"{name}: This is the parent client. Loading level...");
+            //PhotonNetwork.LoadLevel("SceneName");
+        }
     }
     #endregion
 
@@ -72,6 +87,22 @@ public class NetworkMainManager : MonoBehaviourPunCallbacks
     {
         if (PhotonNetwork.IsConnected && _roomName.text != "")
         {
+            // Determine the player nickname
+            string _playerNickname = "";
+            if (_nickname.text != "")
+            {
+                _playerNickname = _nickname.text;
+                PlayerPrefs.SetString("nickname", _nickname.text);
+            }
+            else
+            {
+                _playerNickname = PlayerPrefs.GetString("nickname", _defaultName);
+            }
+
+            Debug.Log($"{name}: Setting nickname to \"{_playerNickname}\"...");
+            PhotonNetwork.LocalPlayer.NickName = _playerNickname;
+
+
             Debug.Log($"{name}: Joining room \"{_roomName.text}\"...");
 
             // Configure settings for the room
