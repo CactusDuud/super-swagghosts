@@ -6,10 +6,17 @@ using Photon.Realtime;
 
 public class NetworkMainManager : MonoBehaviourPunCallbacks
 {
+    #region Menu Elements
+    [SerializeField] private GameObject _title;
+    [SerializeField] private GameObject _menuPanel;
+    [SerializeField] private GameObject _connectionsPanel;
     [SerializeField] private Button _joinButton;
     [SerializeField] private TMP_InputField _nickname;
     [SerializeField] private TMP_InputField _roomName;
+    #endregion
+
     [SerializeField] private byte _maxPlayersPerRoom = 5;
+    [SerializeField] private PlayerConnectionDisplay[] _playerDisplays;
 
     private string _gameVersion = "0.0.1";
 
@@ -24,8 +31,12 @@ public class NetworkMainManager : MonoBehaviourPunCallbacks
 
     private void Start()
     {
-        // Disable join button until connected
+        // Toggle what UI is available
+        _title.SetActive(true);
+        _menuPanel.SetActive(true);
         _joinButton.enabled = false;
+        _connectionsPanel.SetActive(false);
+
 
         // Immediately try to connect to PUN servers.
         // Also save connection status for 
@@ -63,6 +74,9 @@ public class NetworkMainManager : MonoBehaviourPunCallbacks
     public override void OnJoinedRoom()
     {
         Debug.Log($"{name}: Joined room \"{_roomName.text}\"");
+
+        
+        PlayerSelectScreen();
     }
 
     public override void OnPlayerEnteredRoom(Player newPlayer)
@@ -70,13 +84,6 @@ public class NetworkMainManager : MonoBehaviourPunCallbacks
         base.OnPlayerEnteredRoom(newPlayer);
 
         Debug.Log($"{name}: Player \"{newPlayer.NickName}\" has entered the room.");
-
-        if (PhotonNetwork.IsMasterClient)
-        {
-            // Load play area for the master client (automatically synced with all players)
-            //Debug.Log($"{name}: This is the parent client. Loading level...");
-            //PhotonNetwork.LoadLevel("SceneName");
-        }
     }
     #endregion
 
@@ -99,7 +106,7 @@ public class NetworkMainManager : MonoBehaviourPunCallbacks
             }
 
 
-            Debug.Log($"{name}: Joining room \"{_roomName.text}\"...");
+            Debug.Log($"{name}: Attempting to join room \"{_roomName.text}\"...");
 
             // Configure settings for the room
             // Ngl this is barely important it just prevents an error
@@ -109,14 +116,36 @@ public class NetworkMainManager : MonoBehaviourPunCallbacks
             };
 
             PhotonNetwork.JoinOrCreateRoom(_roomName.text, _roomConfig, null);
-            PlayerSelectScreen();
         }
     }
 
     /// <summary> Sets up menu for player selection. </summary>
     private void PlayerSelectScreen()
     {
+        _title.SetActive(false);
+        _menuPanel.SetActive(false);
+        _connectionsPanel.SetActive(true);
 
+        for (int playerNum = 1; playerNum <= PhotonNetwork.CurrentRoom.PlayerCount; playerNum++)
+        {
+            Debug.Log($"{name}: Processing player {playerNum}: \"{PhotonNetwork.CurrentRoom.Players[playerNum].NickName}\"");
+
+            _playerDisplays[playerNum-1].SetPlayerName(PhotonNetwork.CurrentRoom.Players[playerNum].NickName);
+            _playerDisplays[playerNum-1].SetConnectionStatus(true);
+        }
+    }
+
+    /// <summary> Loads the level and starts the game </summary>
+    public void StartGame()
+    {
+        //TODO: Ensure that everything is ready before allowing this function to be called
+
+        if (PhotonNetwork.IsMasterClient)
+        {
+            // Load play area for the master client (automatically synced with all players)
+            Debug.Log($"{name}: This is the parent client. Loading level...");
+            PhotonNetwork.LoadLevel("SceneName");
+        }
     }
 
     /// <summary> Close the application. </summary>
