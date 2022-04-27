@@ -70,7 +70,7 @@ public class NetworkMainManager : MonoBehaviourPunCallbacks
     /// <summary> Joins a room on the Photon Network with the provided name, or creates one if it doesn't exist. </summary>
     public void JoinRoom()
     {
-        if (PhotonNetwork.IsConnected)
+        if (PhotonNetwork.IsConnected && _roomName.text != "")
         {
             Debug.Log($"{name}: Joining room \"{_roomName.text}\"...");
 
