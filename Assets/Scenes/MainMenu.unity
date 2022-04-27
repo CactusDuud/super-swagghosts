@@ -857,7 +857,7 @@ GameObject:
   - component: {fileID: 950310738}
   - component: {fileID: 950310737}
   m_Layer: 5
-  m_Name: NickNameInputField
+  m_Name: NicknameInputField
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1577,6 +1577,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _joinButton: {fileID: 1967469706}
+  _nickname: {fileID: 0}
   _roomName: {fileID: 2014973360}
   _maxPlayersPerRoom: 5
 --- !u!1 &1676399855
