@@ -6,26 +6,10 @@ using Photon.Realtime;
 
 public class NetworkRoomManager : MonoBehaviourPunCallbacks
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-
     #region Photon Callbacks
     public override void OnJoinedRoom()
     {
-        Debug.Log($"{name}: Joined room <PLACEHOLDER>.");
-
-        // Room creation logic
-        // Character select, map select, and loading the right level
+        Debug.Log($"{name}: Joined Museum Manor level.");
     }
 
     public override void OnPlayerEnteredRoom(Player newPlayer)
