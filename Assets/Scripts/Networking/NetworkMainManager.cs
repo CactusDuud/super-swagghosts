@@ -8,7 +8,6 @@ public class NetworkMainManager : MonoBehaviourPunCallbacks
 {
     [SerializeField] private Button _joinButton;
     [SerializeField] private TMP_InputField _nickname;
-    [SerializeField] private string _defaultName = "player";
     [SerializeField] private TMP_InputField _roomName;
     [SerializeField] private byte _maxPlayersPerRoom = 5;
 
@@ -88,19 +87,16 @@ public class NetworkMainManager : MonoBehaviourPunCallbacks
         if (PhotonNetwork.IsConnected && _roomName.text != "")
         {
             // Determine the player nickname
-            string _playerNickname = "";
             if (_nickname.text != "")
             {
-                _playerNickname = _nickname.text;
+                PhotonNetwork.LocalPlayer.NickName = _nickname.text;
                 PlayerPrefs.SetString("nickname", _nickname.text);
+                Debug.Log($"{name}: Set local nickname to \"{_nickname.text}\"...");
             }
             else
             {
-                _playerNickname = PlayerPrefs.GetString("nickname", _defaultName);
+                PhotonNetwork.LocalPlayer.NickName = PlayerPrefs.GetString("nickname", $"Player {PhotonNetwork.LocalPlayer.ActorNumber}");
             }
-
-            Debug.Log($"{name}: Setting nickname to \"{_playerNickname}\"...");
-            PhotonNetwork.LocalPlayer.NickName = _playerNickname;
 
 
             Debug.Log($"{name}: Joining room \"{_roomName.text}\"...");
@@ -113,8 +109,14 @@ public class NetworkMainManager : MonoBehaviourPunCallbacks
             };
 
             PhotonNetwork.JoinOrCreateRoom(_roomName.text, _roomConfig, null);
-            //TODO: Load the room menu scene
+            PlayerSelectScreen();
         }
+    }
+
+    /// <summary> Sets up menu for player selection. </summary>
+    private void PlayerSelectScreen()
+    {
+
     }
 
     /// <summary> Close the application. </summary>
