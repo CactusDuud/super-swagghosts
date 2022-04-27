@@ -29,7 +29,7 @@ public class NetworkMainManager : MonoBehaviourPunCallbacks
     #region Pun Callbacks
     public override void OnConnectedToMaster()
     {
-        Debug.Log($"{name}: Connected to Photon servers (region: {PhotonNetwork.CloudRegion}).");
+        Debug.Log($"{name}: Connected to Photon Cloud (region: {PhotonNetwork.CloudRegion}).");
 
         // TODO: Toggle which buttons are available
     }
@@ -43,7 +43,7 @@ public class NetworkMainManager : MonoBehaviourPunCallbacks
 
     public override void OnCreatedRoom()
     {
-        Debug.Log($"{name}: Disconnected from room\nCause: {cause}");
+        Debug.Log($"{name}: Created new room \"{_roomName}\"");
     }
     #endregion
 
