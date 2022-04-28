@@ -9,7 +9,7 @@ public class FlashDetection : MonoBehaviour
     {
         if (collision.tag == "Ghost")
         {
-            GhostHealth ghost = collision.gameObject.GetComponent<GhostHealth>();
+            GhostHealth ghost = collision.GetComponent<GhostHealth>();
             ghost.TakeDamage(5);
         }
     }
