@@ -4,15 +4,41 @@ using UnityEngine;
 
 public class HunterController : ParentController
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private GameObject lightAOE;
+    private bool power;
+
+    protected override void Awake()
     {
-        
+        base.Awake();
+        parentControls.Player.Special.performed += _ => PowerLight();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void PowerLight()
     {
-        
+        if (_view.IsMine)
+        {
+            if (power)
+            {
+                lightAOE.SetActive(false);
+            }
+            else
+            {
+                lightAOE.SetActive(true);
+            }
+            power = !power;
+        }
+    }
+
+    protected override void MoveEntity()
+    {
+        if (_view.IsMine)
+        {
+            Vector2 move = parentControls.Player.Move.ReadValue<Vector2>() * speed;
+            rb.velocity = move;
+            if(move != Vector2.zero  )
+            {
+                lightAOE.transform.RotateAround(transform.position, Vector3.forward, Vector3.Angle(lightAOE.transform.up, move));
+            }
+        }
     }
 }

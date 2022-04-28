@@ -7,18 +7,20 @@ using Photon.Pun;
 public class ParentController : MonoBehaviour
 {
     // Input Actions for controls
-    private ParentControls parentControls;
-    private PhotonView _view;
+    protected ParentControls parentControls;
+    protected PhotonView _view;
+    protected Rigidbody2D rb;
 
     // Speed for movement
-    [SerializeField] private float speed;
+    [SerializeField] protected float speed;
 
 
     // Initiate parentControls
-    private void Awake()
+    protected virtual void Awake()
     {
         parentControls = new ParentControls();
         _view = GetComponent<PhotonView>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
     // Enable parentControls
@@ -33,21 +35,18 @@ public class ParentController : MonoBehaviour
         parentControls.Disable();
     }
 
-    // Start is called before the first frame update
-    void Start()
+    protected virtual void MoveEntity()
     {
-        
+        if (_view.IsMine)
+        {
+            Vector2 move = parentControls.Player.Move.ReadValue<Vector2>() * speed;
+            rb.velocity = move;
+        }
     }
 
     // handles movement of the player
     void FixedUpdate()
     {
-        if (_view.IsMine)
-        {
-            Vector3 move = parentControls.Player.Move.ReadValue<Vector2>();
-            
-            transform.position += move * speed * Time.fixedDeltaTime;
-        }
-
+        MoveEntity();
     }
 }
