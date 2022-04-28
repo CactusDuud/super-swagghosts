@@ -32,10 +32,12 @@ public class GameManager : MonoBehaviour
         if (PhotonNetwork.IsMasterClient)
         {
             _spawned = PhotonNetwork.Instantiate(_ghostPrefab.name, _ghostSpawn.position, _ghostSpawn.rotation);
+            Debug.Log($"{name}: instantiated {_spawned.name}");
         }
         else
         {
             _spawned = PhotonNetwork.Instantiate(_playerPrefab.name, _playerSpawn.position, _playerSpawn.rotation);
+            Debug.Log($"{name}: instantiated {_spawned.name}");
         }
         
         _camera.Follow = _spawned.transform;
