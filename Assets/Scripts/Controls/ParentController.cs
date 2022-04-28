@@ -18,6 +18,7 @@ public class ParentController : MonoBehaviour
     private void Awake()
     {
         parentControls = new ParentControls();
+        _view = GetComponent<PhotonView>();
     }
 
     // Enable parentControls
