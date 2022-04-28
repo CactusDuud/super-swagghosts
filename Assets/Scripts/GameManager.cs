@@ -13,12 +13,15 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        //! Singleton insurance
         if (Instance != null && Instance != this) { Destroy(this); }
         else { Instance = this; }
     }
 
     void Start()
     {
+        // Works like instantiate locally, but tells other clients to spawn a player in their view.
+        // Basically, call once for yourself and everyone else will also see you.
         PhotonNetwork.Instantiate(_playerPrefab.name, _playerSpawn.position, _playerSpawn.rotation);
     }
 

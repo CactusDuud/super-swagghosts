@@ -34,15 +34,10 @@ public class ParentController : MonoBehaviour
         parentControls.Disable();
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     // handles movement of the player
     void FixedUpdate()
     {
+        // Ensure this is my local player before doing any movement
         if (_view.IsMine)
         {
             Vector3 move = parentControls.Player.Move.ReadValue<Vector2>();
