@@ -26,7 +26,6 @@ public class NetworkMainManager : MonoBehaviourPunCallbacks
     {
         // Ensures that all clients load levels when the parent does.
         PhotonNetwork.AutomaticallySyncScene = true;
-        Debug.Log($"{name}: Automatic Scene Synching enabled");
     }
 
     private void Start()
@@ -61,11 +60,6 @@ public class NetworkMainManager : MonoBehaviourPunCallbacks
         Debug.Log($"{name}: Disconnected from Photon Cloud\nCause: {cause}");
     }
 
-    public override void OnJoinedLobby()
-    {
-        Debug.Log($"{name}: Joined lobby for Super Swagghosts.");
-    }
-
     public override void OnCreatedRoom()
     {
         Debug.Log($"{name}: Created new room \"{_roomName.text}\"");
@@ -75,8 +69,7 @@ public class NetworkMainManager : MonoBehaviourPunCallbacks
     {
         Debug.Log($"{name}: Joined room \"{_roomName.text}\"");
 
-        
-        PlayerSelectScreen();
+        JoinLobby();
     }
 
     public override void OnPlayerEnteredRoom(Player newPlayer)
@@ -133,7 +126,7 @@ public class NetworkMainManager : MonoBehaviourPunCallbacks
     }
 
     /// <summary> Sets up menu for player selection. </summary>
-    private void PlayerSelectScreen()
+    private void JoinLobby()
     {
         _title.SetActive(false);
         _menuPanel.SetActive(false);
@@ -146,7 +139,18 @@ public class NetworkMainManager : MonoBehaviourPunCallbacks
         }
     }
 
-    /// <summary> Loads the level and starts the game </summary>
+
+    /// <summary> Exits menu for player selection, and disconnects from the room. </summary>
+    public void LeaveLobby()
+    {
+        _connectionsPanel.SetActive(false);
+        _title.SetActive(true);
+        _menuPanel.SetActive(true);
+
+        PhotonNetwork.LeaveRoom();
+    }
+
+    /// <summary> Loads the level and starts the game. </summary>
     public void StartGame()
     {
         //TODO: Ensure that everything is ready before allowing this function to be called
