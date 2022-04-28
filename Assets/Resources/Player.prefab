@@ -10,11 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1216869407}
   - component: {fileID: 1216869409}
-  - component: {fileID: 1216869408}
   - component: {fileID: 1216869410}
   m_Layer: 0
   m_Name: Light
-  m_TagString: Untagged
+  m_TagString: Flashlight
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -63,18 +62,6 @@ PolygonCollider2D:
       - {x: -0.1550179, y: -0.3130278}
       - {x: 0.15630263, y: -0.31351575}
       - {x: 0.31489787, y: 0.31759405}
---- !u!114 &1216869408
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1216869406}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1365dd03168ffb148ab24e8c02e14688, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!212 &1216869410
 SpriteRenderer:
   m_ObjectHideFlags: 0
