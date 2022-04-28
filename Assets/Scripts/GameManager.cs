@@ -1,16 +1,30 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
+using Photon.Realtime;
 
 public class GameManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private GameObject _playerPrefab;
+    [SerializeField] private Transform _playerSpawn;
+
+    public static GameManager Instance { get; private set; }
+
+    private void Awake()
     {
-        
+        //! Singleton insurance
+        if (Instance != null && Instance != this) { Destroy(this); }
+        else { Instance = this; }
     }
 
-    // Update is called once per frame
+    void Start()
+    {
+        // Works like instantiate locally, but tells other clients to spawn a player in their view.
+        // Basically, call once for yourself and everyone else will also see you.
+        PhotonNetwork.Instantiate(_playerPrefab.name, _playerSpawn.position, _playerSpawn.rotation);
+    }
+
     void Update()
     {
         

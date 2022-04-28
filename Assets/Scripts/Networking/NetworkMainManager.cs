@@ -20,13 +20,18 @@ public class NetworkMainManager : MonoBehaviourPunCallbacks
 
     private string _gameVersion = "0.0.1";
 
+    public static NetworkMainManager Instance { get; private set; }
+
 
     #region Unity Callbacks
     private void Awake()
     {
+        //! Singleton insurance
+        if (Instance != null && Instance != this) { Destroy(this); }
+        else { Instance = this; }
+
         // Ensures that all clients load levels when the parent does.
         PhotonNetwork.AutomaticallySyncScene = true;
-        Debug.Log($"{name}: Automatic Scene Synching enabled");
     }
 
     private void Start()
@@ -61,11 +66,6 @@ public class NetworkMainManager : MonoBehaviourPunCallbacks
         Debug.Log($"{name}: Disconnected from Photon Cloud\nCause: {cause}");
     }
 
-    public override void OnJoinedLobby()
-    {
-        Debug.Log($"{name}: Joined lobby for Super Swagghosts.");
-    }
-
     public override void OnCreatedRoom()
     {
         Debug.Log($"{name}: Created new room \"{_roomName.text}\"");
@@ -75,8 +75,7 @@ public class NetworkMainManager : MonoBehaviourPunCallbacks
     {
         Debug.Log($"{name}: Joined room \"{_roomName.text}\"");
 
-        
-        PlayerSelectScreen();
+        JoinLobby();
     }
 
     public override void OnPlayerEnteredRoom(Player newPlayer)
@@ -84,6 +83,19 @@ public class NetworkMainManager : MonoBehaviourPunCallbacks
         base.OnPlayerEnteredRoom(newPlayer);
 
         Debug.Log($"{name}: Player \"{newPlayer.NickName}\" has entered the room.");
+
+        _playerDisplays[newPlayer.ActorNumber-1].SetPlayerName(newPlayer.NickName);
+        _playerDisplays[newPlayer.ActorNumber-1].SetConnectionStatus(true);
+    }
+
+    public override void OnPlayerLeftRoom(Player otherPlayer)
+    {
+        base.OnPlayerLeftRoom(otherPlayer);
+
+        Debug.Log($"{name}: Player \"{otherPlayer.NickName}\" has left the room.");
+
+        _playerDisplays[otherPlayer.ActorNumber-1].SetPlayerName("—");
+        _playerDisplays[otherPlayer.ActorNumber-1].SetConnectionStatus(false);
     }
     #endregion
 
@@ -120,7 +132,7 @@ public class NetworkMainManager : MonoBehaviourPunCallbacks
     }
 
     /// <summary> Sets up menu for player selection. </summary>
-    private void PlayerSelectScreen()
+    private void JoinLobby()
     {
         _title.SetActive(false);
         _menuPanel.SetActive(false);
@@ -128,14 +140,22 @@ public class NetworkMainManager : MonoBehaviourPunCallbacks
 
         for (int playerNum = 1; playerNum <= PhotonNetwork.CurrentRoom.PlayerCount; playerNum++)
         {
-            Debug.Log($"{name}: Processing player {playerNum}: \"{PhotonNetwork.CurrentRoom.Players[playerNum].NickName}\"");
-
             _playerDisplays[playerNum-1].SetPlayerName(PhotonNetwork.CurrentRoom.Players[playerNum].NickName);
             _playerDisplays[playerNum-1].SetConnectionStatus(true);
         }
     }
 
-    /// <summary> Loads the level and starts the game </summary>
+    /// <summary> Exits menu for player selection, and disconnects from the room. </summary>
+    public void LeaveLobby()
+    {
+        _connectionsPanel.SetActive(false);
+        _title.SetActive(true);
+        _menuPanel.SetActive(true);
+
+        PhotonNetwork.LeaveRoom();
+    }
+
+    /// <summary> Loads the level and starts the game. </summary>
     public void StartGame()
     {
         //TODO: Ensure that everything is ready before allowing this function to be called
@@ -144,7 +164,7 @@ public class NetworkMainManager : MonoBehaviourPunCallbacks
         {
             // Load play area for the master client (automatically synced with all players)
             Debug.Log($"{name}: This is the parent client. Loading level...");
-            PhotonNetwork.LoadLevel("SceneName");
+            PhotonNetwork.LoadLevel("MuseumManor");
         }
     }
 

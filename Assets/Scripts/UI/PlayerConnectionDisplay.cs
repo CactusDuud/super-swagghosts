@@ -16,7 +16,7 @@ public class PlayerConnectionDisplay : MonoBehaviour
 
     private void Awake()
     {
-        SetPlayerName("[]");
+        SetPlayerName("—");
         SetConnectionStatus(false);
     }
 
@@ -29,7 +29,5 @@ public class PlayerConnectionDisplay : MonoBehaviour
     public void SetPlayerName(string newPlayerName)
     {
         playerName.text = $"{newPlayerName}";
-
-        Debug.Log($"{name}: A player's name was set to \"{newPlayerName}\"");
     }
 }

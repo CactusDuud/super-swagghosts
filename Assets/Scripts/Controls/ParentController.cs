@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Photon.Pun;
 
 public class ParentController : MonoBehaviour
 {
     // Input Actions for controls
     private ParentControls parentControls;
+    private PhotonView _view;
 
     // Speed for movement
     [SerializeField] private float speed;
@@ -16,6 +18,7 @@ public class ParentController : MonoBehaviour
     private void Awake()
     {
         parentControls = new ParentControls();
+        _view = GetComponent<PhotonView>();
     }
 
     // Enable parentControls
@@ -39,9 +42,12 @@ public class ParentController : MonoBehaviour
     // handles movement of the player
     void FixedUpdate()
     {
-        Vector3 move = parentControls.Player.Move.ReadValue<Vector2>();
-
-        transform.position += move * speed * Time.fixedDeltaTime;
+        if (_view.IsMine)
+        {
+            Vector3 move = parentControls.Player.Move.ReadValue<Vector2>();
+            
+            transform.position += move * speed * Time.fixedDeltaTime;
+        }
 
     }
 }

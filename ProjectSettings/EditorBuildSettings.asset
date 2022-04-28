@@ -5,7 +5,13 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Scenes/MainMenu.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
+    guid: a75d1421b705942429dfa524bc423f2b
+  - enabled: 1
+    path: Assets/Scenes/MuseumManor.unity
+    guid: a7201ff61f2c01c4ca7cf85a96a22fa6
   m_configObjects: {}
