@@ -84,6 +84,19 @@ public class NetworkMainManager : MonoBehaviourPunCallbacks
         base.OnPlayerEnteredRoom(newPlayer);
 
         Debug.Log($"{name}: Player \"{newPlayer.NickName}\" has entered the room.");
+
+        _playerDisplays[newPlayer.ActorNumber-1].SetPlayerName(newPlayer.NickName);
+        _playerDisplays[newPlayer.ActorNumber-1].SetConnectionStatus(true);
+    }
+
+    public override void OnPlayerLeftRoom(Player otherPlayer)
+    {
+        base.OnPlayerLeftRoom(otherPlayer);
+
+        Debug.Log($"{name}: Player \"{otherPlayer.NickName}\" has left the room.");
+
+        _playerDisplays[otherPlayer.ActorNumber-1].SetPlayerName("—");
+        _playerDisplays[otherPlayer.ActorNumber-1].SetConnectionStatus(false);
     }
     #endregion
 
@@ -128,8 +141,6 @@ public class NetworkMainManager : MonoBehaviourPunCallbacks
 
         for (int playerNum = 1; playerNum <= PhotonNetwork.CurrentRoom.PlayerCount; playerNum++)
         {
-            Debug.Log($"{name}: Processing player {playerNum}: \"{PhotonNetwork.CurrentRoom.Players[playerNum].NickName}\"");
-
             _playerDisplays[playerNum-1].SetPlayerName(PhotonNetwork.CurrentRoom.Players[playerNum].NickName);
             _playerDisplays[playerNum-1].SetConnectionStatus(true);
         }

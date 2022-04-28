@@ -16,7 +16,7 @@ public class PlayerConnectionDisplay : MonoBehaviour
 
     private void Awake()
     {
-        SetPlayerName("[]");
+        SetPlayerName("—");
         SetConnectionStatus(false);
     }
 
