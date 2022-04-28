@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerHealth : ParentHealth
 {
 
-    [SerializeField] protected int max_health = 100; // can be overrided for variation
+    // [SerializeField] protected int max_health = 100; // can be overrided for variation
 
 
     // sets max health to current health

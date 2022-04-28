@@ -4,13 +4,4 @@ using UnityEngine;
 
 public class FlashDetection : MonoBehaviour
 {
-
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if (collision.tag == "Ghost")
-        {
-            GhostHealth ghost = collision.GetComponent<GhostHealth>();
-            ghost.TakeDamage(5);
-        }
-    }
 }
