@@ -29,7 +29,7 @@ public class PlayerHealth : ParentHealth
             if(curr_health != 0)
             {
                 TakeDamage(100);
-                GetComponent<ParentController>().enabled = false;
+                GetComponent<HunterController>().enabled = false;
                 Debug.Log(curr_health);
             }
         }

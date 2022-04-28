@@ -6,34 +6,52 @@ public class GhostHealth : ParentHealth
 {
 
     private int iframe_buildup;
-    private bool activate_iframe;
+    // private bool activate_iframe;
 
     void Awake()
     {
         curr_health = max_health;
+        iframe_buildup = 0;
         Debug.Log(curr_health);
     }
 
+    // resets iframe buildup
+    private void ResetIframeBuildUp() {iframe_buildup = 0;}
+
+    //give ghost movement back so that they can get out of the way
+    //and they dont take damage as they leave
+    // NOTE: i want to increase the speed for a few sec but id have to change the
+    // parent controller script and idk if we want to have a public func that can change speed
     private void ActivateInvincibility()
     {
-        //give ghost movement back so that they can get out of the way
-        //and they dont take damage as they leave
+        GetComponent<GhostController>().enabled = true;
+        ResetIframeBuildUp();
     }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.tag == "Flashlight") //make sure to have ghost freeze for a few secs here too
+
+        // if ghost collides with a flashlight ray, then ghost freezes up, and 
+        // takes damage for each second its in the flashlight ray
+        // once its taken enough damage it can iframe out of it
+        if (collision.tag == "Flashlight")
         {
-            TakeDamage(1);
+            GetComponent<GhostController>().enabled = false;
+
+
+            if(iframe_buildup >= 20){ActivateInvincibility();}
+            else{TakeDamage(1);}
+
             iframe_buildup++;
             Debug.Log(curr_health);
-
-            if(iframe_buildup == 20) {ActivateInvincibility();}
+            
         }
     }
 
+    // when the ghost leaves the flashlight ray, the iframe buildup is reset and it can move again
     private void OnTriggerExit2D(Collider2D collision)
     {
-        iframe_buildup = 0;
+        ResetIframeBuildUp();
+        GetComponent<GhostController>().enabled = true;
     }
 }
