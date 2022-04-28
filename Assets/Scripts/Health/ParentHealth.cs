@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public abstract class ParentHealth : MonoBehaviour
 {
     protected int curr_health;
+    [SerializeField] protected int max_health = 100; // can be overrided for variation
     // public Slider slider;
     // public Gradient gradient;
     // public Image fill;
