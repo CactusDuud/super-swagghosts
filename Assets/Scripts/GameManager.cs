@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,8 @@ using Photon.Realtime;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] private CinemachineVirtualCamera _camera;
+
     [SerializeField] private GameObject _playerPrefab;
     [SerializeField] private Transform _playerSpawn;
     [SerializeField] private GameObject _ghostPrefab;
@@ -25,14 +28,18 @@ public class GameManager : MonoBehaviour
         // Works like instantiate locally, but tells other clients to spawn a player in their view.
         // Basically, call once for yourself and everyone else will also see you.
         // Instantiate a ghost only for the host
+        GameObject _spawned;
         if (PhotonNetwork.IsMasterClient)
         {
-            PhotonNetwork.Instantiate(_ghostPrefab.name, _ghostSpawn.position, _ghostSpawn.rotation);
+            _spawned = PhotonNetwork.Instantiate(_ghostPrefab.name, _ghostSpawn.position, _ghostSpawn.rotation);
         }
         else
         {
-            PhotonNetwork.Instantiate(_playerPrefab.name, _playerSpawn.position, _playerSpawn.rotation);
+            _spawned = PhotonNetwork.Instantiate(_playerPrefab.name, _playerSpawn.position, _playerSpawn.rotation);
         }
+        
+        _camera.Follow = _spawned.transform;
+        _camera.LookAt = _spawned.transform;
     }
 
     void Update()
