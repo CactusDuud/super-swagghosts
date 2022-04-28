@@ -13,6 +13,7 @@ public class NetworkMainManager : MonoBehaviourPunCallbacks
     [SerializeField] private Button _joinButton;
     [SerializeField] private TMP_InputField _nickname;
     [SerializeField] private TMP_InputField _roomName;
+    [SerializeField] private TMP_Text _roomNameDisplay;
     #endregion
 
     [SerializeField] private byte _maxPlayersPerRoom = 5;
@@ -137,6 +138,7 @@ public class NetworkMainManager : MonoBehaviourPunCallbacks
         _title.SetActive(false);
         _menuPanel.SetActive(false);
         _connectionsPanel.SetActive(true);
+        _roomNameDisplay.text = $"Room: {PhotonNetwork.CurrentRoom.Name}";
 
         for (int playerNum = 1; playerNum <= PhotonNetwork.CurrentRoom.PlayerCount; playerNum++)
         {
