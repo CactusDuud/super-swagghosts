@@ -20,10 +20,16 @@ public class NetworkMainManager : MonoBehaviourPunCallbacks
 
     private string _gameVersion = "0.0.1";
 
+    public static NetworkMainManager Instance { get; private set; }
+
 
     #region Unity Callbacks
     private void Awake()
     {
+        //! Singleton insurance
+        if (Instance != null && Instance != this) { Destroy(this); }
+        else { Instance = this; }
+
         // Ensures that all clients load levels when the parent does.
         PhotonNetwork.AutomaticallySyncScene = true;
     }
@@ -165,7 +171,7 @@ public class NetworkMainManager : MonoBehaviourPunCallbacks
         {
             // Load play area for the master client (automatically synced with all players)
             Debug.Log($"{name}: This is the parent client. Loading level...");
-            PhotonNetwork.LoadLevel("SceneName");
+            PhotonNetwork.LoadLevel("MuseumManor");
         }
     }
 
