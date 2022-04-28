@@ -18,6 +18,8 @@ public class ParentController : MonoBehaviour
     private void Awake()
     {
         parentControls = new ParentControls();
+
+        _view = GetComponent<PhotonView>();
     }
 
     // Enable parentControls
@@ -44,7 +46,7 @@ public class ParentController : MonoBehaviour
         if (_view.IsMine)
         {
             Vector3 move = parentControls.Player.Move.ReadValue<Vector2>();
-            
+
             transform.position += move * speed * Time.fixedDeltaTime;
         }
 
