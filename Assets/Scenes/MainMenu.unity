@@ -379,7 +379,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1574709268}
         m_TargetAssemblyTypeName: NetworkMainManager, Assembly-CSharp
-        m_MethodName: LeaveLobby
+        m_MethodName: StartGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

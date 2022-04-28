@@ -152,13 +152,6 @@ public class NetworkMainManager : MonoBehaviourPunCallbacks
         _title.SetActive(true);
         _menuPanel.SetActive(true);
 
-        int i = 1;
-        while (PhotonNetwork.IsMasterClient)
-        {
-            PhotonNetwork.CurrentRoom.SetMasterClient(PhotonNetwork.CurrentRoom.Players[i]);
-            i++;
-        }
-
         PhotonNetwork.LeaveRoom();
     }
 
