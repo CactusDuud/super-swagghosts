@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] private GameObject _playerPrefab;
     [SerializeField] private Transform _playerSpawn;
+    [SerializeField] private GameObject _ghostPrefab;
+    [SerializeField] private Transform _ghostSpawn;
 
     public static GameManager Instance { get; private set; }
 
@@ -22,7 +24,15 @@ public class GameManager : MonoBehaviour
     {
         // Works like instantiate locally, but tells other clients to spawn a player in their view.
         // Basically, call once for yourself and everyone else will also see you.
-        PhotonNetwork.Instantiate(_playerPrefab.name, _playerSpawn.position, _playerSpawn.rotation);
+        // Instantiate a ghost only for the host
+        if (PhotonNetwork.IsMasterClient)
+        {
+            PhotonNetwork.Instantiate(_ghostPrefab.name, _ghostSpawn.position, _ghostSpawn.rotation);
+        }
+        else
+        {
+            PhotonNetwork.Instantiate(_playerPrefab.name, _playerSpawn.position, _playerSpawn.rotation);
+        }
     }
 
     void Update()
