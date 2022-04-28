@@ -322,18 +322,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2137670058, guid: 0bcfe2857f60f96458da589af8e06c6e, type: 3}
-      propertyPath: m_Radius
-      value: 0.28
-      objectReference: {fileID: 0}
-    - target: {fileID: 1939664736968611763, guid: 0bcfe2857f60f96458da589af8e06c6e, type: 3}
-      propertyPath: sceneViewId
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6376504521942341411, guid: 0bcfe2857f60f96458da589af8e06c6e, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: c54a04e2c521011408f755801c69f295, type: 3}
     - target: {fileID: 7318581742099624092, guid: 0bcfe2857f60f96458da589af8e06c6e, type: 3}
       propertyPath: m_Name
       value: Player

@@ -7,12 +7,15 @@ public class HunterController : ParentController
     [SerializeField] private GameObject lightAOE;
     private bool power;
 
+
+    // makes it so function is called every time the special control is activated
     protected override void Awake()
     {
         base.Awake();
         parentControls.Player.Special.performed += _ => PowerLight();
     }
 
+    // turns on a players flashlight if it is off, turns it on if it is on, turns on while holding control
     private void PowerLight()
     {
         if (_view.IsMine)
@@ -29,6 +32,8 @@ public class HunterController : ParentController
         }
     }
 
+    // moves by applying force to a rigidbody and if the character is moving, move the flashlight AOE in
+    // the direction the player is moving
     protected override void MoveEntity()
     {
         if (_view.IsMine)

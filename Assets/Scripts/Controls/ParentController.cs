@@ -35,6 +35,8 @@ public class ParentController : MonoBehaviour
         parentControls.Disable();
     }
 
+    // function used to move the entity based on wasd input
+    // moves through rigidbody by setting velocity
     protected virtual void MoveEntity()
     {
         if (_view.IsMine)
