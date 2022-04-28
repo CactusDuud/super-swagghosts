@@ -16,10 +16,10 @@ public class PlayerHealth : ParentHealth
     }
 
     // subtract damage from current health
-    protected override void TakeDamage(int damage)
-    {
-        curr_health -= damage;
-    }
+    // protected override void TakeDamage(int damage)
+    // {
+    //     curr_health -= damage;
+    // }
 
     //when collides with a ghost, player's health falls to 0 and player can't move
     private void OnCollisionEnter2D(Collision2D collision)

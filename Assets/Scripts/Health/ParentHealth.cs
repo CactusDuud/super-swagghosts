@@ -26,7 +26,12 @@ public abstract class ParentHealth : MonoBehaviour
     //     fill.color = gradient.Evaluate(slider.normalizedValue);
     // }
 
-    protected virtual void TakeDamage(int damage) {}
+    public void TakeDamage(int damage)
+    {
+        curr_health -= damage;
+    }
+
+    // virtual void TakeDamage(int damage) {}
     // {
     //     CurrentHealth -= damage;
     //     ChangeHealthBar();
