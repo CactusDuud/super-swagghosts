@@ -2,10 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Photon.Pun;
 
 public abstract class ParentHealth : MonoBehaviour
 {
     protected int curr_health;
+
+
+
     [SerializeField] protected int max_health = 100; // can be overrided for variation
     // public Slider slider;
     // public Gradient gradient;
@@ -43,4 +47,17 @@ public abstract class ParentHealth : MonoBehaviour
     //     }
     // }
 
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            // We own this player: send the others our data
+            stream.SendNext(curr_health);
+        }
+        else
+        {
+            // Network player, receive data
+            curr_health = (int)stream.ReceiveNext();
+        }
+    }
 }

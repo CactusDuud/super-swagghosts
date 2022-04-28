@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class HunterController : ParentController
 {
@@ -44,6 +45,20 @@ public class HunterController : ParentController
             {
                 lightAOE.transform.RotateAround(transform.position, Vector3.forward, Vector3.Angle(lightAOE.transform.up, move));
             }
+        }
+    }
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            // We own this player: send the others our data
+            stream.SendNext(power);
+        }
+        else
+        {
+            // Network player, receive data
+            power = (bool)stream.ReceiveNext();
         }
     }
 }
