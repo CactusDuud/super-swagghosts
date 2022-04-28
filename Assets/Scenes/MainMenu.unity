@@ -2084,13 +2084,13 @@ MonoBehaviour:
     serializedVersion: 2
     rgba: 4291151159
   m_fontColor: {r: 0.21568626, g: 0.77254903, b: 0.77254903, a: 1}
-  m_enableVertexGradient: 0
+  m_enableVertexGradient: 1
   m_colorMode: 3
   m_fontColorGradient:
     topLeft: {r: 1, g: 1, b: 1, a: 1}
     topRight: {r: 1, g: 1, b: 1, a: 1}
     bottomLeft: {r: 1, g: 1, b: 1, a: 1}
-    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 0.22745095, g: 0.41356358, b: 0.67058825, a: 1}
   m_fontColorGradientPreset: {fileID: 0}
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
@@ -3360,7 +3360,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.08820986, g: 0.02429691, b: 0.13207549, a: 0}
+  m_BackGroundColor: {r: 0.0572143, g: 0.0134999985, b: 0.09, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
