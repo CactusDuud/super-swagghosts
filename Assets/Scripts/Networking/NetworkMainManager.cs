@@ -139,7 +139,6 @@ public class NetworkMainManager : MonoBehaviourPunCallbacks
         }
     }
 
-
     /// <summary> Exits menu for player selection, and disconnects from the room. </summary>
     public void LeaveLobby()
     {
