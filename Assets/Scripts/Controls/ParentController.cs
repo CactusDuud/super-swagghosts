@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Photon.Pun;
 
-public class ParentController : MonoBehaviour
+public class ParentController : MonoBehaviour, IPunObservable
 {
     // Input Actions for controls
     protected ParentControls parentControls;
@@ -51,4 +51,6 @@ public class ParentController : MonoBehaviour
     {
         MoveEntity();
     }
+
+    public virtual void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info) {}
 }

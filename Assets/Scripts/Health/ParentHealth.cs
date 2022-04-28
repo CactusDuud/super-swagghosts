@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
 
-public abstract class ParentHealth : MonoBehaviour
+public abstract class ParentHealth : MonoBehaviour, IPunObservable
 {
     protected int curr_health;
 
