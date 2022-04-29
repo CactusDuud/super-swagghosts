@@ -6,7 +6,7 @@ using Photon.Pun;
 
 public abstract class ParentHealth : MonoBehaviour, IPunObservable
 {
-    protected int curr_health;
+    [ReadOnly] protected int curr_health;
     public bool is_down;
 
 
