@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
         //! Singleton insurance
         if (Instance != null && Instance != this) { Destroy(this); }
         else { Instance = this; }
-        
+
         // Works like instantiate locally, but tells other clients to spawn a player in their view.
         // Basically, call once for yourself and everyone else will also see you.
         // Instantiate a ghost only for the host
@@ -47,6 +47,23 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        
+        if (PhotonNetwork.IsMasterClient)
+        {
+            int downCount = 0;
+            foreach (var p in GameObject.FindGameObjectsWithTag("Player"))
+            {
+                if (p.GetComponent<PlayerHealth>().is_down)
+                {
+                    downCount++;
+                }
+            }
+
+            if (downCount >= PhotonNetwork.CurrentRoom.PlayerCount - 1)
+            {
+                Debug.Log("End Game");
+
+                Application.Quit();
+            }
+        }
     }
 }
