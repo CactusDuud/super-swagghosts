@@ -12,7 +12,8 @@ public class PlayerHealth : ParentHealth
     void Awake()
     {
         curr_health = max_health;
-        Debug.Log(curr_health);
+        //Debug.Log(curr_health);
+        is_down = false;
     }
 
     // subtract damage from current health
@@ -30,7 +31,8 @@ public class PlayerHealth : ParentHealth
             {
                 TakeDamage(100);
                 GetComponent<HunterController>().enabled = false;
-                Debug.Log(curr_health);
+                is_down = false;
+                //Debug.Log(curr_health);
             }
         }
     }

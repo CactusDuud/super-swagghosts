@@ -12,7 +12,17 @@ public class GhostHealth : ParentHealth
     {
         curr_health = max_health;
         iframe_buildup = 0;
-        Debug.Log(curr_health);
+        is_down = false;
+        //Debug.Log(curr_health);
+    }
+
+    void Update()
+    {
+        if(curr_health == 0)
+        {
+            is_down = true;
+            GetComponent<GhostController>().enabled = false;
+        }
     }
 
     // resets iframe buildup

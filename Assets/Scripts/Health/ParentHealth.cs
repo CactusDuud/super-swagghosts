@@ -7,7 +7,7 @@ using Photon.Pun;
 public abstract class ParentHealth : MonoBehaviour, IPunObservable
 {
     protected int curr_health;
-
+    public bool is_down;
 
 
     [SerializeField] protected int max_health = 100; // can be overrided for variation

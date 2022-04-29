@@ -338,6 +338,7 @@ GameObject:
   m_Component:
   - component: {fileID: 521881936}
   - component: {fileID: 521881937}
+  - component: {fileID: 521881938}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -378,6 +379,21 @@ MonoBehaviour:
   _playerSpawn: {fileID: 1065076142}
   _ghostPrefab: {fileID: 2974735930679030579, guid: 0838fabb35b731947be6a311e5a5822b, type: 3}
   _ghostSpawn: {fileID: 1382566367}
+--- !u!114 &521881938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 521881935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 576f19f7998812b49b5eb84ea71a4ded, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  players: []
+  p_health_scripts: []
+  g_health_script: {fileID: 0}
 --- !u!1 &1065076141
 GameObject:
   m_ObjectHideFlags: 0
