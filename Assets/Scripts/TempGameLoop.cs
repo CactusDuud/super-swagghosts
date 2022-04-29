@@ -33,10 +33,11 @@ public class TempGameLoop : MonoBehaviour
     {
         if(has_setuped == false)
         {
-            if(PhotonNetwork.CountOfPlayersInRooms == PhotonNetwork.CountOfPlayers) 
+            if(PhotonNetwork.CurrentRoom.PlayerCount == PhotonNetwork.CountOfPlayers) 
             {
                 SetUp();
                 has_setuped = true;
+                Debug.Log("checking #players");
             }
         }
         else
