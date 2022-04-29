@@ -338,4 +338,5 @@ MonoBehaviour:
   _notConnectedColour: {r: 1, g: 0.19999999, b: 0.19999999, a: 1}
   _connectedColour: {r: 0.19999999, g: 1, b: 0.23392409, a: 1}
   _statusLight: {fileID: 7821245949698220420}
+  _characterImage: {fileID: 3025337551238089365}
   playerName: {fileID: 7821245949163005806}

@@ -162,7 +162,7 @@ public class NetworkMainManager : MonoBehaviourPunCallbacks
     {
         //TODO: Ensure that everything is ready before allowing this function to be called
 
-        if (PhotonNetwork.IsMasterClient)
+        if (PhotonNetwork.IsMasterClient && PhotonNetwork.CurrentRoom.PlayerCount >= 2)
         {
             // Load play area for the master client (automatically synced with all players)
             Debug.Log($"{name}: This is the parent client. Loading level...");
