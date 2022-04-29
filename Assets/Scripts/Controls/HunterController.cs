@@ -41,7 +41,7 @@ public class HunterController : ParentController
         {
             Vector2 move = parentControls.Player.Move.ReadValue<Vector2>() * speed;
             rb.velocity = move;
-            if(move != Vector2.zero  )
+            if(move != Vector2.zero)
             {
                 lightAOE.transform.RotateAround(transform.position, Vector3.forward, Vector3.Angle(lightAOE.transform.up, move));
             }
