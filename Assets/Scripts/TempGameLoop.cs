@@ -31,9 +31,9 @@ public class TempGameLoop : MonoBehaviour
         {
             if(player.tag == "Player")
             {
-                p_health_scripts.Add(GetComponent<PlayerHealth>());
+                p_health_scripts.Add(player.GetComponent<PlayerHealth>());
             }
-            else {g_health_script = GetComponent<GhostHealth>();} //assumming there is only 1 ghost
+            else {g_health_script = player.GetComponent<GhostHealth>();} //assumming there is only 1 ghost
         }
 
         total_num_humans = p_health_scripts.Count;
