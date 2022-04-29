@@ -31,6 +31,7 @@ public class PlayerHealth : ParentHealth
             {
                 TakeDamage(100);
                 GetComponent<HunterController>().enabled = false;
+                GetComponent<Rigidbody2D>().velocity = Vector2.zero;
                 is_down = false;
                 //Debug.Log(curr_health);
             }
