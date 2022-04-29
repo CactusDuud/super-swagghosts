@@ -69,12 +69,12 @@ public class NetworkMainManager : MonoBehaviourPunCallbacks
 
     public override void OnCreatedRoom()
     {
-        Debug.Log($"{name}: Created new room \"{_roomName.text}\"");
+        Debug.Log($"{name}: Created new room \"{_roomName.text.ToLower()}\"");
     }
 
     public override void OnJoinedRoom()
     {
-        Debug.Log($"{name}: Joined room \"{_roomName.text}\"");
+        Debug.Log($"{name}: Joined room \"{PhotonNetwork.CurrentRoom.Name}\"");
 
         JoinLobby();
     }
@@ -104,7 +104,7 @@ public class NetworkMainManager : MonoBehaviourPunCallbacks
     /// <summary> Joins a room on the Photon Network with the provided name, or creates one if it doesn't exist. </summary>
     public void JoinRoom()
     {
-        if (PhotonNetwork.IsConnected && _roomName.text != "")
+        if (PhotonNetwork.IsConnected && _roomName.text.ToLower() != "")
         {
             // Determine the player nickname
             if (_nickname.text != "")
@@ -119,7 +119,7 @@ public class NetworkMainManager : MonoBehaviourPunCallbacks
             }
 
 
-            Debug.Log($"{name}: Attempting to join room \"{_roomName.text}\"...");
+            Debug.Log($"{name}: Attempting to join room \"{_roomName.text.ToLower()}\"...");
 
             // Configure settings for the room
             // Ngl this is barely important it just prevents an error
@@ -128,7 +128,7 @@ public class NetworkMainManager : MonoBehaviourPunCallbacks
                 MaxPlayers = _maxPlayersPerRoom
             };
 
-            PhotonNetwork.JoinOrCreateRoom(_roomName.text, _roomConfig, null);
+            PhotonNetwork.JoinOrCreateRoom(_roomName.text.ToLower(), _roomConfig, null);
         }
     }
 
@@ -160,8 +160,6 @@ public class NetworkMainManager : MonoBehaviourPunCallbacks
     /// <summary> Loads the level and starts the game. </summary>
     public void StartGame()
     {
-        //TODO: Ensure that everything is ready before allowing this function to be called
-
         if (PhotonNetwork.IsMasterClient && PhotonNetwork.CurrentRoom.PlayerCount >= 2)
         {
             // Load play area for the master client (automatically synced with all players)
