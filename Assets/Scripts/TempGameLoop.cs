@@ -9,38 +9,16 @@ public class TempGameLoop : MonoBehaviour
     [SerializeField] private List<PlayerHealth> p_health_scripts = new List<PlayerHealth>();
     [SerializeField] private GhostHealth g_health_script;
     int total_num_humans;
+    bool has_setuped;
 
     // Start is called before the first frame update
     void Start()
     {
-        var photonViews = UnityEngine.Object.FindObjectsOfType<PhotonView>();
-    
-        // go through each photonView/players in game and grabs the gameobject
-        foreach (var view in photonViews)
-        {
-            var player = view.Owner;
-            //Objects in the scene don't have an owner, its means view.owner will be null
-            if(player!=null){
-                var playerPrefabObject = view.gameObject;
-                players.Add(playerPrefabObject);
-            }
-        }
+        has_setuped = false;
+        //PhotonNetwork.countOfPlayers
 
-        Debug.Log("total players: " + players.Count);
+        // Debug.Log("total human scripts" + p_health_scripts.Count);
 
-        //goes through each player prefab and grabs the health script
-        foreach (var player in players)
-        {
-            if(player.tag == "Player")
-            {
-                p_health_scripts.Add(player.GetComponent<PlayerHealth>());
-            }
-            else {g_health_script = player.GetComponent<GhostHealth>();} //assumming there is only 1 ghost
-        }
-
-        total_num_humans = p_health_scripts.Count;
-
-        Debug.Log("total human scripts" + p_health_scripts.Count);
         // go through each player and grab health script
         // foreach (var player in PhotonNetwork.PlayerList)
         // {
@@ -53,10 +31,21 @@ public class TempGameLoop : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(CheckWinner() != "None")
+        if(has_setuped == false)
         {
-            Debug.Log("No Winner rn");
-            //PhotonNetwork.LoadLevel("MainMenu");
+            if(PhotonNetwork.CountOfPlayersInRooms == PhotonNetwork.CountOfPlayers) 
+            {
+                SetUp();
+                has_setuped = true;
+            }
+        }
+        else
+        {
+            if(CheckWinner() != "None")
+            {
+                Debug.Log("No Winner rn");
+                //PhotonNetwork.LoadLevel("MainMenu");
+            }
         }
     }
 
@@ -80,6 +69,36 @@ public class TempGameLoop : MonoBehaviour
         }
 
         return winner;
+    }
+
+    void SetUp()
+    {
+        var photonViews = UnityEngine.Object.FindObjectsOfType<PhotonView>();
+    
+        // go through each photonView/players in game and grabs the gameobject
+        foreach (var view in photonViews)
+        {
+            var player = view.Owner;
+            //Objects in the scene don't have an owner, its means view.owner will be null
+            if(player!=null){
+                var playerPrefabObject = view.gameObject;
+                players.Add(playerPrefabObject);
+            }
+        }
+
+        // Debug.Log("total players: " + players.Count);
+
+        //goes through each player prefab and grabs the health script
+        foreach (var player in players)
+        {
+            if(player.tag == "Player")
+            {
+                p_health_scripts.Add(player.GetComponent<PlayerHealth>());
+            }
+            else {g_health_script = player.GetComponent<GhostHealth>();} //assumming there is only 1 ghost
+        }
+
+        total_num_humans = p_health_scripts.Count;
     }
 
     // foreach (var player in PhotonNetwork.PlayerList) // 2 Players Room
