@@ -20,5 +20,11 @@ public class GhostController : ParentController
     }
 
 
+    public void ModifySpeed(float newSpeed)
+    {
+        speed *= newSpeed;
+    }
+
+
     
 }
