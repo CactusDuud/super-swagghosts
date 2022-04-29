@@ -225,7 +225,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
-  _spookBox: {fileID: 0}
+  _spookBox: {fileID: 7634329586970433535}
 --- !u!61 &7634329586970433535
 BoxCollider2D:
   m_ObjectHideFlags: 0
