@@ -42,7 +42,7 @@ public partial class @ParentControls : IInputActionCollection2, IDisposable
                     ""id"": ""a3745b6f-ed53-4033-88fe-7c39300ddfbd"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": """",
+                    ""interactions"": ""Hold(duration=0.1)"",
                     ""initialStateCheck"": false
                 }
             ],

@@ -47,7 +47,7 @@ public class ParentController : MonoBehaviour, IPunObservable
     }
 
     // handles movement of the player
-    void FixedUpdate()
+    protected virtual void FixedUpdate()
     {
         MoveEntity();
     }

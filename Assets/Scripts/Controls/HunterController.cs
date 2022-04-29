@@ -13,7 +13,8 @@ public class HunterController : ParentController
     protected override void Awake()
     {
         base.Awake();
-        parentControls.Player.Special.performed += _ => PowerLight();
+        parentControls.Player.Special.performed += _ => _lightOn = true;
+        parentControls.Player.Special.canceled += _ => _lightOn = false;
     }
 
     // turns on a players flashlight if it is off, turns it on if it is on, turns on while holding control
@@ -21,15 +22,7 @@ public class HunterController : ParentController
     {
         if (_view.IsMine)
         {
-            if (_lightOn)
-            {
-                lightAOE.SetActive(false);
-            }
-            else
-            {
-                lightAOE.SetActive(true);
-            }
-            _lightOn = !_lightOn;
+            lightAOE.SetActive(_lightOn);
         }
     }
 
@@ -60,5 +53,11 @@ public class HunterController : ParentController
             // Network player, receive data
             _lightOn = (bool)stream.ReceiveNext();
         }
+    }
+
+    protected override void FixedUpdate()
+    {
+        base.FixedUpdate();
+        PowerLight();
     }
 }
