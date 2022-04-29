@@ -26,6 +26,8 @@ public class TempGameLoop : MonoBehaviour
             }
         }
 
+        Debug.Log("total players: " + players.Count);
+
         //goes through each player prefab and grabs the health script
         foreach (var player in players)
         {
@@ -37,6 +39,8 @@ public class TempGameLoop : MonoBehaviour
         }
 
         total_num_humans = p_health_scripts.Count;
+
+        Debug.Log("total human scripts" + p_health_scripts.Count);
         // go through each player and grab health script
         // foreach (var player in PhotonNetwork.PlayerList)
         // {
