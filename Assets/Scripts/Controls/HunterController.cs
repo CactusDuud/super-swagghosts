@@ -6,7 +6,7 @@ using Photon.Pun;
 public class HunterController : ParentController
 {
     [SerializeField] private GameObject lightAOE;
-    private bool power;
+    private bool _lightOn;
 
 
     // makes it so function is called every time the special control is activated
@@ -21,7 +21,7 @@ public class HunterController : ParentController
     {
         if (_view.IsMine)
         {
-            if (power)
+            if (_lightOn)
             {
                 lightAOE.SetActive(false);
             }
@@ -29,7 +29,7 @@ public class HunterController : ParentController
             {
                 lightAOE.SetActive(true);
             }
-            power = !power;
+            _lightOn = !_lightOn;
         }
     }
 
@@ -53,12 +53,12 @@ public class HunterController : ParentController
         if (stream.IsWriting)
         {
             // We own this player: send the others our data
-            stream.SendNext(power);
+            stream.SendNext(_lightOn);
         }
         else
         {
             // Network player, receive data
-            power = (bool)stream.ReceiveNext();
+            _lightOn = (bool)stream.ReceiveNext();
         }
     }
 }
