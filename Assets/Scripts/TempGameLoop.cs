@@ -51,7 +51,8 @@ public class TempGameLoop : MonoBehaviour
     {
         if(CheckWinner() != "None")
         {
-            PhotonNetwork.LoadLevel("MainMenu");
+            Debug.Log("No Winner rn");
+            //PhotonNetwork.LoadLevel("MainMenu");
         }
     }
 
