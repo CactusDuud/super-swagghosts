@@ -25,7 +25,7 @@ public class PlayerHealth : ParentHealth
     //when collides with a ghost, player's health falls to 0 and player can't move
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Ghost")
+        if (collision.gameObject.CompareTag("Ghost"))
         {
             if(curr_health != 0)
             {
