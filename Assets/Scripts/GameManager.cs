@@ -21,10 +21,7 @@ public class GameManager : MonoBehaviour
         //! Singleton insurance
         if (Instance != null && Instance != this) { Destroy(this); }
         else { Instance = this; }
-    }
-
-    void Start()
-    {
+        
         // Works like instantiate locally, but tells other clients to spawn a player in their view.
         // Basically, call once for yourself and everyone else will also see you.
         // Instantiate a ghost only for the host
@@ -42,6 +39,10 @@ public class GameManager : MonoBehaviour
         
         _camera.Follow = _spawned.transform;
         _camera.LookAt = _spawned.transform;
+    }
+
+    void Start()
+    {
     }
 
     void Update()
