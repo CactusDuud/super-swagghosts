@@ -1,20 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.Rendering.Universal;
 using Photon.Pun;
 
 public class HunterController : ParentController
 {
-    [SerializeField] private GameObject lightAOE;
-    private bool _lightOn;
+    [SerializeField] private GameObject _lights;
+    private GameObject _focusedLight;
+    private GameObject _ambientLight;
+    private bool _isLightOn;
 
 
-    // makes it so function is called every time the special control is activated
+    // Subscribes _isLightOn to the special button being used
     protected override void Awake()
     {
         base.Awake();
-        parentControls.Player.Special.performed += _ => _lightOn = true;
-        parentControls.Player.Special.canceled += _ => _lightOn = false;
+
+        _focusedLight = _lights.transform.GetChild(0).gameObject;
+        _ambientLight = _lights.transform.GetChild(1).gameObject;
+
+        parentControls.Player.Special.performed += _ => _isLightOn = true;
+        parentControls.Player.Special.canceled += _ => _isLightOn = false;
     }
 
     // turns on a players flashlight if it is off, turns it on if it is on, turns on while holding control
@@ -22,7 +29,8 @@ public class HunterController : ParentController
     {
         if (_view.IsMine)
         {
-            lightAOE.SetActive(_lightOn);
+            _focusedLight.SetActive(_isLightOn);
+            _ambientLight.SetActive(_isLightOn);
         }
     }
 
@@ -36,7 +44,7 @@ public class HunterController : ParentController
             rb.velocity = move;
             if (move != Vector2.zero)
             {
-                lightAOE.transform.RotateAround(transform.position, Vector3.forward, Vector3.Angle(lightAOE.transform.up, move));
+                _lights.transform.RotateAround(transform.position, Vector3.forward, Vector3.Angle(_lights.transform.up, move));
             }
         }
     }
@@ -46,12 +54,12 @@ public class HunterController : ParentController
         if (stream.IsWriting)
         {
             // We own this player: send the others our data
-            stream.SendNext(_lightOn);
+            stream.SendNext(_isLightOn);
         }
         else
         {
             // Network player, receive data
-            _lightOn = (bool)stream.ReceiveNext();
+            _isLightOn = (bool)stream.ReceiveNext();
         }
     }
 
