@@ -179,7 +179,6 @@ MonoBehaviour:
   - {fileID: 2974735930679030580}
   - {fileID: 2974735930679030581}
   - {fileID: 2974735930679030578}
-  - {fileID: 0}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -227,6 +226,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   _spookBox: {fileID: 9160570681613881095}
+  optionsMenu: {fileID: 5652935064288510696, guid: f9feb392f46349140b867da4d61e29c7, type: 3}
+  dimImage: {fileID: 9050823988773069891, guid: f17409932b326054d9c0ab0a26b2ede0, type: 3}
 --- !u!1 &5343677343164499149
 GameObject:
   m_ObjectHideFlags: 0
