@@ -34,7 +34,7 @@ public class HunterController : ParentController
         if (_view.IsMine)
         {
             _focusedLight.SetActive(_isLightOn);
-            _ambientLight.SetActive(_isLightOn);
+            _ambientLight.SetActive(!_isLightOn);
         }
     }
 
