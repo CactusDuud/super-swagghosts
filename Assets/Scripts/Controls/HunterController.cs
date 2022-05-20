@@ -117,20 +117,14 @@ public class HunterController : ParentController
         Time.timeScale = 1f;
     }
 
+    [PunRPC]
     public void DebugStuff()
     {
         Debug.Log($"Debug Stuff id {GetComponent<PhotonView>().GetInstanceID()}");
     }
 
-    private void Start()
-    {
-        Debug.Log($"thus player photon view {GetComponent<PhotonView>().GetInstanceID()}");
-    }
-
     public override void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
-        GetComponent<PhotonView>().RPC("PowerLight", RpcTarget.All);
-        GetComponent<PhotonView>().RPC("DebugStuff", RpcTarget.All);
         if (stream.IsWriting)
         {
             // We own this player: send the others our data
@@ -150,5 +144,10 @@ public class HunterController : ParentController
     {
         base.FixedUpdate();
         PowerLight();
+    }
+
+    private void Update()
+    {
+        GetComponent<PhotonView>().RPC("DebugStuff", RpcTarget.All);
     }
 }
