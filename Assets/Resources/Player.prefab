@@ -339,5 +339,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 3.5
   _lights: {fileID: 0}
+  _lightFuelMax: 1000
+  _lightFuel: 0
+  _minimumLight: 0.17
   optionsMenu: {fileID: 5652935064288510696, guid: f9feb392f46349140b867da4d61e29c7, type: 3}
   dimImage: {fileID: 9050823988773069891, guid: f17409932b326054d9c0ab0a26b2ede0, type: 3}
