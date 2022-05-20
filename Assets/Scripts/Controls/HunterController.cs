@@ -31,6 +31,8 @@ public class HunterController : ParentController
     }
 
     // turns on a players flashlight if it is off, turns it on if it is on, turns on while holding control
+
+    [PunRPC]
     private void PowerLight()
     {
         if (_view.IsMine)
@@ -122,7 +124,7 @@ public class HunterController : ParentController
             // We own this player: send the others our data
             stream.SendNext(_isLightOn);
             stream.SendNext(_lightFuel);
-            //GetComponent<PhotonView>().RPC("PowerLight", RpcTarget.Others);
+            GetComponent<PhotonView>().RPC("PowerLight", RpcTarget.Others);
         }
         else
         {
