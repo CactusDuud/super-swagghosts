@@ -6,7 +6,7 @@ using Photon.Pun;
 public class TempGameLoop : MonoBehaviour
 {
     [SerializeField] private List<GameObject> players = new List<GameObject>();
-    [SerializeField] private List<PlayerHealth> p_health_scripts = new List<PlayerHealth>();
+    [SerializeField] private List<HunterHealth> p_health_scripts = new List<HunterHealth>();
     [SerializeField] private GhostHealth g_health_script;
     public int total_num_humans;
     public bool has_setuped;
@@ -110,7 +110,7 @@ public class TempGameLoop : MonoBehaviour
         {
             if(player.tag == "Player")
             {
-                p_health_scripts.Add(player.GetComponent<PlayerHealth>());
+                p_health_scripts.Add(player.GetComponent<HunterHealth>());
             }
             else if (player.tag == "Ghost")
             {g_health_script = player.GetComponent<GhostHealth>();} //assumming there is only 1 ghost

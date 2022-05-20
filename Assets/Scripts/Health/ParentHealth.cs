@@ -39,7 +39,10 @@ public abstract class ParentHealth : MonoBehaviourPunCallbacks
         if (!_view.IsMine) return;
 
         curr_health = health;
-        Debug.Log($"{name}: Health set to {health}");
+        if (curr_health < 0) curr_health = 0;
+        if (curr_health > max_health) curr_health = max_health;
+
+        Debug.Log($"{name}: Health set to {curr_health}");
 
         //! This stuff might belong in HunterHealth
         //slider.value = curr_health;

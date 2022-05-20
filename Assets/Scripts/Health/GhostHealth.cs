@@ -18,7 +18,7 @@ public class GhostHealth : ParentHealth
 
     private void Update()
     {
-        if(curr_health == 0)
+        if (curr_health == 0)
         {
             is_down = true;
             _controller.enabled = false;

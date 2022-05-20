@@ -400,8 +400,6 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 1732884974039032681}
-  - {fileID: 2052007292895768184}
-  - {fileID: 2052007292895768186}
   - {fileID: 6042223981339123395}
   sceneViewId: 0
   InstantiationId: 0
@@ -431,11 +429,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 8785083144454512461}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 330c0e6938497764da50bc586c72d911, type: 3}
+  m_Script: {fileID: 11500000, guid: 8843233bd989ae04ea8b57b9d0aa5c08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  is_down: 0
   max_health: 100
+  is_down: 0
 --- !u!114 &2052007292895768186
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -449,9 +447,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3.5
+  _minMoveThreshhold: 0.01
+  optionsMenu: {fileID: 5652935064288510696, guid: f9feb392f46349140b867da4d61e29c7, type: 3}
+  dimImage: {fileID: 9050823988773069891, guid: f17409932b326054d9c0ab0a26b2ede0, type: 3}
   _lights: {fileID: 828910934991253413}
   _lightFuelMax: 10
   _lightFuel: 0
   _minimumLight: 0.34
-  optionsMenu: {fileID: 5652935064288510696, guid: f9feb392f46349140b867da4d61e29c7, type: 3}
-  dimImage: {fileID: 9050823988773069891, guid: f17409932b326054d9c0ab0a26b2ede0, type: 3}

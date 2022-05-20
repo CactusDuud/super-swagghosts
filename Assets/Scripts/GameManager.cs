@@ -48,7 +48,7 @@ public class GameManager : MonoBehaviour
             int downCount = 0;
             foreach (var p in GameObject.FindGameObjectsWithTag("Player"))
             {
-                if (p.GetComponent<PlayerHealth>().is_down)
+                if (p.GetComponent<HunterHealth>().is_down)
                 {
                     downCount++;
                 }
