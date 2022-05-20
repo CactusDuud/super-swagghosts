@@ -117,6 +117,7 @@ public class HunterController : ParentController
         Time.timeScale = 1f;
     }
 
+    [PunRPC]
     public void DebugStuff()
     {
         Debug.Log($"Debug Stuff id {GetComponent<PhotonView>().GetInstanceID()}");
