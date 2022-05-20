@@ -43,6 +43,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        Debug.Log($"Ghost photon view {GetComponent<PhotonView>().GetInstanceID()}");
     }
 
     void Update()
