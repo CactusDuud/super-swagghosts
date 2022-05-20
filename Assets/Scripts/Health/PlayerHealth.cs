@@ -9,11 +9,9 @@ public class PlayerHealth : ParentHealth
 
 
     // sets max health to current health
-    void Awake()
+    protected override void Awake()
     {
-        curr_health = max_health;
-        //Debug.Log(curr_health);
-        is_down = false;
+        base.Awake();
     }
 
     // subtract damage from current health

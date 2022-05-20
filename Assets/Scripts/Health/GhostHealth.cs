@@ -9,12 +9,11 @@ public class GhostHealth : ParentHealth
     
     // private bool activate_iframe;
 
-    void Awake()
+    protected override void Awake()
     {
-        curr_health = max_health;
+        base.Awake();
+
         iframe_buildup = 0;
-        is_down = false;
-        //Debug.Log(curr_health);
     }
 
     void Update()

@@ -1,13 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
+using Photon.Realtime;
+using ExitGames.Client.Photon;
 
-public abstract class ParentHealth : MonoBehaviour, IPunObservable
+public abstract class ParentHealth : MonoBehaviourPunCallbacks
 {
     [ReadOnly] protected int curr_health;
     public bool is_down;
+    protected PhotonView _view;
 
 
     [SerializeField] protected int max_health = 100; // can be overrided for variation
@@ -31,33 +32,36 @@ public abstract class ParentHealth : MonoBehaviour, IPunObservable
     //     fill.color = gradient.Evaluate(slider.normalizedValue);
     // }
 
-    public void TakeDamage(int damage)
+    protected virtual void Awake()
     {
-        curr_health -= damage;
+        _view = GetComponent<PhotonView>();
+
+        curr_health = max_health;
+        is_down = false;
     }
 
-    // virtual void TakeDamage(int damage) {}
-    // {
-    //     CurrentHealth -= damage;
-    //     ChangeHealthBar();
-
-    //     if (CurrentHealth <= 0)
-    //     {
-    //         Die();
-    //     }
-    // }
-
-    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    public void SetHealth(int health)
     {
-        if (stream.IsWriting)
+        curr_health = health;
+
+        if (_view.IsMine)
         {
-            // We own this player: send the others our data
-            stream.SendNext(curr_health);
+            Hashtable hash = new Hashtable();
+            hash.Add("curr_health", curr_health);
+            PhotonNetwork.LocalPlayer.SetCustomProperties(hash);
         }
-        else
+    }
+
+    public void TakeDamage(int damage)
+    {
+        SetHealth(curr_health - damage);
+    }
+
+    public override void OnPlayerPropertiesUpdate(Player targetPlayer, Hashtable changedProps)
+    {
+        if (!_view.IsMine && targetPlayer == _view.Owner)
         {
-            // Network player, receive data
-            curr_health = (int)stream.ReceiveNext();
+            SetHealth((int)changedProps["curr_health"]);
         }
     }
 }
