@@ -117,14 +117,17 @@ public class HunterController : ParentController
         Time.timeScale = 1f;
     }
 
+    
+
     public override void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
+        GetComponent<PhotonView>().RPC("PowerLight", RpcTarget.All);
         if (stream.IsWriting)
         {
             // We own this player: send the others our data
             stream.SendNext(_isLightOn);
             stream.SendNext(_lightFuel);
-            GetComponent<PhotonView>().RPC("PowerLight", RpcTarget.Others);
+            
         }
         else
         {
