@@ -51,11 +51,13 @@ public class TempGameLoop : MonoBehaviour
             else if(winner == "ghost")
             {
                 Debug.Log("Winner is ghost");
+                PhotonNetwork.LeaveRoom();
                 PhotonNetwork.LoadLevel("MainMenu");
             }
             else if(winner == "humans")
             {
                 Debug.Log("Winners is human");
+                PhotonNetwork.LeaveRoom();
                 PhotonNetwork.LoadLevel("MainMenu");
             }
             
