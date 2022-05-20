@@ -122,7 +122,7 @@ public class HunterController : ParentController
             // We own this player: send the others our data
             stream.SendNext(_isLightOn);
             stream.SendNext(_lightFuel);
-            GetComponent<PhotonView>().RPC("PowerLight", RpcTarget.Others);
+            //GetComponent<PhotonView>().RPC("PowerLight", RpcTarget.Others);
         }
         else
         {
