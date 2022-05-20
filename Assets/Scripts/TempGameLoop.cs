@@ -33,12 +33,13 @@ public class TempGameLoop : MonoBehaviour
     {
         if(has_setuped == false)
         {
-            if(PhotonNetwork.CurrentRoom.PlayerCount == PhotonNetwork.CountOfPlayers) 
-            {
-                SetUp();
-                has_setuped = true;
-                Debug.Log("checking #players");
-            }
+            StartCoroutine(SpawnEnemy());
+            // if(PhotonNetwork.CurrentRoom.PlayerCount == PhotonNetwork.CountOfPlayers) 
+            // {
+            //     SetUp();
+            //     has_setuped = true;
+            //     Debug.Log("checking #players");
+            // }
         }
         else
         {
@@ -106,4 +107,12 @@ public class TempGameLoop : MonoBehaviour
     // {
 
     // }
+    IEnumerator SpawnEnemy()
+    {
+        yield return new WaitForSeconds(5f);
+        SetUp();
+        has_setuped = true;
+        Debug.Log("checking #players");
+        yield return new WaitForSeconds(0.1f);
+    }
 }
