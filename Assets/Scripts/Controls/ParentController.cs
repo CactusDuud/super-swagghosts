@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Photon.Pun;
 
-public class ParentController : MonoBehaviour
+public class ParentController : MonoBehaviourPunCallbacks
 {
     // Input Actions for controls
     protected ParentControls parentControls;
@@ -34,14 +34,18 @@ public class ParentController : MonoBehaviour
     }
 
     // Enable parentControls
-    private void OnEnable()
+    public override void OnEnable()
     {
+        base.OnEnable();
+
         parentControls.Enable();
     }
 
     // disable parentControls
-    private void OnDisable()
+    public override void OnDisable()
     {
+        base.OnEnable();
+
         parentControls.Disable();
     }
 

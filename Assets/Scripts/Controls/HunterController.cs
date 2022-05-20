@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
 using Photon.Pun;
+using ExitGames.Client.Photon;
+using Photon.Realtime;
 
 public class HunterController : ParentController
 {
@@ -10,8 +12,7 @@ public class HunterController : ParentController
     private PolygonCollider2D _focusedLightCollider;
     private float _focusedLightDefaultIntensity;
     private float _ambientLightDefaultIntensity;
-
-    private bool _isLightOn;
+    
     [SerializeField] private float _lightFuelMax;
     [ReadOnly] [SerializeField] private float _lightFuel;
     [SerializeField] private float _minimumLight;
@@ -19,51 +20,11 @@ public class HunterController : ParentController
 
 
 
-    public void Refuel(float fuelAmount)
-    {
-        _lightFuel += fuelAmount;
-        if (_lightFuel > _lightFuelMax) { _lightFuel = _lightFuelMax; }
-    }
-
-    // turns on a players flashlight if it is off, turns it on if it is on, turns on while holding control
-
-    [PunRPC]
-    private void PowerLight()
-    {
-        if (!_view.IsMine) return;
-        
-        if (_isLightOn)
-        {
-            // Toggle light
-            _focusedLight.intensity = _focusedLightDefaultIntensity;
-            _focusedLightCollider.enabled = true;
-            _ambientLight.intensity = 0;
-
-            // Reduce fuel amount
-            if (_lightFuel > 0)
-            {
-                _lightFuel -= Time.deltaTime;
-                if (_lightFuel < 0) { _lightFuel = 0; }
-            }
-
-            // Set size of beam 
-            // Assumes default scale for hitbox is 1
-            float _lightScale = 1 - ((1 - _minimumLight) * (1 - (_lightFuel / _lightFuelMax)));
-            _focusedLightCollider.transform.localScale = new Vector3(_lightScale, _lightScale);
-            _focusedLight.pointLightOuterRadius = _focusedLightDefaultDistance * _lightScale;
-        }
-        else
-        {
-            // Toggle light
-            _focusedLight.intensity = 0;
-            _focusedLightCollider.enabled = false;
-            _ambientLight.intensity = _ambientLightDefaultIntensity;
-        }
-    }
-
     protected override void Awake()
     {
         base.Awake();
+
+        _lightFuel = _lightFuelMax;
 
         _focusedLight = _lights.transform.GetChild(0).GetComponent<Light2D>();
         _focusedLightDefaultIntensity = _focusedLight.intensity;
@@ -74,10 +35,8 @@ public class HunterController : ParentController
         _focusedLightCollider.enabled = false;
 
         // Subscribes _isLightOn to the special button being used
-        parentControls.Player.Special.performed += _ => _isLightOn = true;
-        parentControls.Player.Special.canceled += _ => _isLightOn = false;
-
-        _lightFuel = _lightFuelMax;
+        parentControls.Player.Special.performed += _ => PowerLight(true);
+        parentControls.Player.Special.canceled += _ => PowerLight(false);
     }
 
     protected override void MoveEntity()
@@ -104,9 +63,67 @@ public class HunterController : ParentController
     {
         base.FixedUpdate();
 
-        PowerLight();
-        GetComponent<PhotonView>().RPC("PowerLight", RpcTarget.Others);
+        
     }
 
+    private void PowerLight(bool isLightOn)
+    {
+        if (!_view.IsMine) return;
+        
+        // Handle light logic
+        if (isLightOn)
+        {
+            // Toggle light
+            _focusedLight.intensity = _focusedLightDefaultIntensity;
+            _focusedLightCollider.enabled = true;
+            _ambientLight.intensity = 0;
 
+            // Reduce fuel amount
+            if (_lightFuel > 0)
+            {
+                _lightFuel -= Time.deltaTime;
+                if (_lightFuel < 0) { _lightFuel = 0; }
+            }
+
+            // Set size of beam 
+            // Assumes default scale for hitbox is 1
+            float _lightScale = 1 - ((1 - _minimumLight) * (1 - (_lightFuel / _lightFuelMax)));
+            _focusedLightCollider.transform.localScale = new Vector3(_lightScale, _lightScale);
+            _focusedLight.pointLightOuterRadius = _focusedLightDefaultDistance * _lightScale;
+        }
+        else
+        {
+            // Toggle light
+            _focusedLight.intensity = 0;
+            _focusedLightCollider.enabled = false;
+            _ambientLight.intensity = _ambientLightDefaultIntensity;
+        }
+
+        // Update over network
+        Hashtable hash = new Hashtable();
+        hash.Add("isLightOn", isLightOn);
+        hash.Add("lightFuel", _lightFuel);
+        PhotonNetwork.LocalPlayer.SetCustomProperties(hash);
+    }
+
+    public void Refuel(float fuelAmount)
+    {
+        SetFuel(_lightFuel + fuelAmount);
+    }
+
+    public void SetFuel(float fuelAmount)
+    {
+        _lightFuel = fuelAmount;
+        if (_lightFuel < 0) { _lightFuel = 0; }
+        if (_lightFuel > _lightFuelMax) { _lightFuel = _lightFuelMax; }
+    }
+
+    public override void OnPlayerPropertiesUpdate(Player targetPlayer, Hashtable changedProps)
+    {
+        if (!_view.IsMine && targetPlayer == _view.Owner)
+        {
+            PowerLight((bool)changedProps["isLightOn"]);
+            SetFuel((float)changedProps["lightFuel"]);
+        }
+    }
 }
