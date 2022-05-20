@@ -144,10 +144,8 @@ public class HunterController : ParentController
     {
         base.FixedUpdate();
         PowerLight();
+        GetComponent<PhotonView>().RPC("PowerLight", RpcTarget.Others);
     }
 
-    private void Update()
-    {
-        GetComponent<PhotonView>().RPC("DebugStuff", RpcTarget.All);
-    }
+
 }
