@@ -35,6 +35,7 @@ public class PlayerHealth : ParentHealth
                 is_down = false;
                 //Debug.Log(curr_health);
             }
+            else {is_down = true;}
         }
     }
 }
