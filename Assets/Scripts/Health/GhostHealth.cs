@@ -6,6 +6,7 @@ public class GhostHealth : ParentHealth
 {
 
     private int iframe_buildup;
+    
     // private bool activate_iframe;
 
     void Awake()
