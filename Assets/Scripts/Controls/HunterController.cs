@@ -71,9 +71,6 @@ public class HunterController : ParentController
     {
         base.Awake();
 
-        // Removes rigidbody from network characters (fixes movement jank)
-        if (!_view.IsMine) { Destroy(GetComponent<Rigidbody2D>()); }
-
         _focusedLight = _lights.transform.GetChild(0).GetComponent<Light2D>();
         _focusedLightDefaultIntensity = _focusedLight.intensity;
         _focusedLightDefaultDistance = _focusedLight.pointLightOuterRadius;

@@ -21,6 +21,9 @@ public class ParentController : MonoBehaviour, IPunObservable
         parentControls = new ParentControls();
         _view = GetComponent<PhotonView>();
         rb = GetComponent<Rigidbody2D>();
+
+        // Removes rigidbody from network characters (fixes movement jank)
+        if (!_view.IsMine) { Destroy(rb); }
     }
 
     // Enable parentControls
