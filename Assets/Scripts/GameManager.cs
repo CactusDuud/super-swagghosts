@@ -41,11 +41,6 @@ public class GameManager : MonoBehaviour
         _camera.LookAt = _spawned.transform;
     }
 
-    void Start()
-    {
-        Debug.Log($"Ghost photon view {GetComponent<PhotonView>().GetInstanceID()}");
-    }
-
     void Update()
     {
         if (PhotonNetwork.IsMasterClient)
