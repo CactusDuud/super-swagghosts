@@ -33,6 +33,7 @@ public class TempGameLoop : MonoBehaviour
     {
         if(has_setuped == false)
         {
+            has_setuped = true;
             StartCoroutine(SpawnEnemy());
             // if(PhotonNetwork.CurrentRoom.PlayerCount == PhotonNetwork.CountOfPlayers) 
             // {
@@ -111,7 +112,7 @@ public class TempGameLoop : MonoBehaviour
     {
         yield return new WaitForSeconds(5f);
         SetUp();
-        has_setuped = true;
+        // has_setuped = true;
         Debug.Log("checking #players");
         yield return new WaitForSeconds(0.1f);
     }
