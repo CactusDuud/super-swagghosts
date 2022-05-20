@@ -30,7 +30,7 @@ public abstract class ParentHealth : MonoBehaviourPunCallbacks
 
     public void TakeDamage(int damage)
     {
-        RPC_SetHealth(curr_health - damage);
+        _view.RPC("RPC_SetHealth", RpcTarget.All, curr_health - damage);
     }
 
     [PunRPC]
