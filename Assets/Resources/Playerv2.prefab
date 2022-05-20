@@ -125,6 +125,7 @@ GameObject:
   - component: {fileID: 691964715441157619}
   - component: {fileID: 630837749399305924}
   - component: {fileID: 2466773734656587915}
+  - component: {fileID: 6042223981339123395}
   m_Layer: 0
   m_Name: Focused Light
   m_TagString: Flashlight
@@ -216,6 +217,22 @@ PolygonCollider2D:
       - {x: 0, y: 1}
       - {x: -0.38, y: 0.92}
       - {x: 0, y: 0.01}
+--- !u!114 &6042223981339123395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2161803169597464691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 0
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
+  m_UseLocal: 0
 --- !u!1 &5269897410204849370
 GameObject:
   m_ObjectHideFlags: 0
@@ -385,6 +402,7 @@ MonoBehaviour:
   - {fileID: 1732884974039032681}
   - {fileID: 2052007292895768184}
   - {fileID: 2052007292895768186}
+  - {fileID: 6042223981339123395}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -401,7 +419,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_SynchronizePosition: 1
-  m_SynchronizeRotation: 1
+  m_SynchronizeRotation: 0
   m_SynchronizeScale: 0
   m_UseLocal: 1
 --- !u!114 &2052007292895768184
