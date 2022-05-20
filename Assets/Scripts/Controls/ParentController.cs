@@ -4,23 +4,30 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Photon.Pun;
 
-public class ParentController : MonoBehaviour, IPunObservable
+public class ParentController : MonoBehaviour
 {
     // Input Actions for controls
     protected ParentControls parentControls;
     protected PhotonView _view;
     protected Rigidbody2D rb;
 
-    // Speed for movement
+    // Speed-related variables
     [SerializeField] protected float speed;
+    [SerializeField] protected float _minMoveThreshhold = 0.01f;
+
+    // Pause menu variables
+    public GameObject optionsMenu;
+    public GameObject dimImage;
 
 
-    // Initiate parentControls
+
     protected virtual void Awake()
     {
         parentControls = new ParentControls();
         _view = GetComponent<PhotonView>();
         rb = GetComponent<Rigidbody2D>();
+
+        parentControls.Player.Pause.performed += _ => Pause();
 
         // Removes rigidbody from network characters (fixes movement jank)
         if (!_view.IsMine) { Destroy(rb); }
@@ -38,22 +45,27 @@ public class ParentController : MonoBehaviour, IPunObservable
         parentControls.Disable();
     }
 
-    // function used to move the entity based on wasd input
-    // moves through rigidbody by setting velocity
+    /// <summary> Moves the entity based on playerinput. Children also rotate hitboxes to follow their facing direction. </summary>
     protected virtual void MoveEntity()
     {
-        if (_view.IsMine)
-        {
-            Vector2 move = parentControls.Player.Move.ReadValue<Vector2>() * speed;
-            rb.velocity = move;
-        }
+        Vector2 move = parentControls.Player.Move.ReadValue<Vector2>() * speed;
+        rb.velocity = move;
     }
 
     // handles movement of the player
     protected virtual void FixedUpdate()
     {
+        if (!_view.IsMine) return;
+
         MoveEntity();
     }
 
-    public virtual void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info) {}
+    private void Pause() 
+    {
+        if (!optionsMenu.gameObject.activeSelf) Time.timeScale = 0f;
+        else Time.timeScale = 1f;
+
+        optionsMenu.gameObject.SetActive(!optionsMenu.gameObject.activeSelf);
+        dimImage.gameObject.SetActive(!dimImage.gameObject.activeSelf);
+    }
 }

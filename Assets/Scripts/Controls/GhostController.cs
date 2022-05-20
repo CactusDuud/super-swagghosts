@@ -1,46 +1,49 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GhostController : ParentController
 {
     [SerializeField] private Collider2D _spookBox;
+    private float baseSpeed;
+    [SerializeField] float fleeSpeedBoost = 1.5f;
+    [SerializeField] float fleeDuration = 5f;
 
-    public GameObject optionsMenu;
-    public GameObject dimImage;
+
+
+    protected override void Awake()
+    {
+        base.Awake();
+
+        baseSpeed = base.speed;
+    }
 
     protected override void MoveEntity()
     {
-        if (_view.IsMine)
+        if (rb.velocity.magnitude >= speed * _minMoveThreshhold)
         {
-            Vector2 move = parentControls.Player.Move.ReadValue<Vector2>() * speed;
-            rb.velocity = move;
-            if (move != Vector2.zero)
-            {
-                _spookBox.transform.RotateAround(transform.position, Vector3.forward, Vector3.Angle(_spookBox.transform.up, move));
-            }
-            parentControls.Player.Pause.performed += _ => Pause();
+            _spookBox.transform.RotateAround(
+                transform.position,
+                Vector3.forward, 
+                Vector3.Angle(_spookBox.transform.up, rb.velocity)
+                );
         }
     }
 
-
-    public void ModifySpeed(float newSpeed)
+    /// <summary>
+    /// Changes the speed of the ghost temporarily
+    /// </summary>
+    /// <param name="speedMultiplier"> Multiplier on the base speed </param>
+    /// <param name="duration"> How long the boost should last </param>
+    public void BoostSpeed()
     {
-        speed *= newSpeed;
+        speed *= fleeSpeedBoost;
+        StartCoroutine("WaitALittle", fleeDuration);
+        speed = baseSpeed;
     }
 
-    private void Pause()
-    {
-        if (!optionsMenu.gameObject.activeSelf)
-            Time.timeScale = 0f;
-        else
-            Unfreeze();
-        optionsMenu.gameObject.SetActive(true);
-        dimImage.gameObject.SetActive(true);
-    }
-
-    public void Unfreeze()
-    {
-        Time.timeScale = 1f;
-    }
+    /// <summary>
+    /// Waits for a little bit.
+    /// </summary>
+    /// <param name="duration"> How long to wait, in seconds </param>
+    IEnumerable WaitALittle(float duration) { yield return new WaitForSeconds(duration); }
 }

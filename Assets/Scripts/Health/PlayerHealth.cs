@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerHealth : ParentHealth
 {
-
+    // TODO: This should be renamed to HunterHealth for consistency
     // [SerializeField] protected int max_health = 100; // can be overrided for variation
 
 
