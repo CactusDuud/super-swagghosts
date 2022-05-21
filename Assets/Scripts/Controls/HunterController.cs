@@ -67,9 +67,7 @@ public class HunterController : ParentController
     }
 
     private void PowerLight(bool isLightOn)
-    {
-        if (!_view.IsMine) return;
-        
+    {        
         // Handle light logic
         if (isLightOn)
         {
