@@ -37,6 +37,9 @@ public class HunterController : ParentController
         // Subscribes _isLightOn to the special button being used
         parentControls.Player.Special.performed += _ => PowerLight(true);
         parentControls.Player.Special.canceled += _ => PowerLight(false);
+
+        // Turn off light just in case
+        PowerLight(false);
     }
 
     protected override void MoveEntity()
