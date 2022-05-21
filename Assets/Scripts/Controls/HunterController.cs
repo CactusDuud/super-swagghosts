@@ -17,6 +17,7 @@ public class HunterController : ParentController
     [ReadOnly] [SerializeField] private float _lightFuel;
     [SerializeField] private float _minimumLight;
     private float _focusedLightDefaultDistance;
+    private bool _isLightOn;
 
 
 
@@ -35,11 +36,11 @@ public class HunterController : ParentController
         _focusedLightCollider.enabled = false;
 
         // Subscribes _isLightOn to the special button being used
-        parentControls.Player.Special.performed += _ => PowerLight(true);
-        parentControls.Player.Special.canceled += _ => PowerLight(false);
+        parentControls.Player.Special.performed += _ => SwitchLight(true);
+        parentControls.Player.Special.canceled += _ => SwitchLight(false);
 
         // Turn off light just in case
-        PowerLight(false);
+        SwitchLight(false);
     }
 
     protected override void MoveEntity()
@@ -66,13 +67,18 @@ public class HunterController : ParentController
     {
         base.FixedUpdate();
 
-        
+        ControlLight();
     }
 
-    private void PowerLight(bool isLightOn)
+    private void SwitchLight(bool isLightOn)
+    {
+        _isLightOn = isLightOn;
+    }
+
+    private void ControlLight()
     {        
         // Handle light logic
-        if (isLightOn)
+        if (_isLightOn)
         {
             // Toggle light
             _focusedLight.intensity = _focusedLightDefaultIntensity;
@@ -85,6 +91,8 @@ public class HunterController : ParentController
                 _lightFuel -= Time.deltaTime;
                 if (_lightFuel < 0) { _lightFuel = 0; }
             }
+
+            Debug.Log(_lightFuel);
 
             // Set size of beam 
             // Assumes default scale for hitbox is 1
@@ -102,7 +110,7 @@ public class HunterController : ParentController
 
         // Update over network
         Hashtable hash = new Hashtable();
-        hash.Add("isLightOn", isLightOn);
+        hash.Add("isLightOn", _isLightOn);
         hash.Add("lightFuel", _lightFuel);
         PhotonNetwork.LocalPlayer.SetCustomProperties(hash);
     }
@@ -123,7 +131,7 @@ public class HunterController : ParentController
     {
         if (!_view.IsMine && targetPlayer == _view.Owner)
         {
-            PowerLight((bool)changedProps["isLightOn"]);
+            SwitchLight((bool)changedProps["isLightOn"]);
             SetFuel((float)changedProps["lightFuel"]);
         }
     }
