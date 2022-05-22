@@ -31,7 +31,7 @@ public abstract class ParentHealth : MonoBehaviourPunCallbacks
     public void TakeDamage(int damage)
     {
         Debug.Log("dmg here");
-        _view.RPC("RPC_SetHealth", RpcTarget.All, curr_health - damage);
+       this.photonView.RPC("RPC_SetHealth", RpcTarget.All, curr_health - damage);
     }
 
     protected virtual void RPC_SetHealth(int health)
