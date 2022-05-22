@@ -87,8 +87,8 @@ public class NetworkMainManager : MonoBehaviourPunCallbacks
 
         Debug.Log($"{name}: Player \"{newPlayer.NickName}\" has entered the room.");
 
-        _playerDisplays[PhotonNetwork.CurrentRoom.PlayerCount].SetPlayerName(newPlayer.NickName);
-        _playerDisplays[PhotonNetwork.CurrentRoom.PlayerCount].SetConnectionStatus(true);
+        _playerDisplays[PhotonNetwork.CurrentRoom.PlayerCount - 1].SetPlayerName(newPlayer.NickName);
+        _playerDisplays[PhotonNetwork.CurrentRoom.PlayerCount - 1].SetConnectionStatus(true);
     }
 
     public override void OnPlayerLeftRoom(Player otherPlayer)
