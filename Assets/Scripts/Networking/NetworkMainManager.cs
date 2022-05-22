@@ -17,7 +17,6 @@ public class NetworkMainManager : MonoBehaviourPunCallbacks
     #endregion
 
     [SerializeField] private byte _maxPlayersPerRoom = 5;
-    [ReadOnly] private int _playersInRoom = 0;
     [SerializeField] private PlayerConnectionDisplay[] _playerDisplays;
 
     private string _gameVersion = "0.0.1";
@@ -87,10 +86,6 @@ public class NetworkMainManager : MonoBehaviourPunCallbacks
         base.OnPlayerEnteredRoom(newPlayer);
 
         Debug.Log($"{name}: Player \"{newPlayer.NickName}\" has entered the room.");
-
-        _playersInRoom++;
-        _playerDisplays[_playersInRoom].SetPlayerName(newPlayer.NickName);
-        _playerDisplays[_playersInRoom].SetConnectionStatus(true);
     }
 
     public override void OnPlayerLeftRoom(Player otherPlayer)
@@ -103,16 +98,7 @@ public class NetworkMainManager : MonoBehaviourPunCallbacks
         if (otherPlayer.IsMasterClient) PhotonNetwork.LeaveRoom();
 
         // Reset player displays
-        _playersInRoom--;
-        int i = 1;
-        foreach (Player p in PhotonNetwork.CurrentRoom.Players.Values)
-        {
-            _playerDisplays[i].Reset();
-            _playerDisplays[i].SetPlayerName(p.NickName);
-            _playerDisplays[i].SetConnectionStatus(true);
-            i++;
-        }
-        _playerDisplays[_playersInRoom].Reset();
+        ResetPlayerDisplays();
     }
     #endregion
 
@@ -156,10 +142,19 @@ public class NetworkMainManager : MonoBehaviourPunCallbacks
         _connectionsPanel.SetActive(true);
         _roomNameDisplay.text = $"Room: {PhotonNetwork.CurrentRoom.Name}";
 
-        for (int playerNum = 1; playerNum <= PhotonNetwork.CurrentRoom.PlayerCount; playerNum++)
+        ResetPlayerDisplays();
+    }
+    
+    /// <summary> Resets all the player displays in the lobby </summary>
+    public void ResetPlayerDisplays()
+    {
+        int i = 0;
+        foreach (Player p in PhotonNetwork.CurrentRoom.Players.Values)
         {
-            _playerDisplays[playerNum-1].SetPlayerName(PhotonNetwork.CurrentRoom.Players[playerNum].NickName);
-            _playerDisplays[playerNum-1].SetConnectionStatus(true);
+            _playerDisplays[i].Reset();
+            _playerDisplays[i].SetPlayerName(p.NickName);
+            _playerDisplays[i].SetConnectionStatus(true);
+            i++;
         }
     }
 
