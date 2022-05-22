@@ -1,13 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
+using Photon.Realtime;
 
 public class GhostHealth : ParentHealth
 {
     private int iframe_buildup;
     private GhostController _controller;
 
-
+    [PunRPC]
+    protected override void RPC_SetHealth(int health)
+    {
+        base.RPC_SetHealth(health);
+    }
 
     protected override void Awake()
     {
