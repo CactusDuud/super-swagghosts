@@ -151,7 +151,7 @@ public class NetworkMainManager : MonoBehaviourPunCallbacks
         _connectionsPanel.SetActive(true);
         _roomNameDisplay.text = $"Room: {PhotonNetwork.CurrentRoom.Name}";
 
-        _playerDisplays[PhotonNetwork.CurrentRoom.PlayerCount - 1].SetPlayerName(newPlayer.NickName);
+        _playerDisplays[PhotonNetwork.CurrentRoom.PlayerCount - 1].SetPlayerName(_nickname.text);
         _playerDisplays[PhotonNetwork.CurrentRoom.PlayerCount - 1].SetConnectionStatus(true);
     }
 
