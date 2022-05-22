@@ -88,7 +88,6 @@ public class NetworkMainManager : MonoBehaviourPunCallbacks
         Debug.Log($"{name}: Player \"{newPlayer.NickName}\" has entered the room.");
 
         _playerDisplays[PhotonNetwork.CurrentRoom.PlayerCount - 1].SetPlayerName(newPlayer.NickName);
-        _playerDisplays[PhotonNetwork.CurrentRoom.PlayerCount - 1].SetPlayer(newPlayer);
         _playerDisplays[PhotonNetwork.CurrentRoom.PlayerCount - 1].SetConnectionStatus(true);
     }
 
@@ -106,7 +105,6 @@ public class NetworkMainManager : MonoBehaviourPunCallbacks
         {
             _playerDisplays[i].Reset();
             _playerDisplays[i].SetPlayerName(p.NickName);
-            _playerDisplays[i].SetPlayer(p);
             _playerDisplays[i].SetConnectionStatus(true);
             i++;
         }
@@ -138,8 +136,7 @@ public class NetworkMainManager : MonoBehaviourPunCallbacks
             // Ngl this is barely important it just prevents an error
             RoomOptions _roomConfig = new RoomOptions
             {
-                MaxPlayers = _maxPlayersPerRoom,
-                BroadcastPropsChangeToAll = true
+                MaxPlayers = _maxPlayersPerRoom
             };
 
             PhotonNetwork.JoinOrCreateRoom(_roomName.text.ToLower(), _roomConfig, null);
@@ -157,8 +154,6 @@ public class NetworkMainManager : MonoBehaviourPunCallbacks
         int i = 0;
         foreach (Player p in PhotonNetwork.CurrentRoom.Players.Values)
         {
-            _playerDisplays[i].SetPlayer(p);
-
             if (p.NickName != _nickname.text)
             {
                 _playerDisplays[i].Reset();
@@ -166,15 +161,9 @@ public class NetworkMainManager : MonoBehaviourPunCallbacks
                 _playerDisplays[i].SetConnectionStatus(true);
                 i++;
             }
-
-            if ((p == PhotonNetwork.LocalPlayer) && (!p.IsMasterClient))
-            {
-                _playerDisplays[PhotonNetwork.CurrentRoom.PlayerCount - 1].ActivateButtons();
-            }
         }
 
         _playerDisplays[PhotonNetwork.CurrentRoom.PlayerCount - 1].SetPlayerName(_nickname.text);
-        _playerDisplays[PhotonNetwork.CurrentRoom.PlayerCount - 1].SetPlayer(PhotonNetwork.LocalPlayer);
         _playerDisplays[PhotonNetwork.CurrentRoom.PlayerCount - 1].SetConnectionStatus(true);
     }
 
