@@ -18,4 +18,9 @@ public class HunterHealth : ParentHealth
             }
         }
     }
+
+    private void Update()
+    {
+        Debug.Log(curr_health);
+    }
 }

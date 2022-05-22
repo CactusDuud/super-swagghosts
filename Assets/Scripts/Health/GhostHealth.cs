@@ -18,6 +18,7 @@ public class GhostHealth : ParentHealth
 
     private void Update()
     {
+        Debug.Log(curr_health);
         if (curr_health == 0)
         {
             is_down = true;
