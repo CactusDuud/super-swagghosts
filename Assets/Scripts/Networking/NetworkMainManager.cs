@@ -154,10 +154,13 @@ public class NetworkMainManager : MonoBehaviourPunCallbacks
         int i = 0;
         foreach (Player p in PhotonNetwork.CurrentRoom.Players.Values)
         {
-            _playerDisplays[i].Reset();
-            _playerDisplays[i].SetPlayerName(p.NickName);
-            _playerDisplays[i].SetConnectionStatus(true);
-            i++;
+            if (p.NickName != _nickname.text)
+            {
+                _playerDisplays[i].Reset();
+                _playerDisplays[i].SetPlayerName(p.NickName);
+                _playerDisplays[i].SetConnectionStatus(true);
+                i++;
+            }
         }
 
         _playerDisplays[PhotonNetwork.CurrentRoom.PlayerCount - 1].SetPlayerName(_nickname.text);
