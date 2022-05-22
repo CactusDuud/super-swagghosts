@@ -86,6 +86,9 @@ public class NetworkMainManager : MonoBehaviourPunCallbacks
         base.OnPlayerEnteredRoom(newPlayer);
 
         Debug.Log($"{name}: Player \"{newPlayer.NickName}\" has entered the room.");
+
+        _playerDisplays[PhotonNetwork.CurrentRoom.PlayerCount].SetPlayerName(newPlayer.NickName);
+        _playerDisplays[PhotonNetwork.CurrentRoom.PlayerCount].SetConnectionStatus(true);
     }
 
     public override void OnPlayerLeftRoom(Player otherPlayer)
@@ -97,7 +100,6 @@ public class NetworkMainManager : MonoBehaviourPunCallbacks
         // Leave if the host leaves
         if (otherPlayer.IsMasterClient) PhotonNetwork.LeaveRoom();
 
-        // Reset player displays
         ResetPlayerDisplays();
     }
     #endregion
@@ -144,11 +146,11 @@ public class NetworkMainManager : MonoBehaviourPunCallbacks
 
         ResetPlayerDisplays();
     }
-    
+
     /// <summary> Resets all the player displays in the lobby </summary>
     public void ResetPlayerDisplays()
     {
-        int i = 0;
+        int i = 1;
         foreach (Player p in PhotonNetwork.CurrentRoom.Players.Values)
         {
             _playerDisplays[i].Reset();
