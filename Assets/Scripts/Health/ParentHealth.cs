@@ -33,8 +33,7 @@ public abstract class ParentHealth : MonoBehaviourPunCallbacks
         _view.RPC("RPC_SetHealth", RpcTarget.All, curr_health - damage);
     }
 
-    [PunRPC]
-    private void RPC_SetHealth(int health)
+    protected virtual void RPC_SetHealth(int health)
     {
         if (!_view.IsMine) return;
 

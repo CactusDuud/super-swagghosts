@@ -57,11 +57,6 @@ public class HunterController : ParentController
         }
     }
 
-    [PunRPC]
-    public void DebugStuff()
-    {
-        Debug.Log($"Debug Stuff id {GetComponent<PhotonView>().GetInstanceID()}");
-    }
 
     protected override void FixedUpdate()
     {
@@ -92,7 +87,7 @@ public class HunterController : ParentController
                 if (_lightFuel < 0) { _lightFuel = 0; }
             }
 
-            Debug.Log(_lightFuel);
+            //Debug.Log(_lightFuel);
 
             // Set size of beam 
             // Assumes default scale for hitbox is 1
