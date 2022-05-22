@@ -100,7 +100,14 @@ public class NetworkMainManager : MonoBehaviourPunCallbacks
         // Leave if the host leaves
         if (otherPlayer.IsMasterClient) PhotonNetwork.LeaveRoom();
 
-        ResetPlayerDisplays();
+        int i = 0;
+        foreach (Player p in PhotonNetwork.CurrentRoom.Players.Values)
+        {
+            _playerDisplays[i].Reset();
+            _playerDisplays[i].SetPlayerName(p.NickName);
+            _playerDisplays[i].SetConnectionStatus(true);
+            i++;
+        }
     }
     #endregion
 
@@ -144,19 +151,16 @@ public class NetworkMainManager : MonoBehaviourPunCallbacks
         _connectionsPanel.SetActive(true);
         _roomNameDisplay.text = $"Room: {PhotonNetwork.CurrentRoom.Name}";
 
-        ResetPlayerDisplays();
-    }
-
-    /// <summary> Resets all the player displays in the lobby </summary>
-    public void ResetPlayerDisplays()
-    {
         int i = 0;
         foreach (Player p in PhotonNetwork.CurrentRoom.Players.Values)
         {
-            _playerDisplays[i].Reset();
-            _playerDisplays[i].SetPlayerName(p.NickName);
-            _playerDisplays[i].SetConnectionStatus(true);
-            i++;
+            if (!p.IsLocal)
+            {
+                _playerDisplays[i].Reset();
+                _playerDisplays[i].SetPlayerName(p.NickName);
+                _playerDisplays[i].SetConnectionStatus(true);
+                i++;
+            }
         }
     }
 
