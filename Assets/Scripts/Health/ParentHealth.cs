@@ -31,14 +31,14 @@ public abstract class ParentHealth : MonoBehaviourPunCallbacks
     public void TakeDamage(int damage)
     {
         Debug.Log("dmg here");
-       this.photonView.RPC("RPC_SetHealth", RpcTarget.All, curr_health - damage);
+       this.photonView.RPC("RPC_SetHealth", RpcTarget.All, damage);
     }
 
     protected virtual void RPC_SetHealth(int health)
     {
         if (!_view.IsMine) return;
 
-        curr_health = health;
+        curr_health -= health;
         if (curr_health < 0) curr_health = 0;
         if (curr_health > max_health) curr_health = max_health;
 
