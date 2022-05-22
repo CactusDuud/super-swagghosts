@@ -1,8 +1,8 @@
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
 using Photon.Pun;
-using ExitGames.Client.Photon;
 using Photon.Realtime;
+using ExitGames.Client.Photon;
 
 public class HunterController : ParentController
 {
@@ -107,6 +107,8 @@ public class HunterController : ParentController
             _focusedLightCollider.enabled = false;
             _ambientLight.intensity = _ambientLightDefaultIntensity;
         }
+
+        if (!_view.IsMine) return;
 
         // Update over network
         Hashtable hash = new Hashtable();
