@@ -30,6 +30,7 @@ public abstract class ParentHealth : MonoBehaviourPunCallbacks
 
     public void TakeDamage(int damage)
     {
+        Debug.Log("dmg here");
         _view.RPC("RPC_SetHealth", RpcTarget.All, curr_health - damage);
     }
 
