@@ -46,8 +46,10 @@ public class GhostHealth : ParentHealth
         // takes damage for each second it is in the flashlight ray
         // Once it has taken enough damage, it gets temporary invincibility
         // to escape
+        Debug.Log("trigger activated");
         if (collision.tag == "Flashlight")
         {
+            Debug.Log("flashlight happening");
             _controller.enabled = false;
 
             if (iframe_buildup >= 20) ActivateInvincibility();
