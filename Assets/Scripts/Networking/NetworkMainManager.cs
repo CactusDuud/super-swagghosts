@@ -150,7 +150,7 @@ public class NetworkMainManager : MonoBehaviourPunCallbacks
     /// <summary> Resets all the player displays in the lobby </summary>
     public void ResetPlayerDisplays()
     {
-        int i = 1;
+        int i = 0;
         foreach (Player p in PhotonNetwork.CurrentRoom.Players.Values)
         {
             _playerDisplays[i].Reset();
