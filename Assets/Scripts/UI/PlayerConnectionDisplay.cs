@@ -17,8 +17,7 @@ public class PlayerConnectionDisplay : MonoBehaviour
 
     private void Awake()
     {
-        SetPlayerName("—");
-        SetConnectionStatus(false);
+        Reset();
     }
 
     public void SetConnectionStatus(bool isConnected)
@@ -38,5 +37,11 @@ public class PlayerConnectionDisplay : MonoBehaviour
     public void SetPlayerName(string newPlayerName)
     {
         playerName.text = $"{newPlayerName}";
+    }
+
+    public void Reset()
+    {
+        SetPlayerName("—");
+        SetConnectionStatus(false);
     }
 }

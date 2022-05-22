@@ -102,9 +102,17 @@ public class NetworkMainManager : MonoBehaviourPunCallbacks
         // Leave if the host leaves
         if (otherPlayer.IsMasterClient) PhotonNetwork.LeaveRoom();
 
+        // Reset player displays
         _playersInRoom--;
-        _playerDisplays[_playersInRoom].SetPlayerName("—");
-        _playerDisplays[_playersInRoom].SetConnectionStatus(false);
+        int i = 1;
+        foreach (Player p in PhotonNetwork.CurrentRoom.Players.Values)
+        {
+            _playerDisplays[i].Reset();
+            _playerDisplays[i].SetPlayerName(p.NickName);
+            _playerDisplays[i].SetConnectionStatus(true);
+            i++;
+        }
+        _playerDisplays[_playersInRoom].Reset();
     }
     #endregion
 
