@@ -36,7 +36,7 @@ public abstract class ParentHealth : MonoBehaviourPunCallbacks
 
     protected virtual void RPC_SetHealth(int health)
     {
-        if (!_view.IsMine) return;
+        //if (!_view.IsMine) return;
 
         curr_health -= health;
         if (curr_health < 0) curr_health = 0;
