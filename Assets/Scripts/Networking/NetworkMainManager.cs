@@ -99,6 +99,9 @@ public class NetworkMainManager : MonoBehaviourPunCallbacks
 
         Debug.Log($"{name}: Player \"{otherPlayer.NickName}\" has left the room.");
 
+        // Leave if the host leaves
+        if (otherPlayer.IsMasterClient) PhotonNetwork.LeaveRoom();
+
         _playersInRoom--;
         _playerDisplays[_playersInRoom].SetPlayerName("—");
         _playerDisplays[_playersInRoom].SetConnectionStatus(false);
