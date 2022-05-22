@@ -164,6 +164,7 @@ public class NetworkMainManager : MonoBehaviourPunCallbacks
         {
             // Load play area for the master client (automatically synced with all players)
             Debug.Log($"{name}: This is the parent client. Loading level...");
+            PhotonNetwork.CurrentRoom.IsOpen = false;
             PhotonNetwork.LoadLevel("Map1");
         }
     }
