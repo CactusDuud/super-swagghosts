@@ -119,7 +119,6 @@ public class PlayerConnectionDisplay : MonoBehaviourPunCallbacks
             {
                 playerProperties["playerAvatar"] = 0;
             }
-            PhotonNetwork.SetPlayerCustomProperties(playerProperties);
         }
     }
 }
