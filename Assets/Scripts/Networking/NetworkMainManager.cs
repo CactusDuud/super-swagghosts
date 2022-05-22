@@ -17,6 +17,7 @@ public class NetworkMainManager : MonoBehaviourPunCallbacks
     #endregion
 
     [SerializeField] private byte _maxPlayersPerRoom = 5;
+    [ReadOnly] private int _playersInRoom = 0;
     [SerializeField] private PlayerConnectionDisplay[] _playerDisplays;
 
     private string _gameVersion = "0.0.1";
@@ -87,8 +88,9 @@ public class NetworkMainManager : MonoBehaviourPunCallbacks
 
         Debug.Log($"{name}: Player \"{newPlayer.NickName}\" has entered the room.");
 
-        _playerDisplays[newPlayer.ActorNumber-1].SetPlayerName(newPlayer.NickName);
-        _playerDisplays[newPlayer.ActorNumber-1].SetConnectionStatus(true);
+        _playersInRoom++;
+        _playerDisplays[_playersInRoom].SetPlayerName(newPlayer.NickName);
+        _playerDisplays[_playersInRoom].SetConnectionStatus(true);
     }
 
     public override void OnPlayerLeftRoom(Player otherPlayer)
@@ -97,8 +99,9 @@ public class NetworkMainManager : MonoBehaviourPunCallbacks
 
         Debug.Log($"{name}: Player \"{otherPlayer.NickName}\" has left the room.");
 
-        _playerDisplays[otherPlayer.ActorNumber-1].SetPlayerName("—");
-        _playerDisplays[otherPlayer.ActorNumber-1].SetConnectionStatus(false);
+        _playersInRoom--;
+        _playerDisplays[_playersInRoom].SetPlayerName("—");
+        _playerDisplays[_playersInRoom].SetConnectionStatus(false);
     }
     #endregion
 
