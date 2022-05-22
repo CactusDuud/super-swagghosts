@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] private CinemachineVirtualCamera _camera;
 
-    [SerializeField] private GameObject _playerPrefab;
+    [SerializeField] private GameObject[] _playerPrefabs;
     [SerializeField] private Transform _playerSpawn;
     [SerializeField] private GameObject _ghostPrefab;
     [SerializeField] private Transform _ghostSpawn;
@@ -33,7 +33,9 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            _spawned = PhotonNetwork.Instantiate(_playerPrefab.name, _playerSpawn.position, _playerSpawn.rotation);
+            //_spawned = PhotonNetwork.Instantiate(_playerPrefab.name, _playerSpawn.position, _playerSpawn.rotation);
+            GameObject playerToSpawn = _playerPrefabs[(int)PhotonNetwork.LocalPlayer.CustomProperties["playerAvatar"]];
+            _spawned = PhotonNetwork.Instantiate(playerToSpawn.name, _playerSpawn.position, _playerSpawn.rotation);
             Debug.Log($"{name}: instantiated {_spawned.name}");
         }
         
