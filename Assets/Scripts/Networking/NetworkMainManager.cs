@@ -43,6 +43,8 @@ public class NetworkMainManager : MonoBehaviourPunCallbacks
         _joinButton.enabled = false;
         _connectionsPanel.SetActive(false);
 
+        // Sets a default name
+        _nickname.text = PlayerPrefs.GetString("nickname", "");
 
         // Immediately try to connect to PUN servers.
         // Also save connection status for 
