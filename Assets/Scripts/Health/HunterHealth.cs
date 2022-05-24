@@ -32,6 +32,7 @@ public class HunterHealth : ParentHealth
         {
             is_down = true;
             GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            GetComponent<Rigidbody2D>().isKinematic = true;
             GetComponent<HunterController>().enabled = false;
             Debug.Log("Rigidbody after");
         }
