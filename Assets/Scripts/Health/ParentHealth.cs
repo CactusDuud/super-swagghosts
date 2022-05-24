@@ -34,7 +34,7 @@ public abstract class ParentHealth : MonoBehaviourPunCallbacks
 
     public virtual void TakeDamage(int damage)
     {
-        Debug.Log("dmg here");
+        //Debug.Log("dmg here");
         this.photonView.RPC("RPC_SetHealth", RpcTarget.All, damage);
     }
 
@@ -46,7 +46,7 @@ public abstract class ParentHealth : MonoBehaviourPunCallbacks
         if (curr_health < 0) curr_health = 0;
         if (curr_health > max_health) curr_health = max_health;
 
-        Debug.Log($"{name}: Health set to {curr_health}");
+        //Debug.Log($"{name}: Health set to {curr_health}");
 
         //! This stuff might belong in HunterHealth
         //slider.value = curr_health;
