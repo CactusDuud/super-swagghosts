@@ -48,6 +48,7 @@ public class GhostHealth : ParentHealth
     private void ActivateInvincibility()
     {
         _controller.enabled = true;
+        _controller.EnableSpookBox();
         _controller.Flee();
         iframe_buildup = 0;
     }
@@ -97,6 +98,7 @@ public class GhostHealth : ParentHealth
         {
             //Debug.Log("flashlight happening");
             _controller.enabled = false;
+            _controller.DisableSpookBox();
 
             if (iframe_buildup >= 20) ActivateInvincibility();
             else TakeDamage(1);

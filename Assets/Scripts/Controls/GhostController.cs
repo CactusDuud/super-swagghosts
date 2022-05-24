@@ -38,9 +38,20 @@ public class GhostController : ParentController
     public void Flee()
     {
         speed *= fleeSpeedBoost;
-        
+        DisableSpookBox();
         StartCoroutine("WaitALittle", fleeDuration);
+        EnableSpookBox();
         speed = baseSpeed;
+    }
+
+    public void EnableSpookBox()
+    {
+        _spookBox.enabled = true;
+    }
+
+    public void DisableSpookBox()
+    {
+        _spookBox.enabled = false;
     }
 
     /// <summary>
