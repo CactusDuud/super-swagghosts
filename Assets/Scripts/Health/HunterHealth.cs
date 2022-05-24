@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
+using Photon.Realtime;
 
 public class HunterHealth : ParentHealth
 {
@@ -19,8 +21,9 @@ public class HunterHealth : ParentHealth
         }
     }
 
-    private void Update()
+    [PunRPC]
+    protected override void RPC_SetHealth(int health)
     {
-        Debug.Log(curr_health);
+        base.RPC_SetHealth(health);
     }
 }
