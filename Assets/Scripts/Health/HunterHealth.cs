@@ -15,9 +15,7 @@ public class HunterHealth : ParentHealth
             {
                 Debug.Log("collided");
                 TakeDamage(100);
-                GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-                GetComponent<HunterController>().enabled = false;
-                Debug.Log("Rigidbody after");
+               
 
                 
             }
@@ -33,6 +31,9 @@ public class HunterHealth : ParentHealth
         if(curr_health == 0)
         {
             is_down = true;
+            GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            GetComponent<HunterController>().enabled = false;
+            Debug.Log("Rigidbody after");
         }
     }
 }
