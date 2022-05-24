@@ -73,7 +73,8 @@ public class TempGameLoop : MonoBehaviour
         int count_down = 0;
 
         // if ghost is dead then humans win
-        if(g_health_script.is_down == true) {winner = "humans";}
+        
+        if (g_health_script.CheckDown() == true) {winner = "humans";}
         else
         {   
             // goes through all human scripts to check is_dead var

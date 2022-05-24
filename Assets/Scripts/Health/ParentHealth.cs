@@ -15,6 +15,10 @@ public abstract class ParentHealth : MonoBehaviourPunCallbacks
     // public Gradient gradient;
     // public Image fill;
 
+    public bool CheckDown()
+    {
+        return is_down;
+    }
 
     protected virtual void Awake()
     {
