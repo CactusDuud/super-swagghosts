@@ -34,7 +34,7 @@ public class GhostHealth : ParentHealth
             _controller.enabled = false;
         }
 
-        DecreaseOpacity();
+        _view.RPC("DecreaseOpacity", RpcTarget.Others);
     }
 
     /// <summary>
@@ -55,13 +55,13 @@ public class GhostHealth : ParentHealth
         base.TakeDamage(damage);
 
         _opacity = 100f;
-        UpdateOpacity();
     }
 
+    [PunRPC]
     private void DecreaseOpacity()
     {
         // Don't change opacity if this is my view
-        if (_view.IsMine) return;
+        //if (_view.IsMine) return;
 
         // Reduce opacity per second
         if (_opacity > 0f) _opacity -= 1f * Time.deltaTime;
