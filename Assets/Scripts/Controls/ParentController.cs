@@ -66,7 +66,7 @@ public class ParentController : MonoBehaviourPunCallbacks
 
     private void Pause() 
     {
-        if (!optionsMenu.gameObject.activeSelf) Time.timeScale = 0f;
+        if (Time.timeScale != 0f) Time.timeScale = 0f;
         else Time.timeScale = 1f;
 
         optionsMenu.gameObject.SetActive(!optionsMenu.gameObject.activeSelf);
