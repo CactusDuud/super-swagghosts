@@ -60,6 +60,7 @@ public class GhostHealth : ParentHealth
     [PunRPC]
     private void DecreaseOpacity()
     {
+        Debug.Log("Hi");
         // Don't change opacity if this is my view
         //if (_view.IsMine) return;
 
@@ -72,6 +73,7 @@ public class GhostHealth : ParentHealth
 
     private void UpdateOpacity()
     {
+        Debug.Log("Hi 2");
         _sprite.color = new Color(
             _sprite.color.r, 
             _sprite.color.g, 
