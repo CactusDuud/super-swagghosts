@@ -65,7 +65,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            _batteryCurrentTime -= 1f;
+            _batteryCurrentTime -= 1f * Time.deltaTime;
         }
     }
 
