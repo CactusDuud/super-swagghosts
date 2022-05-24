@@ -7,7 +7,7 @@ using Photon.Realtime;
 public class GhostHealth : ParentHealth
 {
     private int iframe_buildup;
-    [ReadOnly] private float _opacity = 100f; 
+    [ReadOnly] private float _opacity = 1f; 
     private GhostController _controller;
     private SpriteRenderer _sprite;
 
@@ -54,7 +54,7 @@ public class GhostHealth : ParentHealth
     {
         base.TakeDamage(damage);
 
-        _opacity = 100f;
+        _opacity = 1f;
     }
 
     [PunRPC]
@@ -66,7 +66,7 @@ public class GhostHealth : ParentHealth
 
         // Reduce opacity per second
         // for some reason when time.deltatime is included the ghost doesnt disappear gradually but takes a bit then disappears all at once
-        if (_opacity > 0f && !PhotonNetwork.IsMasterClient) _opacity -= 0.1f;// * Time.deltaTime;
+        if (_opacity > 0f && !PhotonNetwork.IsMasterClient) _opacity -= 0.01f * Time.deltaTime;
         Debug.Log(_opacity);
         // Set the actual opacity
         UpdateOpacity();
