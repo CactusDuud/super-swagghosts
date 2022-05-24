@@ -19,7 +19,13 @@ public class HunterController : ParentController
     private float _focusedLightDefaultDistance;
     private bool _isLightOn;
 
-
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.tag == "Fuel")
+        {
+                Refuel(5f);
+        }
+    }
 
     protected override void Awake()
     {

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Ghost
   - Flashlight
+  - Fuel
   layers:
   - Default
   - TransparentFX
