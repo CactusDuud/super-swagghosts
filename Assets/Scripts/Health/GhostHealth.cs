@@ -34,7 +34,7 @@ public class GhostHealth : ParentHealth
             _controller.enabled = false;
         }
 
-        this.photonView.RPC("DecreaseOpacity", RpcTarget.Others);
+        this.photonView.RPC("DecreaseOpacity", RpcTarget.All);
     }
 
     /// <summary>
@@ -65,7 +65,7 @@ public class GhostHealth : ParentHealth
         //if (_view.IsMine) return;
 
         // Reduce opacity per second
-        if (_opacity > 0f) _opacity -= 1f * Time.deltaTime;
+        if (_opacity > 0f) _opacity -= 1f;//* Time.deltaTime;
         
         // Set the actual opacity
         UpdateOpacity();
