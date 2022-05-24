@@ -9,7 +9,7 @@ public abstract class ParentHealth : MonoBehaviourPunCallbacks
 
     [SerializeField] protected int max_health = 100; // can be overrided for variation
     [ReadOnly] protected int curr_health;
-    public bool is_down;
+    public bool is_down = false;
 
     // public Slider slider;
     // public Gradient gradient;
