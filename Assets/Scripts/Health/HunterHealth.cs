@@ -19,14 +19,20 @@ public class HunterHealth : ParentHealth
                 GetComponent<HunterController>().enabled = false;
                 Debug.Log("Rigidbody after");
 
-                is_down = true;
+                
             }
         }
     }
+
+    
 
     [PunRPC]
     protected override void RPC_SetHealth(int health)
     {
         base.RPC_SetHealth(health);
+        if(curr_health == 0)
+        {
+            is_down = true;
+        }
     }
 }
