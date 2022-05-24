@@ -39,6 +39,7 @@ MonoBehaviour:
   - PowerLight
   - DebugStuff
   - RPC_SetHealth
+  - DecreaseOpacity
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1
