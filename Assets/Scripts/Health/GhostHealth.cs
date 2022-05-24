@@ -27,7 +27,7 @@ public class GhostHealth : ParentHealth
 
     private void Update()
     {
-        Debug.Log(curr_health);
+        //Debug.Log(curr_health);
         if (curr_health == 0)
         {
             is_down = true;
@@ -60,21 +60,21 @@ public class GhostHealth : ParentHealth
     [PunRPC]
     private void DecreaseOpacity()
     {
-        Debug.Log("Hi");
+        //Debug.Log("Hi");
         // Don't change opacity if this is my view
         //if (_view.IsMine) return;
 
         // Reduce opacity per second
         // for some reason when time.deltatime is included the ghost doesnt disappear gradually but takes a bit then disappears all at once
         if (_opacity > 0f && !PhotonNetwork.IsMasterClient) _opacity -= 0.1f;// * Time.deltaTime;
-        
+        Debug.Log(_opacity);
         // Set the actual opacity
         UpdateOpacity();
     }
 
     private void UpdateOpacity()
     {
-        Debug.Log("Hi 2");
+        //Debug.Log("Hi 2");
         _sprite.color = new Color(
             _sprite.color.r, 
             _sprite.color.g, 
@@ -90,10 +90,10 @@ public class GhostHealth : ParentHealth
         // takes damage for each second it is in the flashlight ray
         // Once it has taken enough damage, it gets temporary invincibility
         // to escape
-        Debug.Log("trigger activated");
+        //Debug.Log("trigger activated");
         if (collision.tag == "Flashlight")
         {
-            Debug.Log("flashlight happening");
+            //Debug.Log("flashlight happening");
             _controller.enabled = false;
 
             if (iframe_buildup >= 20) ActivateInvincibility();
