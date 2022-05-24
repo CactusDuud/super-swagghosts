@@ -30,6 +30,7 @@ public class PlayerConnectionDisplay : MonoBehaviourPunCallbacks
     {
         Reset();
         playerProperties["playerAvatar"] = 0;
+        PhotonNetwork.SetPlayerCustomProperties(playerProperties);
     }
 
     public void SetPlayer(Player player)
