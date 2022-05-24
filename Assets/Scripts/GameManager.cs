@@ -59,7 +59,7 @@ public class GameManager : MonoBehaviour
         }
         else if(_batteryCurrentTime <= 0)
         {
-            int spawnIndex = (int)Mathf.Floor(Random.Range(0f, 5.99f));
+            int spawnIndex = Random.Range(0, 6);
             _battery = PhotonNetwork.Instantiate(_batteryPrefab.name, _batterySpawn[spawnIndex].position, _batterySpawn[spawnIndex].rotation);
             _batteryCurrentTime = _batteryMaxTime;
         }
