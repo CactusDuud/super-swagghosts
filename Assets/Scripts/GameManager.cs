@@ -13,11 +13,18 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Transform _playerSpawn;
     [SerializeField] private GameObject _ghostPrefab;
     [SerializeField] private Transform _ghostSpawn;
+    [SerializeField] private GameObject _batteryPrefab;
+    [SerializeField] private Transform[] _batterySpawn;
+    [SerializeField] private float _batteryMaxTime;
+    [ReadOnly] private float _batteryCurrentTime;
+    private GameObject _battery;
 
     public static GameManager Instance { get; private set; }
 
     private void Awake()
     {
+
+
         //! Singleton insurance
         if (Instance != null && Instance != this) { Destroy(this); }
         else { Instance = this; }
@@ -41,12 +48,33 @@ public class GameManager : MonoBehaviour
         
         _camera.Follow = _spawned.transform;
         _camera.LookAt = _spawned.transform;
+        _batteryCurrentTime = _batteryMaxTime;
+    }
+
+    private void SpawnBattery()
+    {
+        if(_battery != null)
+        {
+            _batteryCurrentTime = _batteryMaxTime;
+        }
+        else if(_batteryCurrentTime <= 0)
+        {
+            int spawnIndex = (int)Mathf.Floor(Random.Range(0f, 5.99f));
+            _battery = PhotonNetwork.Instantiate(_batteryPrefab.name, _batterySpawn[spawnIndex].position, _batterySpawn[spawnIndex].rotation);
+            _batteryCurrentTime = _batteryMaxTime;
+        }
+        else
+        {
+            _batteryCurrentTime -= 1f;
+        }
     }
 
     void Update()
     {
         if (PhotonNetwork.IsMasterClient)
         {
+            SpawnBattery();
+
             int downCount = 0;
             foreach (var p in GameObject.FindGameObjectsWithTag("Player"))
             {
