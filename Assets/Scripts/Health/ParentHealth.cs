@@ -28,10 +28,10 @@ public abstract class ParentHealth : MonoBehaviourPunCallbacks
         //fill.color = gradient.Evaluate(1f);
     }
 
-    public void TakeDamage(int damage)
+    public virtual void TakeDamage(int damage)
     {
         Debug.Log("dmg here");
-       this.photonView.RPC("RPC_SetHealth", RpcTarget.All, damage);
+        this.photonView.RPC("RPC_SetHealth", RpcTarget.All, damage);
     }
 
     protected virtual void RPC_SetHealth(int health)

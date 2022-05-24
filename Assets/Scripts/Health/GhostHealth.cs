@@ -7,7 +7,9 @@ using Photon.Realtime;
 public class GhostHealth : ParentHealth
 {
     private int iframe_buildup;
+    [ReadOnly] private float _opacity = 100f; 
     private GhostController _controller;
+    private SpriteRenderer _sprite;
 
     [PunRPC]
     protected override void RPC_SetHealth(int health)
@@ -20,6 +22,7 @@ public class GhostHealth : ParentHealth
         base.Awake();
 
         _controller = GetComponent<GhostController>();
+        _sprite = GetComponentInChildren<SpriteRenderer>();
     }
 
     private void Update()
@@ -30,6 +33,8 @@ public class GhostHealth : ParentHealth
             is_down = true;
             _controller.enabled = false;
         }
+
+        DecreaseOpacity();
     }
 
     /// <summary>
@@ -43,6 +48,36 @@ public class GhostHealth : ParentHealth
         _controller.enabled = true;
         _controller.BoostSpeed();
         iframe_buildup = 0;
+    }
+
+    public override void TakeDamage(int damage)
+    {
+        base.TakeDamage(damage);
+
+        _opacity = 100f;
+        UpdateOpacity();
+    }
+
+    private void DecreaseOpacity()
+    {
+        // Don't change opacity if this is my view
+        if (_view.IsMine) return;
+
+        // Reduce opacity per second
+        if (_opacity > 0f) _opacity -= 1f * Time.deltaTime;
+        
+        // Set the actual opacity
+        UpdateOpacity();
+    }
+
+    private void UpdateOpacity()
+    {
+        _sprite.color = new Color(
+            _sprite.color.r, 
+            _sprite.color.g, 
+            _sprite.color.b, 
+            _opacity
+            );
     }
 
     private void OnTriggerStay2D(Collider2D collision)
