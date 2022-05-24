@@ -66,10 +66,17 @@ public class ParentController : MonoBehaviourPunCallbacks
 
     private void Pause() 
     {
-        if (Time.timeScale != 0f) Time.timeScale = 0f;
-        else Time.timeScale = 1f;
-
-        optionsMenu.gameObject.SetActive(!optionsMenu.gameObject.activeSelf);
-        dimImage.gameObject.SetActive(!dimImage.gameObject.activeSelf);
+        if (!optionsMenu.gameObject.activeSelf)
+        {
+            Time.timeScale = 0f;
+            optionsMenu.gameObject.SetActive(true);
+            dimImage.gameObject.SetActive(true);
+        }
+        else 
+        {
+            Time.timeScale = 1f;
+            optionsMenu.gameObject.SetActive(false);
+            dimImage.gameObject.SetActive(false);
+        }
     }
 }
