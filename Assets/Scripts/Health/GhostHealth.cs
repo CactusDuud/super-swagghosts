@@ -69,7 +69,7 @@ public class GhostHealth : ParentHealth
         // Reduce opacity per second
         // for some reason when time.deltatime is included the ghost doesnt disappear gradually but takes a bit then disappears all at once
         if (_opacity > 0f && !PhotonNetwork.IsMasterClient) _opacity -= 0.1f * Time.deltaTime;
-        Debug.Log(_opacity);
+        //Debug.Log(_opacity);
         // Set the actual opacity
         UpdateOpacity();
     }
