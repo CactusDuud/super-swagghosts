@@ -34,7 +34,7 @@ public class GhostHealth : ParentHealth
             _controller.enabled = false;
         }
 
-        _view.RPC("DecreaseOpacity", RpcTarget.Others);
+        this.photonView.RPC("DecreaseOpacity", RpcTarget.Others);
     }
 
     /// <summary>
