@@ -65,7 +65,8 @@ public class GhostHealth : ParentHealth
         //if (_view.IsMine) return;
 
         // Reduce opacity per second
-        if (_opacity > 0f) _opacity -= 1f * Time.deltaTime;
+        // for some reason when time.deltatime is included the ghost doesnt disappear gradually but takes a bit then disappears all at once
+        if (_opacity > 0f) _opacity -= 1f;// * Time.deltaTime;
         
         // Set the actual opacity
         UpdateOpacity();
