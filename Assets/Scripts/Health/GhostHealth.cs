@@ -7,7 +7,9 @@ using Photon.Realtime;
 public class GhostHealth : ParentHealth
 {
     private int iframe_buildup;
-    [ReadOnly] private float _opacity = 1f; 
+
+    // opacity is made so it is opaque at 1 and transparent at 0, anything above 1 will cause it to take longer to become transparent
+    [Range(0f,1f)][ReadOnly] private float _opacity = 1f; 
     private GhostController _controller;
     private SpriteRenderer _sprite;
 
