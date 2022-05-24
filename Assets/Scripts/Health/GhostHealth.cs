@@ -48,7 +48,7 @@ public class GhostHealth : ParentHealth
     private void ActivateInvincibility()
     {
         _controller.enabled = true;
-        _controller.BoostSpeed();
+        _controller.Flee();
         iframe_buildup = 0;
     }
 

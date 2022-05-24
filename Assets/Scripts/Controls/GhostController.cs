@@ -35,9 +35,10 @@ public class GhostController : ParentController
     /// </summary>
     /// <param name="speedMultiplier"> Multiplier on the base speed </param>
     /// <param name="duration"> How long the boost should last </param>
-    public void BoostSpeed()
+    public void Flee()
     {
         speed *= fleeSpeedBoost;
+        
         StartCoroutine("WaitALittle", fleeDuration);
         speed = baseSpeed;
     }
