@@ -13,9 +13,12 @@ public class HunterHealth : ParentHealth
             // When a hunter collides with a ghost, hunter's health falls to 0 and is downed
             if(curr_health != 0)
             {
+                Debug.Log("collided");
                 TakeDamage(100);
-                GetComponent<HunterController>().enabled = false;
                 GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+                GetComponent<HunterController>().enabled = false;
+                Debug.Log("Rigidbody after");
+
                 is_down = true;
             }
         }
