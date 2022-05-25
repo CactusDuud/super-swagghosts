@@ -20,12 +20,13 @@ public class GhostController : ParentController
     protected override void MoveEntity()
     {
         base.MoveEntity();
+        
         if (rb.velocity.magnitude >= speed * _minMoveThreshhold)
         {
             _spookBox.transform.RotateAround(
                 transform.position,
                 Vector3.forward, 
-                Vector3.Angle(_spookBox.transform.up, rb.velocity)
+                Vector3.Angle(_spookBox.transform.down, rb.velocity)
                 );
         }
     }
