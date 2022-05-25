@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9145537700947648032}
   - component: {fileID: 4902120737922480370}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -91,7 +91,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8772577006205314962}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Lights
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -126,7 +126,7 @@ GameObject:
   - component: {fileID: 630837749399305924}
   - component: {fileID: 2466773734656587915}
   - component: {fileID: 6042223981339123395}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Focused Light
   m_TagString: Flashlight
   m_Icon: {fileID: 0}
@@ -244,7 +244,7 @@ GameObject:
   - component: {fileID: 4146936064619904035}
   - component: {fileID: 7345934667523892907}
   - component: {fileID: 4322025655038581035}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ghost Detector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -275,7 +275,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -304,7 +304,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7626060305396731192}
   - component: {fileID: 1708276348203582737}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ghost Indicator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -386,7 +386,7 @@ GameObject:
   m_Component:
   - component: {fileID: 255257509174647646}
   - component: {fileID: 8258790089751901017}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ambient Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -464,7 +464,7 @@ GameObject:
   - component: {fileID: 2052007292895768184}
   - component: {fileID: 2052007292895768186}
   - component: {fileID: 7025737679981220458}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Playerv2
   m_TagString: Player
   m_Icon: {fileID: 0}
