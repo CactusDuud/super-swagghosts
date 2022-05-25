@@ -7,6 +7,7 @@ using Photon.Realtime;
 public class GhostHealth : ParentHealth
 {
     private int iframe_buildup;
+    public Rigidbody rb;
 
     // opacity is made so it is opaque at 1 and transparent at 0, anything above 1 will cause it to take longer to become transparent
     [Range(0f,1f)][ReadOnly] private float _opacity = 1f; 
@@ -23,9 +24,9 @@ public class GhostHealth : ParentHealth
     {
         base.Awake();
 
-        max_health = 5000;
         _controller = GetComponent<GhostController>();
         _sprite = GetComponentInChildren<SpriteRenderer>();
+        rb = GetComponent<Rigidbody>();
     }
 
     private void Update()
@@ -99,10 +100,12 @@ public class GhostHealth : ParentHealth
         if (collision.tag == "Flashlight")
         {
             //Debug.Log("flashlight happening");
+
             _controller.enabled = false;
+            // rb.velocity = new Vector3(0, 0, 0);
             _controller.DisableSpookBox();
 
-            if (iframe_buildup >= 20) ActivateInvincibility();
+            if (iframe_buildup >= 60) ActivateInvincibility();
             else TakeDamage(1);
 
             iframe_buildup++;
