@@ -26,11 +26,11 @@ PrefabInstance:
     - target: {fileID: 2052007292895768186, guid: d77042d1e1f911b459e5918f8b396e30, type: 3}
       propertyPath: dimImage
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 9050823988773069891, guid: f17409932b326054d9c0ab0a26b2ede0, type: 3}
     - target: {fileID: 2052007292895768186, guid: d77042d1e1f911b459e5918f8b396e30, type: 3}
       propertyPath: optionsMenu
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 5652935064288510696, guid: f9feb392f46349140b867da4d61e29c7, type: 3}
     - target: {fileID: 4902120737922480370, guid: d77042d1e1f911b459e5918f8b396e30, type: 3}
       propertyPath: m_Sprite
       value: 
