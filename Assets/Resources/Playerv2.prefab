@@ -362,8 +362,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1560912333
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 3e4a39581dbc29d4f98bfb3acf88414e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -598,9 +598,10 @@ MonoBehaviour:
   optionsMenu: {fileID: 5652935064288510696, guid: f9feb392f46349140b867da4d61e29c7, type: 3}
   dimImage: {fileID: 9050823988773069891, guid: f17409932b326054d9c0ab0a26b2ede0, type: 3}
   _lights: {fileID: 828910934991253413}
-  _lightFuelMax: 10
+  _lightFuelMax: 20
   _lightFuel: 0
   _minimumLight: 0.34
+  _refuelAmount: 10
 --- !u!114 &7025737679981220458
 MonoBehaviour:
   m_ObjectHideFlags: 0

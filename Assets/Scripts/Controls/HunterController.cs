@@ -16,6 +16,7 @@ public class HunterController : ParentController
     [SerializeField] private float _lightFuelMax;
     [ReadOnly] [SerializeField] private float _lightFuel;
     [SerializeField] private float _minimumLight;
+    [SerializeField] private float _refuelAmount;
     private float _focusedLightDefaultDistance;
     private bool _isLightOn;
 
@@ -23,7 +24,7 @@ public class HunterController : ParentController
     {
         if(collision.tag == "Fuel")
         {
-                Refuel(5f);
+                Refuel(_refuelAmount);
         }
     }
 
