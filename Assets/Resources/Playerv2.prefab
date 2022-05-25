@@ -71,7 +71,7 @@ SpriteRenderer:
   m_SortingLayerID: -1560912333
   m_SortingLayer: 2
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: c54a04e2c521011408f755801c69f295, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 76c8aefc29c7b49969e8a6236442268e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -320,6 +320,7 @@ GameObject:
   - component: {fileID: 1732884974039032681}
   - component: {fileID: 2052007292895768184}
   - component: {fileID: 2052007292895768186}
+  - component: {fileID: 7025737679981220458}
   m_Layer: 0
   m_Name: Playerv2
   m_TagString: Player
@@ -400,6 +401,7 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 1732884974039032681}
+  - {fileID: 7025737679981220458}
   - {fileID: 6042223981339123395}
   sceneViewId: 0
   InstantiationId: 0
@@ -454,3 +456,19 @@ MonoBehaviour:
   _lightFuelMax: 10
   _lightFuel: 0
   _minimumLight: 0.34
+--- !u!114 &7025737679981220458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8785083144454512461}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e7cb724808c322458aa4d15f5035fa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizeVelocity: 1
+  m_SynchronizeAngularVelocity: 0
+  m_TeleportEnabled: 0
+  m_TeleportIfDistanceGreaterThan: 3
