@@ -71,7 +71,7 @@ public class NetworkMainManager : MonoBehaviourPunCallbacks
 
     public override void OnCreatedRoom()
     {
-        Debug.Log($"{name}: Created new room \"{_roomName.text.ToLower()}\"");
+        Debug.Log($"{name}: Created new room \"{_roomName.text.Trim().ToLower()}\"");
     }
 
     public override void OnJoinedRoom()
@@ -117,7 +117,7 @@ public class NetworkMainManager : MonoBehaviourPunCallbacks
     /// <summary> Joins a room on the Photon Network with the provided name, or creates one if it doesn't exist. </summary>
     public void JoinRoom()
     {
-        if (PhotonNetwork.IsConnected && _roomName.text.ToLower() != "")
+        if (PhotonNetwork.IsConnected && _roomName.text.Trim().ToLower() != "")
         {
             // Determine the player nickname
             if (_nickname.text != "")
@@ -132,7 +132,7 @@ public class NetworkMainManager : MonoBehaviourPunCallbacks
             }
 
 
-            Debug.Log($"{name}: Attempting to join room \"{_roomName.text.ToLower()}\"...");
+            Debug.Log($"{name}: Attempting to join room \"{_roomName.text.Trim().ToLower()}\"...");
 
             // Configure settings for the room
             // Ngl this is barely important it just prevents an error
@@ -142,7 +142,7 @@ public class NetworkMainManager : MonoBehaviourPunCallbacks
                 BroadcastPropsChangeToAll = true
             };
 
-            PhotonNetwork.JoinOrCreateRoom(_roomName.text.ToLower(), _roomConfig, null);
+            PhotonNetwork.JoinOrCreateRoom(_roomName.text.Trim().ToLower(), _roomConfig, null);
         }
     }
 
