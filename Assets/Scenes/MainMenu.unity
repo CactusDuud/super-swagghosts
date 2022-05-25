@@ -4467,11 +4467,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7e22d746160e594890b1f105b0ba517, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!82 &1678598801 stripped
-AudioSource:
-  m_CorrespondingSourceObject: {fileID: 1017395466333746224, guid: 336c5c75028479d4a838f02d05809a9f, type: 3}
-  m_PrefabInstance: {fileID: 1017395465420046006}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1700952760
 GameObject:
   m_ObjectHideFlags: 0
@@ -5558,14 +5553,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1017395466333746224, guid: 336c5c75028479d4a838f02d05809a9f, type: 3}
-      propertyPath: m_Volume
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1017395466333746224, guid: 336c5c75028479d4a838f02d05809a9f, type: 3}
-      propertyPath: m_audioClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 89e13d0ee9627e041ad4bd18fc5e6938, type: 3}
     - target: {fileID: 1017395466333746225, guid: 336c5c75028479d4a838f02d05809a9f, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -5610,14 +5597,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1017395466333746226, guid: 336c5c75028479d4a838f02d05809a9f, type: 3}
-      propertyPath: BGM
-      value: 
-      objectReference: {fileID: 1678598801}
-    - target: {fileID: 1017395466333746227, guid: 336c5c75028479d4a838f02d05809a9f, type: 3}
-      propertyPath: BGM
-      value: 
-      objectReference: {fileID: 1678598801}
     - target: {fileID: 1017395466333746227, guid: 336c5c75028479d4a838f02d05809a9f, type: 3}
       propertyPath: volumeSlider
       value: 

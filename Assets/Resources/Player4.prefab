@@ -8,6 +8,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 580043342443487456, guid: 2b5cb08f5157241268ab22834f2039c5, type: 3}
+      propertyPath: sceneViewId
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 580043342443487456, guid: 2b5cb08f5157241268ab22834f2039c5, type: 3}
       propertyPath: ObservedComponents.Array.size
       value: 4
       objectReference: {fileID: 0}
