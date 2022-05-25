@@ -33,6 +33,7 @@ public class GhostHealth : ParentHealth
         if (curr_health == 0)
         {
             is_down = true;
+            _controller.DisableSpookBox();
             _controller.enabled = false;
         }
 
