@@ -23,6 +23,7 @@ public class GhostHealth : ParentHealth
     {
         base.Awake();
 
+        max_health = 5000;
         _controller = GetComponent<GhostController>();
         _sprite = GetComponentInChildren<SpriteRenderer>();
     }
