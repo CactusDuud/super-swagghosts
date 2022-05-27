@@ -15,19 +15,12 @@ public class ParentController : MonoBehaviourPunCallbacks
     [SerializeField] protected float speed;
     [SerializeField] protected float _minMoveThreshhold = 0.01f;
 
-    // Pause menu variables
-    public GameObject optionsMenu;
-    public GameObject dimImage;
-
-
 
     protected virtual void Awake()
     {
         parentControls = new ParentControls();
         _view = GetComponent<PhotonView>();
         rb = GetComponent<Rigidbody2D>();
-
-        parentControls.Player.Pause.performed += _ => Pause();
 
         // Removes rigidbody from network characters (fixes movement jank)
         if (!_view.IsMine) { Destroy(rb); }
@@ -62,21 +55,5 @@ public class ParentController : MonoBehaviourPunCallbacks
         if (!_view.IsMine) return;
 
         MoveEntity();
-    }
-
-    private void Pause() 
-    {
-        if (!optionsMenu.gameObject.activeSelf)
-        {
-            Time.timeScale = 0f;
-            optionsMenu.gameObject.SetActive(true);
-            dimImage.gameObject.SetActive(true);
-        }
-        else 
-        {
-            Time.timeScale = 1f;
-            optionsMenu.gameObject.SetActive(false);
-            dimImage.gameObject.SetActive(false);
-        }
     }
 }
