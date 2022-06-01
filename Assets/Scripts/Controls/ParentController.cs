@@ -15,6 +15,8 @@ public class ParentController : MonoBehaviourPunCallbacks
     [SerializeField] protected float speed;
     [SerializeField] protected float _minMoveThreshhold = 0.01f;
 
+    protected Vector2 move;
+
 
     protected virtual void Awake()
     {
@@ -45,7 +47,7 @@ public class ParentController : MonoBehaviourPunCallbacks
     /// <summary> Moves the entity based on playerinput. Children also rotate hitboxes to follow their facing direction. </summary>
     protected virtual void MoveEntity()
     {
-        Vector2 move = parentControls.Player.Move.ReadValue<Vector2>() * speed;
+        move = parentControls.Player.Move.ReadValue<Vector2>() * speed;
         rb.velocity = move;
     }
 

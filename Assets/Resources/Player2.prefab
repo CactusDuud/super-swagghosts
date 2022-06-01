@@ -27,6 +27,10 @@ PrefabInstance:
       propertyPath: ObservedComponents.Array.data[3]
       value: 
       objectReference: {fileID: 792608826483972394}
+    - target: {fileID: 476991229559664805, guid: d77042d1e1f911b459e5918f8b396e30, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 9ae02eac4189442e49dfec3706bd6f72, type: 2}
     - target: {fileID: 2052007292895768186, guid: d77042d1e1f911b459e5918f8b396e30, type: 3}
       propertyPath: dimImage
       value: 
@@ -36,6 +40,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5652935064288510696, guid: f9feb392f46349140b867da4d61e29c7, type: 3}
     - target: {fileID: 4902120737922480370, guid: d77042d1e1f911b459e5918f8b396e30, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 97273f152737c473092019e4ba0bb386, type: 3}
+    - target: {fileID: 5473547924024818039, guid: d77042d1e1f911b459e5918f8b396e30, type: 3}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 97273f152737c473092019e4ba0bb386, type: 3}
