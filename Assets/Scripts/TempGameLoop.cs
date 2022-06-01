@@ -48,11 +48,8 @@ public class TempGameLoop : MonoBehaviour
     //  none of us know how to get that to work lol
     private string CheckWinner()
     {
-        // Error case
-        if (ghost_health == null) return "none";
-
         // If ghost is dead then humans win
-        else if (ghost_health.is_down) return "humans";
+        if (ghost_health != null && ghost_health.is_down) return "humans";
 
         // Check if hunters are dead
         else
@@ -68,6 +65,8 @@ public class TempGameLoop : MonoBehaviour
             // if total number of dead pp == total num of humans, then ghost wins
             if (down_count >= num_hunters) return "ghost";
         }
+
+        return "none";
     }
 
 
@@ -76,7 +75,7 @@ public class TempGameLoop : MonoBehaviour
         yield return new WaitForSeconds(5f);
 
         Debug.Log($"{name}: Counting players...");
-        PhotonView photonViews = UnityEngine.Object.FindObjectsOfType<PhotonView>();
+        PhotonView[] photonViews = UnityEngine.Object.FindObjectsOfType<PhotonView>();
     
         // Go through each photonView/player in game and grab the GameObject
         foreach (PhotonView view in photonViews)
