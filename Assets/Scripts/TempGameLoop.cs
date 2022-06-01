@@ -6,130 +6,105 @@ using Photon.Pun;
 public class TempGameLoop : MonoBehaviour
 {
     [SerializeField] private List<GameObject> players = new List<GameObject>();
-    [SerializeField] private List<HunterHealth> p_health_scripts = new List<HunterHealth>();
-    [SerializeField] private GhostHealth g_health_script;
-    public int total_num_humans;
-    public bool has_setuped;
+    [SerializeField] private List<HunterHealth> hunter_healths = new List<HunterHealth>();
+    [SerializeField] private GhostHealth ghost_health;
+
+    public int num_hunters;
+    public bool is_set_up = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        has_setuped = false;
-        //PhotonNetwork.countOfPlayers
-
-        // Debug.Log("total human scripts" + p_health_scripts.Count);
-
-        // go through each player and grab health script
-        // foreach (var player in PhotonNetwork.PlayerList)
-        // {
-        //     Debug.Log(player.GetType());
-        //     players.Add(player.GameObject);
-        //     //Debug.Log(players.Length);
-        // }
+        //! Does this still work?
+        StartCoroutine(Setup());
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(has_setuped == false)
+        if (is_set_up == false) return;
+
+        string winner = CheckWinner();
+        if (winner == "ghost")
         {
-            has_setuped = true;
-            StartCoroutine(SpawnEnemy());
-            // if(PhotonNetwork.CurrentRoom.PlayerCount == PhotonNetwork.CountOfPlayers) 
-            // {
-            //     SetUp();
-            //     has_setuped = true;
-            //     Debug.Log("checking #players");
-            // }
+            Debug.Log($"{name}: The ghost has won!");
+
+            // TODO: Replace with game over screen
+            PhotonNetwork.LeaveRoom();
+            PhotonNetwork.LoadLevel("MainMenu");
         }
-        else
+        else if (winner == "humans")
         {
-            string winner = "";
-            winner = CheckWinner();
-            if(winner == "None")
-            {Debug.Log("No Winner rn");}
-            else if(winner == "ghost")
-            {
-                Debug.Log("Winner is ghost");
-                // PhotonNetwork.LeaveRoom();
-                // PhotonNetwork.LoadLevel("MainMenu");
-                // Application.Quit();
-            }
-            else if(winner == "humans")
-            {
-                Debug.Log("Winners is human");
-                // Application.Quit();
-                // PhotonNetwork.LeaveRoom();
-                // PhotonNetwork.LoadLevel("MainMenu");
-            }
-            
+            Debug.Log($"{name}: The hunters have won!");
+
+            // TODO: Replace with game over screen
+            PhotonNetwork.LeaveRoom();
+            PhotonNetwork.LoadLevel("MainMenu");
         }
     }
 
 
+    // We probably could've optimised this better with an event-based system over Photon but
+    //  none of us know how to get that to work lol
     private string CheckWinner()
     {
-        string winner = "None";
-        int count_down = 0;
+        // Error case
+        if (ghost_health == null) return "none";
 
-        // if ghost is dead then humans win
-        if (g_health_script == null) { return winner; }
-        else if (g_health_script.CheckDown() == true) { winner = "humans"; }
+        // If ghost is dead then humans win
+        else if (ghost_health.is_down) return "humans";
+
+        // Check if hunters are dead
         else
         {
-            // goes through all human scripts to check is_dead var
-            for (int h = 0; h < total_num_humans; h++)
-            {
-                if (p_health_scripts[h].is_down == true) { count_down++; }
-            }
-            // if total number of dead pp == total num of humans, then ghost wins
-            if (count_down == total_num_humans) { winner = "ghost"; }
-        }
+            int down_count = 0;
 
-        return winner;
+            // Iterate through all human scripts to check if they are down
+            for (int h = 0; h < num_hunters; h++)
+            {
+                if (hunter_healths[h].is_down == true) down_count++;
+            }
+
+            // if total number of dead pp == total num of humans, then ghost wins
+            if (down_count >= num_hunters) return "ghost";
+        }
     }
 
-    void SetUp()
+
+    IEnumerator Setup()
     {
-        var photonViews = UnityEngine.Object.FindObjectsOfType<PhotonView>();
+        yield return new WaitForSeconds(5f);
+
+        Debug.Log($"{name}: Counting players...");
+        PhotonView photonViews = UnityEngine.Object.FindObjectsOfType<PhotonView>();
     
-        // go through each photonView/players in game and grabs the gameobject
-        foreach (var view in photonViews)
+        // Go through each photonView/player in game and grab the GameObject
+        foreach (PhotonView view in photonViews)
         {
-            var player = view.Owner;
-            //Objects in the scene don't have an owner, its means view.owner will be null
-            if(player!=null){
-                var playerPrefabObject = view.gameObject;
+            // Skip replicated players with no owner
+            if (view.Owner != null)
+            {
+                GameObject playerPrefabObject = view.gameObject;
                 players.Add(playerPrefabObject);
             }
         }
 
-        // Debug.Log("total players: " + players.Count);
-
-        //goes through each player prefab and grabs the health script
-        foreach (var player in players)
+        // Goes through each GameObject found and grabs the health script
+        foreach (GameObject player in players)
         {
             if(player.tag == "Player")
             {
-                p_health_scripts.Add(player.GetComponent<HunterHealth>());
+                hunter_healths.Add(player.GetComponent<HunterHealth>());
             }
+            // Assumes there is only one ghost
             else if (player.tag == "Ghost")
-            {g_health_script = player.GetComponent<GhostHealth>();} //assumming there is only 1 ghost
+            {
+                ghost_health = player.GetComponent<GhostHealth>();
+            }
         }
 
-        total_num_humans = p_health_scripts.Count;
-    }
-
-    // foreach (var player in PhotonNetwork.PlayerList) // 2 Players Room
-    // {
-
-    // }
-    IEnumerator SpawnEnemy()
-    {
-        yield return new WaitForSeconds(5f);
-        SetUp();
-        // has_setuped = true;
-        Debug.Log("checking #players");
+        num_hunters = hunter_healths.Count;
+        is_set_up = true;
         yield return new WaitForSeconds(0.1f);
     }
 }
