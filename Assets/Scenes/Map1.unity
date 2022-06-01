@@ -2120,10 +2120,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   players: []
-  p_health_scripts: []
-  g_health_script: {fileID: 0}
-  total_num_humans: 0
-  has_setuped: 0
+  hunter_healths: []
+  ghost_health: {fileID: 0}
+  num_hunters: 0
+  is_set_up: 0
 --- !u!1 &569885939
 GameObject:
   m_ObjectHideFlags: 0
