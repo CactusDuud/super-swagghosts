@@ -47,6 +47,9 @@ TagManager:
   - name: Terrain
     uniqueID: 3343002665
     locked: 0
+  - name: Furniture
+    uniqueID: 1407449533
+    locked: 0
   - name: Player
     uniqueID: 2734054963
     locked: 0
