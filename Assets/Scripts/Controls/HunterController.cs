@@ -20,6 +20,8 @@ public class HunterController : ParentController
     private float _focusedLightDefaultDistance;
     private bool _isLightOn;
 
+    private Animator _anim;
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.tag == "Fuel")
@@ -42,6 +44,8 @@ public class HunterController : ParentController
         _focusedLightCollider = _lights.transform.GetChild(0).GetComponent<PolygonCollider2D>();
         _focusedLightCollider.enabled = false;
 
+        _anim = GetComponent<Animator>();
+
         // Subscribes _isLightOn to the special button being used
         parentControls.Player.Special.performed += _ => SwitchLight(true);
         parentControls.Player.Special.canceled += _ => SwitchLight(false);
@@ -62,6 +66,24 @@ public class HunterController : ParentController
                 Vector3.Angle(_lights.transform.up, rb.velocity)
                 );
         }
+
+        Vector2 movement = move / speed;
+
+        if (movement != Vector2.zero)
+        {
+            UpdateAnimation(movement);
+        }
+        else
+        {
+            _anim.SetBool("isMoving", false);
+        }
+    }
+
+    private void UpdateAnimation(Vector2 movement)
+    {
+        _anim.SetFloat("moveX", movement.x);
+        _anim.SetFloat("moveY", movement.y);
+        _anim.SetBool("isMoving", true);
     }
 
 

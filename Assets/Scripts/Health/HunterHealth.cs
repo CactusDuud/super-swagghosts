@@ -6,6 +6,14 @@ using Photon.Realtime;
 
 public class HunterHealth : ParentHealth
 {
+    private Animator _anim;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        _anim = GetComponent<Animator>();
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Ghost"))
@@ -34,6 +42,7 @@ public class HunterHealth : ParentHealth
             GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             GetComponent<Rigidbody2D>().isKinematic = true;
             GetComponent<HunterController>().enabled = false;
+            _anim.SetTrigger("isDead");
             Debug.Log("Rigidbody after");
         }
     }
