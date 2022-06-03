@@ -97,7 +97,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8772577006205314962
 Transform:
   m_ObjectHideFlags: 0
@@ -175,7 +175,7 @@ MonoBehaviour:
   m_PointLightInnerAngle: 30
   m_PointLightOuterAngle: 45
   m_PointLightInnerRadius: 0
-  m_PointLightOuterRadius: 2
+  m_PointLightOuterRadius: 3
   m_PointLightDistance: 3
   m_PointLightQuality: 1
   m_ShapeLightParametricSides: 5
@@ -213,9 +213,9 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.76, y: 1.84}
-      - {x: 0, y: 2}
-      - {x: -0.76, y: 1.84}
+    - - {x: 1.14, y: 2.76}
+      - {x: 0, y: 3}
+      - {x: -1.14, y: 2.76}
       - {x: 0, y: 0}
 --- !u!114 &6042223981339123395
 MonoBehaviour:
@@ -290,7 +290,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3363712363055306723}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b3b4c103d6fb9c478d54d0517a2d0d1, type: 3}
+  m_Script: {fileID: 11500000, guid: b72686322975490419503b30b2baaa39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   indicator: {fileID: 4569089941604791018}
@@ -435,7 +435,7 @@ MonoBehaviour:
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
-  m_PointLightOuterRadius: 1
+  m_PointLightOuterRadius: 1.5
   m_PointLightDistance: 3
   m_PointLightQuality: 1
   m_ShapeLightParametricSides: 5
@@ -655,8 +655,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1560912333
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 76c8aefc29c7b49969e8a6236442268e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
