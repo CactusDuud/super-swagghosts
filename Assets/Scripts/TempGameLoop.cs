@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using UnityEngine.SceneManagement;
 
 public class TempGameLoop : MonoBehaviour
 {
@@ -33,7 +34,9 @@ public class TempGameLoop : MonoBehaviour
 
             // TODO: Replace with game over screen
             PhotonNetwork.LeaveRoom();
-            PhotonNetwork.LoadLevel("EndScreen");
+            //PhotonNetwork.LoadLevel("EndScreen");
+            SceneManager.LoadScene("EndScreen");
+
         }
         else if (winner == "humans")
         {
@@ -41,7 +44,8 @@ public class TempGameLoop : MonoBehaviour
 
             // TODO: Replace with game over screen
             PhotonNetwork.LeaveRoom();
-            PhotonNetwork.LoadLevel("EndScreen");
+            //PhotonNetwork.LoadLevel("EndScreen");
+            SceneManager.LoadScene("EndScreen");
         }
     }
 
