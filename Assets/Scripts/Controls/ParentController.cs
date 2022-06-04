@@ -69,10 +69,18 @@ public class ParentController : MonoBehaviourPunCallbacks
         }
     }
 
+    protected virtual void Update()
+    {
+        if(_view.IsMine)
+        {
+            PlayerPause();
+        }
+    }
+
     // handles movement of the player
     protected virtual void FixedUpdate()
     {
-        PlayerPause();
+        
         if (!_view.IsMine || Pause.Instance.IsPaused()) return;
 
         MoveEntity();
