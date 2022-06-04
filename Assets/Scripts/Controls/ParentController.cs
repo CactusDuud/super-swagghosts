@@ -63,42 +63,6 @@ public class ParentController : MonoBehaviourPunCallbacks
         if (!_view.IsMine) return;
 
         MoveEntity();
-        CheckPause();
-
-    }
-
-    protected void CheckPause()
-    {
-        if (parentControls.Player.Pause.triggered && !pause)
-        {
-            playerWhoPaused = true;
-            this.photonView.RPC("PauseGame", RpcTarget.All);
-            
-        }
-        else if(parentControls.Player.Pause.triggered && pause && playerWhoPaused)
-        {
-            playerWhoPaused = false;
-            this.photonView.RPC("UnpauseGame", RpcTarget.All);
-        }
-        Debug.Log("checkpause");
-    }
-
-    [PunRPC]
-    protected void PauseGame()
-    {
-        Time.timeScale = 0f;
-        pauseMenu.SetActive(true);
-        pause = true;
-        Debug.Log($"Pause {Time.timeScale}");
-
-    }
-
-    protected void UnpauseGame()
-    {
-        Time.timeScale = 1f;
-        pauseMenu.SetActive(false);
-        pause = false;
-        Debug.Log($"Unpause {Time.timeScale}");
     }
 
 }
