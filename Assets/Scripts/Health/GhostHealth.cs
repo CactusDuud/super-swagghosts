@@ -31,6 +31,7 @@ public class GhostHealth : ParentHealth
 
     private void Update()
     {
+        if (Pause.Instance.IsPaused()) { return; }
         //Debug.Log(curr_health);
         if (curr_health == 0)
         {

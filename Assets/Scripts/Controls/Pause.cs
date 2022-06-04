@@ -6,11 +6,18 @@ using Photon.Realtime;
 
 public class Pause : MonoBehaviourPunCallbacks
 {
+    public static Pause Instance;
+
     public GameObject optionsMenu;
     //public GameObject backButton;
-    public GameObject optionsButton;
+    //public GameObject optionsButton;
 
+    [ReadOnly] private bool paused = false;
 
+    private void Awake()
+    {
+        Instance = this;
+    }
     public void PauseGame()
     {
         this.photonView.RPC("PauseGameRPC", RpcTarget.All);
@@ -24,10 +31,11 @@ public class Pause : MonoBehaviourPunCallbacks
     [PunRPC]
     private void PauseGameRPC()
     {
-        Time.timeScale = 0f;
+        //Time.timeScale = 0f;
+        paused = true;
         optionsMenu.gameObject.SetActive(true);
         //backButton.gameObject.SetActive(true);
-        optionsButton.gameObject.SetActive(false);
+        //optionsButton.gameObject.SetActive(false);
         
     }
 
@@ -36,8 +44,15 @@ public class Pause : MonoBehaviourPunCallbacks
     {
         Debug.Log("unpause");
         optionsMenu.gameObject.SetActive(false);
+        paused = false;
         //backButton.gameObject.SetActive(false);
-        optionsButton.gameObject.SetActive(true);
-        Time.timeScale = 1f;
+        //optionsButton.gameObject.SetActive(true);
+        //Time.timeScale = 1f;
     }
+
+    public bool IsPaused()
+    {
+        return paused;
+    }
+
 }

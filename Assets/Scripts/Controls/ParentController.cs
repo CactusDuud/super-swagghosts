@@ -57,10 +57,23 @@ public class ParentController : MonoBehaviourPunCallbacks
         rb.velocity = move;
     }
 
+    protected void PlayerPause()
+    {
+        if (parentControls.Player.Pause.triggered && Pause.Instance.IsPaused())
+        {
+            Pause.Instance.UnpauseGame();
+        }
+        else if (parentControls.Player.Pause.triggered && !Pause.Instance.IsPaused())
+        {
+            Pause.Instance.PauseGame();
+        }
+    }
+
     // handles movement of the player
     protected virtual void FixedUpdate()
     {
-        if (!_view.IsMine) return;
+        PlayerPause();
+        if (!_view.IsMine || Pause.Instance.IsPaused()) return;
 
         MoveEntity();
     }
