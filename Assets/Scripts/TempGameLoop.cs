@@ -9,6 +9,8 @@ public class TempGameLoop : MonoBehaviour
     [SerializeField] private List<HunterHealth> hunter_healths = new List<HunterHealth>();
     [SerializeField] private GhostHealth ghost_health;
 
+    public static string winner;
+
     public int num_hunters;
     public bool is_set_up = false;
 
@@ -24,14 +26,14 @@ public class TempGameLoop : MonoBehaviour
     {
         if (is_set_up == false) return;
 
-        string winner = CheckWinner();
+        winner = CheckWinner();
         if (winner == "ghost")
         {
             Debug.Log($"{name}: The ghost has won!");
 
             // TODO: Replace with game over screen
             PhotonNetwork.LeaveRoom();
-            PhotonNetwork.LoadLevel("MainMenu");
+            PhotonNetwork.LoadLevel("EndScreen");
         }
         else if (winner == "humans")
         {
@@ -39,7 +41,7 @@ public class TempGameLoop : MonoBehaviour
 
             // TODO: Replace with game over screen
             PhotonNetwork.LeaveRoom();
-            PhotonNetwork.LoadLevel("MainMenu");
+            PhotonNetwork.LoadLevel("EndScreen");
         }
     }
 
