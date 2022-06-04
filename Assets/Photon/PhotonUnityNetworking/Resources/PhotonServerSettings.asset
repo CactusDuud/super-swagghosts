@@ -40,6 +40,7 @@ MonoBehaviour:
   - DebugStuff
   - RPC_SetHealth
   - DecreaseOpacity
+  - PauseGame
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1

@@ -3,9 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Photon.Pun;
+using Photon.Realtime;
 
 public class ParentController : MonoBehaviourPunCallbacks
 {
+    // pause stuff
+    [SerializeField] GameObject pauseMenu;
+    [ReadOnly] private bool pause;
+    [ReadOnly] private bool playerWhoPaused;
+
     // Input Actions for controls
     protected ParentControls parentControls;
     protected PhotonView _view;
@@ -57,5 +63,42 @@ public class ParentController : MonoBehaviourPunCallbacks
         if (!_view.IsMine) return;
 
         MoveEntity();
+        CheckPause();
+
     }
+
+    protected void CheckPause()
+    {
+        if (parentControls.Player.Pause.triggered && !pause)
+        {
+            playerWhoPaused = true;
+            this.photonView.RPC("PauseGame", RpcTarget.All);
+            
+        }
+        else if(parentControls.Player.Pause.triggered && pause && playerWhoPaused)
+        {
+            playerWhoPaused = false;
+            this.photonView.RPC("UnpauseGame", RpcTarget.All);
+        }
+        Debug.Log("checkpause");
+    }
+
+    [PunRPC]
+    protected void PauseGame()
+    {
+        Time.timeScale = 0f;
+        pauseMenu.SetActive(true);
+        pause = true;
+        Debug.Log($"Pause {Time.timeScale}");
+
+    }
+
+    protected void UnpauseGame()
+    {
+        Time.timeScale = 1f;
+        pauseMenu.SetActive(false);
+        pause = false;
+        Debug.Log($"Unpause {Time.timeScale}");
+    }
+
 }
