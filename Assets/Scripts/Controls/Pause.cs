@@ -35,9 +35,9 @@ public class Pause : MonoBehaviourPunCallbacks
     private void UnpauseGameRPC()
     {
         Debug.Log("unpause");
-        Time.timeScale = 1f;
         optionsMenu.gameObject.SetActive(false);
         //backButton.gameObject.SetActive(false);
         optionsButton.gameObject.SetActive(true);
+        Time.timeScale = 1f;
     }
 }
