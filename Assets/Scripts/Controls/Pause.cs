@@ -31,6 +31,7 @@ public class Pause : MonoBehaviourPunCallbacks
     [PunRPC]
     private void PauseGameRPC()
     {
+        Debug.Log("pause happening");
         //Time.timeScale = 0f;
         paused = true;
         optionsMenu.gameObject.SetActive(true);
