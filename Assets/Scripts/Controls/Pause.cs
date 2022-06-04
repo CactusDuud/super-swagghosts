@@ -16,22 +16,27 @@ public class Pause : MonoBehaviourPunCallbacks
         this.photonView.RPC("PauseGameRPC", RpcTarget.All);
     }
 
+    public void UnpauseGame()
+    {
+        this.photonView.RPC("UnpauseGameRPC", RpcTarget.All);
+    }
+
     [PunRPC]
     private void PauseGameRPC()
     {
-        if (!optionsMenu.gameObject.activeSelf)
-        {
-            Time.timeScale = 0f;
-            optionsMenu.gameObject.SetActive(true);
-            backButton.gameObject.SetActive(true);
-            optionsButton.gameObject.SetActive(false);
-        }
-        else
-        {
-            Time.timeScale = 1f;
-            optionsMenu.gameObject.SetActive(false);
-            backButton.gameObject.SetActive(false);
-            optionsButton.gameObject.SetActive(true);
-        }
+        Time.timeScale = 0f;
+        optionsMenu.gameObject.SetActive(true);
+        backButton.gameObject.SetActive(true);
+        optionsButton.gameObject.SetActive(false);
+        
+    }
+
+    [PunRPC]
+    private void UnpauseGameRPC()
+    {
+        Time.timeScale = 1f;
+        optionsMenu.gameObject.SetActive(false);
+        backButton.gameObject.SetActive(false);
+        optionsButton.gameObject.SetActive(true);
     }
 }
