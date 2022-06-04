@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class EndScreenMisc : MonoBehaviour
 {
-    public Text txt;
+    public TextMeshProUGUI txt;
 
-    void Start() 
+    void Awake() 
     {
         txt.text = TempGameLoop.winner;
     }
