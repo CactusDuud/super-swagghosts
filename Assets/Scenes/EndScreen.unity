@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 59572995}
   - component: {fileID: 59572994}
   m_Layer: 5
-  m_Name: Title Text (Swagghosts)
+  m_Name: Winner Text (Reveal)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -632,7 +632,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2a27ed2064c1d447aab0c400fadf248, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  txt: {fileID: 1512106680}
+  txt: {fileID: 59572992}
 --- !u!1 &1768635147
 GameObject:
   m_ObjectHideFlags: 0
@@ -881,7 +881,7 @@ GameObject:
   - component: {fileID: 1950175126}
   - component: {fileID: 1950175125}
   m_Layer: 5
-  m_Name: Title Text (Super)
+  m_Name: Winner Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
