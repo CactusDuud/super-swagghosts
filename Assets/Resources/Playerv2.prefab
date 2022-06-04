@@ -466,6 +466,7 @@ GameObject:
   - component: {fileID: 7025737679981220458}
   - component: {fileID: 5473547924024818039}
   - component: {fileID: 476991229559664805}
+  - component: {fileID: -8791103500490441223}
   m_Layer: 6
   m_Name: Playerv2
   m_TagString: Player
@@ -595,6 +596,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc491c8b0d565f645b0d50f2165cdd6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pauseMenu: {fileID: 0}
   speed: 3.5
   _minMoveThreshhold: 0.01
   _lights: {fileID: 828910934991253413}
@@ -688,3 +690,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &-8791103500490441223
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8785083144454512461}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b8c4a61274f60b4ea5fb4299cfdbf14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowLayerWeightsInspector: 1
+  ShowParameterInspector: 1
+  m_SynchronizeParameters: []
+  m_SynchronizeLayers: []
