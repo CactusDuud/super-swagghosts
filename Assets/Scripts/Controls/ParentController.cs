@@ -71,6 +71,8 @@ public class ParentController : MonoBehaviourPunCallbacks
 
     protected virtual void Update()
     {
+        // Originally thought pause wouldnt work with time but i think it is because i forgot to use view.ismine
+        // if the way i coded it rn is too difficult to use remind me to try using the time.timescale version but with view.ismine
         if(_view.IsMine)
         {
             PlayerPause();
