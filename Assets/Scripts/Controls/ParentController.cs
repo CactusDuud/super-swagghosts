@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Photon.Pun;
+using Photon.Realtime;
 
 public class ParentController : MonoBehaviourPunCallbacks
 {
@@ -67,19 +68,23 @@ public class ParentController : MonoBehaviourPunCallbacks
         if (parentControls.Player.Pause.triggered)
         {
             this.photonView.RPC("PauseGame", RpcTarget.All);
+            Debug.Log("in checkpause");
         }
     }
 
     [PunRPC]
     protected void PauseGame()
     {
+        Debug.Log("in pausegame");
         if(Time.timeScale > 0)
         {
             Time.timeScale = 1f;
+            Debug.Log("pause");
         }
         else
         {
             Time.timeScale = 0f;
+            Debug.Log("unpause");
         }
     }
 
