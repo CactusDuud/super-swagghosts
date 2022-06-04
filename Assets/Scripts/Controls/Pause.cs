@@ -7,7 +7,7 @@ using Photon.Realtime;
 public class Pause : MonoBehaviourPunCallbacks
 {
     public GameObject optionsMenu;
-    public GameObject backButton;
+    //public GameObject backButton;
     public GameObject optionsButton;
 
 
@@ -26,7 +26,7 @@ public class Pause : MonoBehaviourPunCallbacks
     {
         Time.timeScale = 0f;
         optionsMenu.gameObject.SetActive(true);
-        backButton.gameObject.SetActive(true);
+        //backButton.gameObject.SetActive(true);
         optionsButton.gameObject.SetActive(false);
         
     }
@@ -34,9 +34,10 @@ public class Pause : MonoBehaviourPunCallbacks
     [PunRPC]
     private void UnpauseGameRPC()
     {
+        Debug.Log("unpause");
         Time.timeScale = 1f;
         optionsMenu.gameObject.SetActive(false);
-        backButton.gameObject.SetActive(false);
+        //backButton.gameObject.SetActive(false);
         optionsButton.gameObject.SetActive(true);
     }
 }
