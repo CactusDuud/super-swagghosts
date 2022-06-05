@@ -8,10 +8,19 @@ public class HunterHealth : ParentHealth
 {
     private Animator _anim;
 
+    [SerializeField] private List<GameObject> _hearts; ///
+
+    private int _currHeartNum;
+
     protected override void Awake()
     {
         base.Awake();
         _anim = GetComponent<Animator>();
+
+        _hearts.Add(GameObject.Find("Full Heart1")); ///
+        _hearts.Add(GameObject.Find("Full Heart2")); ///
+        _hearts.Add(GameObject.Find("Full Heart3")); ///
+        _currHeartNum = 3;  ///
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -22,10 +31,11 @@ public class HunterHealth : ParentHealth
             if(curr_health != 0)
             {
                 Debug.Log("collided");
-                TakeDamage(100);
+                // TakeDamage(100);
+                TakeDamage(34);
                
-
-                
+                _hearts[_currHeartNum].SetActive(false);    ///
+                _currHeartNum--;    ///
             }
         }
     }
