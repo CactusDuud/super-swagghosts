@@ -550,6 +550,7 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 1732884974039032681}
   - {fileID: 7025737679981220458}
+  - {fileID: -8791103500490441223}
   - {fileID: 6042223981339123395}
   sceneViewId: 0
   InstantiationId: 0
@@ -704,5 +705,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowLayerWeightsInspector: 1
   ShowParameterInspector: 1
-  m_SynchronizeParameters: []
-  m_SynchronizeLayers: []
+  m_SynchronizeParameters:
+  - Type: 1
+    SynchronizeType: 1
+    Name: Blend
+  - Type: 1
+    SynchronizeType: 1
+    Name: moveX
+  - Type: 1
+    SynchronizeType: 1
+    Name: moveY
+  - Type: 4
+    SynchronizeType: 1
+    Name: isMoving
+  m_SynchronizeLayers:
+  - SynchronizeType: 1
+    LayerIndex: 0
