@@ -4,6 +4,8 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 
+using UnityEngine.UI;   ///
+
 public class GhostHealth : ParentHealth
 {
     private int iframe_buildup;
@@ -13,6 +15,8 @@ public class GhostHealth : ParentHealth
     [Range(0f,1f)][ReadOnly] private float _opacity = 1f; 
     private GhostController _controller;
     private SpriteRenderer _sprite;
+
+    public Text _healthTextObj;  ///
 
     [PunRPC]
     protected override void RPC_SetHealth(int health)
@@ -27,6 +31,9 @@ public class GhostHealth : ParentHealth
         _controller = GetComponent<GhostController>();
         _sprite = GetComponentInChildren<SpriteRenderer>();
         rb = GetComponent<Rigidbody>();
+
+        _healthTextObj = GameObject.Find("Ghost Health Num").GetComponent<Text>();  ///
+        _healthTextObj.text = curr_health.ToString();   ///
     }
 
     private void Update()
@@ -41,6 +48,8 @@ public class GhostHealth : ParentHealth
         }
 
         this.photonView.RPC("DecreaseOpacity", RpcTarget.All);
+
+        _healthTextObj.text = curr_health.ToString();   ///
     }
 
     /// <summary>

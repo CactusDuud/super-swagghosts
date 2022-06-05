@@ -29,6 +29,9 @@ public class GameManager : MonoBehaviour
 
     public static GameManager Instance { get; private set; }
 
+    [SerializeField] private GameObject _ghostUI;   ///
+    [SerializeField] private GameObject _hunterUI;   ///
+
     private void Awake()
     {
         //! Singleton insurance
@@ -54,6 +57,9 @@ public class GameManager : MonoBehaviour
         _camera.Follow = _spawned.transform;
         _camera.LookAt = _spawned.transform;
         _batteryCurrentTime = _batteryMaxTime;
+
+        _ghostUI.SetActive(false);  ///
+        _hunterUI.SetActive(false); ///
     }
 
     void Update()
@@ -62,6 +68,8 @@ public class GameManager : MonoBehaviour
         {
             SpawnBattery();
             DoLightning();
+
+            _ghostUI.SetActive(true); ///
 
             // int downCount = 0;
             // foreach (var p in GameObject.FindGameObjectsWithTag("Player"))
@@ -79,6 +87,7 @@ public class GameManager : MonoBehaviour
             //     Application.Quit();
             // }
         }
+        else {_hunterUI.SetActive(true);}   ///
     }
 
     private void SpawnBattery()
