@@ -123,7 +123,7 @@ public class GhostHealth : ParentHealth
             // rb.velocity = new Vector3(0, 0, 0);
             _controller.DisableSpookBox();
 
-            if (iframe_buildup >= 60) {StartCoroutine(ActivateInvincibility());} //ActivateInvincibility();
+            if (iframe_buildup >= 60) {StartCoroutine("ActivateInvincibility");} //ActivateInvincibility();
             else TakeDamage(1);
 
             iframe_buildup++;
