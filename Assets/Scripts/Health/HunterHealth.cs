@@ -33,6 +33,7 @@ public class HunterHealth : ParentHealth
                 Debug.Log("collided");
                 // TakeDamage(100);
                 TakeDamage(34);
+                Debug.Log("taken damage");
                
                 _hearts[_currHeartNum-1].SetActive(false);    ///
                 _currHeartNum--;    ///

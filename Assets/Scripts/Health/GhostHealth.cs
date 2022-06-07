@@ -32,8 +32,9 @@ public class GhostHealth : ParentHealth
         _sprite = GetComponentInChildren<SpriteRenderer>();
         rb = GetComponent<Rigidbody>();
 
-        _healthTextObj = GameObject.Find("Ghost Health Num").GetComponent<Text>();  ///
-        _healthTextObj.text = curr_health.ToString();   ///
+        // GameObject _healthTextObject = GameObject.Find("Ghost Health Num");//.GetComponent<Text>();  ///
+        // _healthTextObj = _healthTextObj.GetComponent<Text>();
+        // _healthTextObj.text = curr_health.ToString();   ///
     }
 
     private void Update()
@@ -49,7 +50,7 @@ public class GhostHealth : ParentHealth
 
         this.photonView.RPC("DecreaseOpacity", RpcTarget.All);
 
-        _healthTextObj.text = curr_health.ToString();   ///
+        // _healthTextObj.text = curr_health.ToString();   ///
     }
 
     /// <summary>
