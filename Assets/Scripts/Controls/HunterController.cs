@@ -96,6 +96,9 @@ public class HunterController : ParentController
 
     private void SwitchLight(bool isLightOn)
     {
+        // Do nothing if this isn't my view
+        if (!_view.IsMine) return;
+
         _isLightOn = isLightOn;
     }
 
