@@ -58,8 +58,8 @@ public class GameManager : MonoBehaviour
         _camera.LookAt = _spawned.transform;
         _batteryCurrentTime = _batteryMaxTime;
 
-        _ghostUI.SetActive(true);  ///
-        _hunterUI.SetActive(true); ///
+        _ghostUI.SetActive(false);  ///
+        _hunterUI.SetActive(false); ///
     }
 
     void Update()
