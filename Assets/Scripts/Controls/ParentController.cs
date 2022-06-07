@@ -8,9 +8,6 @@ using Photon.Realtime;
 public class ParentController : MonoBehaviourPunCallbacks
 {
     // pause stuff
-    [SerializeField] GameObject pauseMenu;
-    [ReadOnly] private bool pause;
-    [ReadOnly] private bool playerWhoPaused;
 
     // Input Actions for controls
     protected ParentControls parentControls;

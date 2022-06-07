@@ -4,19 +4,18 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 
-using UnityEngine.UI;   ///
-
+using UnityEngine.UI;   
 public class GhostHealth : ParentHealth
 {
     private int iframe_buildup;
-    public Rigidbody rb;
+    public Rigidbody2D rb;
 
     // opacity is made so it is opaque at 1 and transparent at 0, anything above 1 will cause it to take longer to become transparent
     [Range(0f,1f)][ReadOnly] private float _opacity = 1f; 
     private GhostController _controller;
     private SpriteRenderer _sprite;
 
-    public Text _healthTextObj;  ///
+    //[SerializeField] private Text _healthTextObj;  
 
     [PunRPC]
     protected override void RPC_SetHealth(int health)
@@ -30,7 +29,8 @@ public class GhostHealth : ParentHealth
 
         _controller = GetComponent<GhostController>();
         _sprite = GetComponentInChildren<SpriteRenderer>();
-        rb = GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody2D>();
+        iframe_buildup = 0;
 
         // GameObject _healthTextObject = GameObject.Find("Ghost Health Num");//.GetComponent<Text>();  ///
         // _healthTextObj = _healthTextObj.GetComponent<Text>();
@@ -121,11 +121,18 @@ public class GhostHealth : ParentHealth
             //Debug.Log("flashlight happening");
 
             _controller.enabled = false;
-            // rb.velocity = new Vector3(0, 0, 0);
             _controller.DisableSpookBox();
 
-            if (iframe_buildup >= 60) ActivateInvincibility();//{StartCoroutine("ActivateInvincibility");} //ActivateInvincibility();
-            else TakeDamage(1);
+            if (iframe_buildup >= 60)
+            {
+                ActivateInvincibility(); //{StartCoroutine("ActivateInvincibility");} //ActivateInvincibility();
+            }
+            else
+            {
+                rb.velocity = new Vector3(0, 0, 0);
+                TakeDamage(1);
+            }
+            
 
             iframe_buildup++;
         }
