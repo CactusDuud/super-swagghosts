@@ -119,28 +119,44 @@ public class GhostHealth : ParentHealth
         //Debug.Log("trigger activated");
         if (collision.tag == "Flashlight")
         {
-            //Debug.Log("flashlight happening");
-
-            
-
            
 
-            if (iframe_buildup > 2f)
+            //if (iframe_buildup > 2f)
+            //{
+            //    Debug.Log("reached 2");
+            //    iframe_buildup = 0f;
+            //}
+            //else if (iframe_buildup >= 1f)
+            //{
+            //    Debug.Log($"here {iframe_buildup}");
+            //    ActivateInvincibility(); 
+            //}
+            //else
+            //{
+            //    Debug.Log("hurt time");
+            //    _controller.enabled = false;
+            //    _controller.DisableSpookBox();
+            //    rb.velocity = new Vector3(0, 0, 0);
+            //    TakeDamage(1);
+                
+            //}
+            if(iframe_buildup < 1f)
             {
-                iframe_buildup = 0;
-            }
-            else if (iframe_buildup >= 1f)
-            {
-                Debug.Log($"here {iframe_buildup}");
-                ActivateInvincibility(); 
-            }
-            else
-            {
+                Debug.Log("hurt time");
                 _controller.enabled = false;
                 _controller.DisableSpookBox();
                 rb.velocity = new Vector3(0, 0, 0);
                 TakeDamage(1);
-                
+            }
+            else if (iframe_buildup < 2f)
+            {
+                Debug.Log($"here {iframe_buildup}");
+                ActivateInvincibility();
+            }
+            else
+            {
+                Debug.Log("reached 2");
+                iframe_buildup = 0f;
             }
             iframe_buildup += Time.deltaTime;
 
