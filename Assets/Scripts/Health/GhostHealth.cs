@@ -30,7 +30,7 @@ public class GhostHealth : ParentHealth
         _controller = GetComponent<GhostController>();
         _sprite = GetComponentInChildren<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
-        iframe_buildup = 0;
+        iframe_buildup = 0f;
 
         // GameObject _healthTextObject = GameObject.Find("Ghost Health Num");//.GetComponent<Text>();  ///
         // _healthTextObj = _healthTextObj.GetComponent<Text>();
@@ -64,13 +64,8 @@ public class GhostHealth : ParentHealth
     {
         _controller.enabled = true;
         _controller.EnableSpookBox();
-        _controller.Flee();
-        float timer = 0;
-        iframe_buildup = 0;
-        while (timer < 1)
-        {
-            timer += Time.deltaTime;
-        }
+        //_controller.Flee();
+        
         
     }
 
@@ -129,7 +124,13 @@ public class GhostHealth : ParentHealth
             _controller.enabled = false;
             _controller.DisableSpookBox();
 
-            if (iframe_buildup >= 1)
+           
+
+            if (iframe_buildup > 2)
+            {
+                iframe_buildup = 0;
+            }
+            else if (iframe_buildup > 1)
             {
                 ActivateInvincibility(); //{StartCoroutine("ActivateInvincibility");} //ActivateInvincibility();
             }
