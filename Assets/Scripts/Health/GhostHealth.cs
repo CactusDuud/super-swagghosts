@@ -142,7 +142,7 @@ public class GhostHealth : ParentHealth
             //}
             if(iframe_buildup < 1f)
             {
-                Debug.Log("hurt time");
+                
                 _controller.enabled = false;
                 _controller.DisableSpookBox();
                 rb.velocity = new Vector3(0, 0, 0);
@@ -150,15 +150,17 @@ public class GhostHealth : ParentHealth
             }
             else if (iframe_buildup < 2f)
             {
-                Debug.Log($"here {iframe_buildup}");
+                
                 ActivateInvincibility();
             }
             else
             {
                 Debug.Log("reached 2");
                 iframe_buildup = 0f;
+                Debug.Log($"see iframe {iframe_buildup}");
             }
-            iframe_buildup += Time.deltaTime;
+            iframe_buildup += Time.fixedDeltaTime;
+            Debug.Log($"end iframe {iframe_buildup}");
 
 
 
