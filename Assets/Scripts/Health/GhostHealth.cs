@@ -121,25 +121,30 @@ public class GhostHealth : ParentHealth
         {
             //Debug.Log("flashlight happening");
 
-            _controller.enabled = false;
-            _controller.DisableSpookBox();
+            
 
            
 
-            if (iframe_buildup > 2)
+            if (iframe_buildup > 2f)
             {
                 iframe_buildup = 0;
             }
-            else if (iframe_buildup > 1)
+            else if (iframe_buildup >= 1f)
             {
-                ActivateInvincibility(); //{StartCoroutine("ActivateInvincibility");} //ActivateInvincibility();
+                Debug.Log($"here {iframe_buildup}");
+                ActivateInvincibility(); //{StartCoroutine("ActivateInvincibility");} //ActivateInvincibility();\
+                iframe_buildup += Time.deltaTime;
             }
             else
             {
+                _controller.enabled = false;
+                _controller.DisableSpookBox();
                 rb.velocity = new Vector3(0, 0, 0);
                 TakeDamage(1);
                 iframe_buildup += Time.deltaTime;
+                
             }
+            Debug.Log(Time.deltaTime);
             
 
             
@@ -150,5 +155,6 @@ public class GhostHealth : ParentHealth
     {
         // Trigger invincibility immediately if the ghosts leaves the light ray
         ActivateInvincibility();
+        iframe_buildup = 0f;
     }
 }
