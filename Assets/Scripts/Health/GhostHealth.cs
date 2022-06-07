@@ -7,7 +7,7 @@ using Photon.Realtime;
 using UnityEngine.UI;   
 public class GhostHealth : ParentHealth
 {
-    private int iframe_buildup;
+    private float iframe_buildup;
     public Rigidbody2D rb;
 
     // opacity is made so it is opaque at 1 and transparent at 0, anything above 1 will cause it to take longer to become transparent
@@ -134,7 +134,7 @@ public class GhostHealth : ParentHealth
             }
             
 
-            iframe_buildup++;
+            iframe_buildup += Time.deltaTime;
         }
     }
 
