@@ -65,7 +65,13 @@ public class GhostHealth : ParentHealth
         _controller.enabled = true;
         _controller.EnableSpookBox();
         _controller.Flee();
+        float timer = 0;
         iframe_buildup = 0;
+        while (timer < 1)
+        {
+            timer += Time.deltaTime;
+        }
+        
     }
 
     // IEnumerable ActivateInvincibility() ///
@@ -123,7 +129,7 @@ public class GhostHealth : ParentHealth
             _controller.enabled = false;
             _controller.DisableSpookBox();
 
-            if (iframe_buildup >= 60)
+            if (iframe_buildup >= 1)
             {
                 ActivateInvincibility(); //{StartCoroutine("ActivateInvincibility");} //ActivateInvincibility();
             }
@@ -131,10 +137,11 @@ public class GhostHealth : ParentHealth
             {
                 rb.velocity = new Vector3(0, 0, 0);
                 TakeDamage(1);
+                iframe_buildup += Time.deltaTime;
             }
             
 
-            iframe_buildup += Time.deltaTime;
+            
         }
     }
 
