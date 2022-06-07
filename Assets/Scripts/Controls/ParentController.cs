@@ -28,7 +28,7 @@ public class ParentController : MonoBehaviourPunCallbacks
         rb = GetComponent<Rigidbody2D>();
 
         // Removes rigidbody from network characters (fixes movement jank)
-        if (!_view.IsMine) { Destroy(rb); }
+        //if (!_view.IsMine) { Destroy(rb); }
     }
 
     // Enable parentControls
