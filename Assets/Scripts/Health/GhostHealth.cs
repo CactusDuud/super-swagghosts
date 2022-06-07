@@ -116,11 +116,18 @@ public class GhostHealth : ParentHealth
         // takes damage for each second it is in the flashlight ray
         // Once it has taken enough damage, it gets temporary invincibility
         // to escape
-        //Debug.Log("trigger activated");
+
+        // Shoots a ray towards the player. If it collides with anything other than the player,
+        //  the rest of this function does nothing.
+        Ray ray = new Ray(transform.position, collision.transform.parent.transform.position);
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit))
+        {
+            if (!hit.CompareTag("Player")) return;
+        }
+
         if (collision.tag == "Flashlight")
         {
-           
-
             //if (iframe_buildup > 2f)
             //{
             //    Debug.Log("reached 2");
@@ -140,7 +147,7 @@ public class GhostHealth : ParentHealth
             //    TakeDamage(1);
                 
             //}
-            if(iframe_buildup < 1f)
+            if (iframe_buildup < 1f)
             {
                 
                 _controller.enabled = false;
