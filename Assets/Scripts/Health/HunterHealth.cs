@@ -34,7 +34,7 @@ public class HunterHealth : ParentHealth
                 // TakeDamage(100);
                 TakeDamage(34);
                
-                _hearts[_currHeartNum].SetActive(false);    ///
+                _hearts[_currHeartNum-1].SetActive(false);    ///
                 _currHeartNum--;    ///
             }
         }
