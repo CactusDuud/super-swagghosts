@@ -157,6 +157,9 @@ public class GhostHealth : ParentHealth
             }
             else
             {
+                _controller.enabled = false;
+                _controller.DisableSpookBox();
+                rb.velocity = new Vector3(0, 0, 0);
                 iframe_buildup = 0f;
             }
             
