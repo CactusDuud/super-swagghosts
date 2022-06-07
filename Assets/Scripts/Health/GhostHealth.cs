@@ -59,20 +59,20 @@ public class GhostHealth : ParentHealth
     /// parent controller script and idk if we want to have a public func that can change speed
     /// </summary>
 
-    private void ActivateInvincibility()
-    {
-        _controller.enabled = true;
-        _controller.EnableSpookBox();
-        _controller.Flee();
-        iframe_buildup = 0;
-    }
-
-    // IEnumerable ActivateInvincibility() ///
+    // private void ActivateInvincibility()
     // {
+    //     _controller.enabled = true;
     //     _controller.EnableSpookBox();
     //     _controller.Flee();
-    //     yield return new WaitForSeconds(5);
+    //     iframe_buildup = 0;
     // }
+
+    IEnumerable ActivateInvincibility() ///
+    {
+        _controller.EnableSpookBox();
+        _controller.Flee();
+        yield return new WaitForSeconds(5);
+    }
 
     public override void TakeDamage(int damage)
     {
@@ -123,7 +123,7 @@ public class GhostHealth : ParentHealth
             // rb.velocity = new Vector3(0, 0, 0);
             _controller.DisableSpookBox();
 
-            if (iframe_buildup >= 60) ActivateInvincibility();//{StartCoroutine("ActivateInvincibility");} //ActivateInvincibility();
+            if (iframe_buildup >= 60) {StartCoroutine("ActivateInvincibility");} //ActivateInvincibility();
             else TakeDamage(1);
 
             iframe_buildup++;
