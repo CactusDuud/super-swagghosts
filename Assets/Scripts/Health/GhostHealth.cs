@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class GhostHealth : ParentHealth
 {
     private float iframe_buildup;
-    public Rigidbody2D rb;
+    private Rigidbody2D rb;
 
     // opacity is made so it is opaque at 1 and transparent at 0, anything above 1 will cause it to take longer to become transparent
     [Range(0f,1f)] [ReadOnly] private float _opacity = 1f; 
@@ -17,6 +17,8 @@ public class GhostHealth : ParentHealth
     private SpriteRenderer _sprite;
 
     [SerializeField] private GameObject _healthTextObj;  
+
+    [SerializeField] private LayerMask _terrainLayer;
 
     [PunRPC]
     protected override void RPC_SetHealth(int health)
@@ -102,16 +104,21 @@ public class GhostHealth : ParentHealth
         // to escape
         if (collision.tag == "Flashlight")
         {
-            // Shoots a ray towards the player. If it collides with anything other than the player,
+            // Shoots a ray towards the player. If it collides with a wall,
             //  the rest of this function does nothing.
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, collision.transform.parent.transform.position);
-            if (hit.collider != null)
-            {
-                Debug.Log($"{name}: Flashlight hit \"{hit.transform.name}\"");
-                if (!hit.transform.CompareTag("Player")) return;
-            }
-            Debug.DrawLine(transform.position, collision.transform.parent.transform.position, Color.yellow);
+            // RaycastHit2D hit = Physics2D.Raycast(
+            //     transform.position,
+            //     collision.transform.parent.transform.position, 
+            //     Mathf.Infinity,
+            //     _terrainLayer
+            // );
+            // if (hit.collider != null)
+            // {
+            //     Debug.Log($"{name}: Flashlight hit {hit.transform.name}");
+            //     if (!hit.collider.CompareTag("Player")) return;
+            // }
 
+            Debug.DrawLine(transform.position, collision.transform.parent.transform.position, Color.yellow);
             if (iframe_buildup < 1f)
             {
                 
