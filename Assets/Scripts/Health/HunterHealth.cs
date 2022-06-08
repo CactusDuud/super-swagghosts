@@ -20,7 +20,7 @@ public class HunterHealth : ParentHealth
         _hearts.Add(GameObject.Find("Full Heart1")); ///
         _hearts.Add(GameObject.Find("Full Heart2")); ///
         _hearts.Add(GameObject.Find("Full Heart3")); ///
-        _currHeartNum = 3;  ///
+        _currHeartNum = 1;  ///
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -31,8 +31,7 @@ public class HunterHealth : ParentHealth
             if(curr_health != 0)
             {
                 Debug.Log("collided");
-                // TakeDamage(100);
-                TakeDamage(34);
+                TakeDamage(100);
                 Debug.Log("taken damage");
                
                 _hearts[_currHeartNum-1].SetActive(false);    ///
