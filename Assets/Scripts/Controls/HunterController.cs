@@ -16,19 +16,12 @@ public class HunterController : ParentController
     [SerializeField] private float _lightFuelMax;
     [ReadOnly] [SerializeField] private float _lightFuel;
     [SerializeField] private float _minimumLight;
-    [SerializeField] private float _refuelAmount;
     private float _focusedLightDefaultDistance;
     private bool _isLightOn;
 
     private Animator _anim;
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if(collision.tag == "Fuel")
-        {
-                Refuel(_refuelAmount);
-        }
-    }
+    
 
     protected override void Awake()
     {
