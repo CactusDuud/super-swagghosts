@@ -11,7 +11,8 @@ public class GhostHealth : ParentHealth
     public Rigidbody2D rb;
 
     // opacity is made so it is opaque at 1 and transparent at 0, anything above 1 will cause it to take longer to become transparent
-    [Range(0f,1f)][ReadOnly] private float _opacity = 1f; 
+    [Range(0f,1f)] [ReadOnly] private float _opacity = 1f; 
+    [Range(0f,1f)] [SerializeField] private float _fadeSpeed = 0.2f;
     private GhostController _controller;
     private SpriteRenderer _sprite;
 
@@ -32,15 +33,13 @@ public class GhostHealth : ParentHealth
         rb = GetComponent<Rigidbody2D>();
         iframe_buildup = 0f;
 
-        _healthTextObj = GameObject.Find("Ghost Health Num");//.GetComponent<Text>();  ///
-        // _healthTextObj = _healthTextObj.GetComponent<Text>();
-        _healthTextObj.GetComponent<Text>().text = curr_health.ToString();   ///
+        _healthTextObj = GameObject.Find("Ghost Health Num");
+        _healthTextObj.GetComponent<Text>().text = curr_health.ToString();
     }
 
     private void Update()
     {
-        if (Pause.Instance.IsPaused()) { return; }
-        //Debug.Log(curr_health);
+        if (Pause.Instance.IsPaused()) return;
         if (curr_health == 0)
         {
             is_down = true;
@@ -49,7 +48,7 @@ public class GhostHealth : ParentHealth
         }
 
         this.photonView.RPC("DecreaseOpacity", RpcTarget.All);
-        _healthTextObj.GetComponent<Text>().text = curr_health.ToString();   ///
+        _healthTextObj.GetComponent<Text>().text = curr_health.ToString();
 
     }
 
@@ -59,49 +58,33 @@ public class GhostHealth : ParentHealth
     /// NOTE: i want to increase the speed for a few sec but id have to change the
     /// parent controller script and idk if we want to have a public func that can change speed
     /// </summary>
-
     private void ActivateInvincibility()
     {
         _controller.enabled = true;
         _controller.EnableSpookBox();
-        //_controller.Flee();
-        
-        
+        //_controller.Flee();   
     }
-
-    // IEnumerable ActivateInvincibility() ///
-    // {
-    //     _controller.EnableSpookBox();
-    //     _controller.Flee();
-    //     yield return new WaitForSeconds(5);
-    // }
 
     public override void TakeDamage(int damage)
     {
         base.TakeDamage(damage);
 
         _opacity = 1f;
-
     }
 
     [PunRPC]
     private void DecreaseOpacity()
     {
-        //Debug.Log("Hi");
-        // Don't change opacity if this is my view
-        //if (_view.IsMine) return;
-
         // Reduce opacity per second
         // for some reason when time.deltatime is included the ghost doesnt disappear gradually but takes a bit then disappears all at once
-        if (_opacity > 0f && !PhotonNetwork.IsMasterClient) _opacity -= 0.1f * Time.deltaTime;
-        //Debug.Log(_opacity);
+        if (_opacity > 0f && !PhotonNetwork.IsMasterClient) _opacity -= _fadeSpeed * Time.deltaTime;
+        
         // Set the actual opacity
         UpdateOpacity();
     }
 
     private void UpdateOpacity()
     {
-        //Debug.Log("Hi 2");
         _sprite.color = new Color(
             _sprite.color.r, 
             _sprite.color.g, 
@@ -117,37 +100,18 @@ public class GhostHealth : ParentHealth
         // takes damage for each second it is in the flashlight ray
         // Once it has taken enough damage, it gets temporary invincibility
         // to escape
-
-        // Shoots a ray towards the player. If it collides with anything other than the player,
-        //  the rest of this function does nothing.
-        Ray ray = new Ray(transform.position, collision.transform.parent.transform.position);
-        RaycastHit hit;
-        if (Physics.Raycast(ray, out hit))
-        {
-            // if (!hit.CompareTag("Player")) return;
-        }
-
         if (collision.tag == "Flashlight")
         {
-            //if (iframe_buildup > 2f)
-            //{
-            //    Debug.Log("reached 2");
-            //    iframe_buildup = 0f;
-            //}
-            //else if (iframe_buildup >= 1f)
-            //{
-            //    Debug.Log($"here {iframe_buildup}");
-            //    ActivateInvincibility(); 
-            //}
-            //else
-            //{
-            //    Debug.Log("hurt time");
-            //    _controller.enabled = false;
-            //    _controller.DisableSpookBox();
-            //    rb.velocity = new Vector3(0, 0, 0);
-            //    TakeDamage(1);
-                
-            //}
+            // Shoots a ray towards the player. If it collides with anything other than the player,
+            //  the rest of this function does nothing.
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, collision.transform.parent.transform.position);
+            if (hit.collider != null)
+            {
+                Debug.Log($"{name}: Flashlight hit \"{hit.transform.name}\"");
+                if (!hit.transform.CompareTag("Player")) return;
+            }
+            Debug.DrawLine(transform.position, collision.transform.parent.transform.position, Color.yellow);
+
             if (iframe_buildup < 1f)
             {
                 
@@ -170,8 +134,6 @@ public class GhostHealth : ParentHealth
                 rb.velocity = new Vector3(0, 0, 0);
                 iframe_buildup = 0f;
             }
-            
-
         }
     }
 

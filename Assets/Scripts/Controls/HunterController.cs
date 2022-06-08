@@ -116,8 +116,6 @@ public class HunterController : ParentController
                 if (_lightFuel < 0) { _lightFuel = 0; }
             }
 
-            //Debug.Log(_lightFuel);
-
             // Set size of beam 
             // Assumes default scale for hitbox is 1
             float _lightScale = 1 - ((1 - _minimumLight) * (1 - (_lightFuel / _lightFuelMax)));
