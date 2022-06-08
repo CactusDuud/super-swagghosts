@@ -49,12 +49,7 @@ public class HunterHealth : ParentHealth
             if (_reviveCount < _reviveThreshold) _reviveCount++;
             else
             {
-                curr_health = max_health;
-                is_down = false;
-                _reviveCount = 0;
-                _rb.isKinematic = false;
-                _controller.enabled = true;
-                _anim.SetTrigger("isDead");
+                RPC_SetHealth(max_health);
             }
         }
     }
@@ -76,14 +71,24 @@ public class HunterHealth : ParentHealth
     {
         base.RPC_SetHealth(health);
 
-        if (curr_health == 0)
+        if (curr_health <= 0)
         {
+            curr_health = 0;
             is_down = true;
             _reviveCount = 0;
             _rb.velocity = Vector2.zero;
             _rb.isKinematic = true;
             _controller.enabled = false;
             _anim.SetTrigger("isDead");
+        }
+
+        if (curr_health >= max_health)
+        {
+            curr_health = max_health;
+            is_down = false;
+            _reviveCount = 0;
+            _rb.isKinematic = false;
+            _controller.enabled = true;
         }
     }
 }
