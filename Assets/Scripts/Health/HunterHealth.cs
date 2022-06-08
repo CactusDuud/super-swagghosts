@@ -32,7 +32,7 @@ public class HunterHealth : ParentHealth
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.CompareTag("Ghost"))
+        if (collision.gameObject.CompareTag("Ghost"))
         {
             // When a hunter collides with a ghost, hunter's health falls to 0 and is downed
             if (curr_health != 0)
@@ -44,12 +44,12 @@ public class HunterHealth : ParentHealth
             }
         }
 
-        if (is_down && collision.CompareTag("Flashlight"))
+        if (is_down && collision.gameObject.CompareTag("Flashlight"))
         {
             if (_reviveCount < _reviveThreshold) _reviveCount++;
             else
             {
-                curr_health = max_health
+                curr_health = max_health;
                 is_down = false;
                 _reviveCount = 0;
                 _rb.isKinematic = false;
