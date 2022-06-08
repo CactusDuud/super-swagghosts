@@ -52,6 +52,7 @@ public class HunterHealth : ParentHealth
             if (_reviveCount < _reviveThreshold) _reviveCount++;
             else
             {
+                _anim.SetFloat("moveY", -1);
                 RPC_SetHealth(-max_health);
                 _reviveCount = 0;
             }
