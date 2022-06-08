@@ -102,7 +102,7 @@ public class GhostHealth : ParentHealth
         // takes damage for each second it is in the flashlight ray
         // Once it has taken enough damage, it gets temporary invincibility
         // to escape
-        if (collision.tag == "Flashlight")
+        if (collision.CompareTag("Flashlight"))
         {
             // Shoots a ray towards the player. If it collides with a wall,
             //  the rest of this function does nothing.

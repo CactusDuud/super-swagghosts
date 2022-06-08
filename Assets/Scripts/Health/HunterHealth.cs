@@ -7,62 +7,83 @@ using Photon.Realtime;
 public class HunterHealth : ParentHealth
 {
     private Animator _anim;
+    private Rigidbody2D _rb;
+    private HunterController _controller;
 
-    [SerializeField] private List<GameObject> _hearts; ///
+    [SerializeField] private List<GameObject> _hearts;
 
     private int _currHeartNum;
+
+    [SerializeField] private int _reviveThreshold = 100;
+    private int _reviveCount = 0;
 
     protected override void Awake()
     {
         base.Awake();
         _anim = GetComponent<Animator>();
+        _rb = GetComponent<Rigidbody2D>();
+        _controller = GetComponent<HunterController>();
 
-        _hearts.Add(GameObject.Find("Full Heart1")); ///
-        _hearts.Add(GameObject.Find("Full Heart2")); ///
-        _hearts.Add(GameObject.Find("Full Heart3")); ///
-        _currHeartNum = 1;  ///
+        _hearts.Add(GameObject.Find("Full Heart1"));
+        _hearts.Add(GameObject.Find("Full Heart2"));
+        _hearts.Add(GameObject.Find("Full Heart3"));
+        _currHeartNum = 1;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Ghost"))
+        if (collision.CompareTag("Ghost"))
         {
             // When a hunter collides with a ghost, hunter's health falls to 0 and is downed
-            if(curr_health != 0)
+            if (curr_health != 0)
             {
-                Debug.Log("collided");
                 TakeDamage(100);
                 Debug.Log("taken damage");
                
                 LoseHeart();
             }
         }
+
+        if (is_down && collision.CompareTag("Flashlight"))
+        {
+            if (_reviveCount < _reviveThreshold) _reviveCount++;
+            else
+            {
+                curr_health = max_health
+                is_down = false;
+                _reviveCount = 0;
+                _rb.isKinematic = false;
+                _controller.enabled = true;
+                _anim.SetTrigger("isDead");
+            }
+        }
     }
 
     private void LoseHeart()
     {
-        _hearts[_currHeartNum-1].SetActive(false);    ///
-        _currHeartNum--;    ///
+        _hearts[_currHeartNum-1].SetActive(false);
+        _currHeartNum--;
     }
 
     private void GainHeart()
     {
-        _hearts[_currHeartNum-1].SetActive(true);    ///
-        _currHeartNum++;    ///
+        _hearts[_currHeartNum].SetActive(true);
+        _currHeartNum++;
     }
 
     [PunRPC]
     protected override void RPC_SetHealth(int health)
     {
         base.RPC_SetHealth(health);
-        if(curr_health == 0)
+
+        if (curr_health == 0)
         {
             is_down = true;
-            GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-            GetComponent<Rigidbody2D>().isKinematic = true;
-            GetComponent<HunterController>().enabled = false;
+            _reviveCount = 0;
+            _rb.velocity = Vector2.zero;
+            _rb.isKinematic = true;
+            _controller.enabled = false;
             _anim.SetTrigger("isDead");
-            Debug.Log("Rigidbody after");
         }
     }
 }
