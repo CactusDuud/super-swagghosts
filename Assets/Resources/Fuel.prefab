@@ -63,8 +63,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8701fecc425b9da4fbbcbee509871414, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _wiggleDistance: 1
-  _wiggleSpeed: 1
+  _wiggleDistance: 0.1
+  _wiggleSpeed: 0.1
+  _refuelAmount: 10
 --- !u!114 &-329736413062125507
 MonoBehaviour:
   m_ObjectHideFlags: 0
