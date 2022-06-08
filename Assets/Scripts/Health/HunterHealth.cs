@@ -34,13 +34,22 @@ public class HunterHealth : ParentHealth
                 TakeDamage(100);
                 Debug.Log("taken damage");
                
-                _hearts[_currHeartNum-1].SetActive(false);    ///
-                _currHeartNum--;    ///
+                LoseHeart();
             }
         }
     }
 
-    
+    private void LoseHeart()
+    {
+        _hearts[_currHeartNum-1].SetActive(false);    ///
+        _currHeartNum--;    ///
+    }
+
+    private void GainHeart()
+    {
+        _hearts[_currHeartNum-1].SetActive(true);    ///
+        _currHeartNum++;    ///
+    }
 
     [PunRPC]
     protected override void RPC_SetHealth(int health)
