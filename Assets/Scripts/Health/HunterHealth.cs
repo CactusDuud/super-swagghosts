@@ -43,7 +43,10 @@ public class HunterHealth : ParentHealth
                 LoseHeart();
             }
         }
+    }
 
+    private void OnTriggerStay2D(Collision2D collision)
+    {
         if (is_down && collision.gameObject.CompareTag("Flashlight"))
         {
             if (_reviveCount < _reviveThreshold) _reviveCount++;
