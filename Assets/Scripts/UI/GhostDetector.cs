@@ -12,7 +12,7 @@ public class GhostDetector : MonoBehaviour
     {
         if (collision.tag == "Ghost")
         {
-            Debug.DrawLine( transform.position, collision.transform.position, Color.red);
+            Debug.DrawLine(transform.position, collision.transform.position, Color.red);
             indicator.SetActive(true);
         }
     }
