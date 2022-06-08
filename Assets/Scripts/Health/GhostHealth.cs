@@ -15,7 +15,7 @@ public class GhostHealth : ParentHealth
     private GhostController _controller;
     private SpriteRenderer _sprite;
 
-    //[SerializeField] private Text _healthTextObj;  
+    [SerializeField] private GameObject _healthTextObj;  
 
     [PunRPC]
     protected override void RPC_SetHealth(int health)
@@ -32,9 +32,9 @@ public class GhostHealth : ParentHealth
         rb = GetComponent<Rigidbody2D>();
         iframe_buildup = 0f;
 
-        // GameObject _healthTextObject = GameObject.Find("Ghost Health Num");//.GetComponent<Text>();  ///
+        _healthTextObj = GameObject.Find("Ghost Health Num");//.GetComponent<Text>();  ///
         // _healthTextObj = _healthTextObj.GetComponent<Text>();
-        // _healthTextObj.text = curr_health.ToString();   ///
+        _healthTextObj.GetComponent<Text>().text = curr_health.ToString();   ///
     }
 
     private void Update()
@@ -49,8 +49,8 @@ public class GhostHealth : ParentHealth
         }
 
         this.photonView.RPC("DecreaseOpacity", RpcTarget.All);
+        _healthTextObj.GetComponent<Text>().text = curr_health.ToString();   ///
 
-        // _healthTextObj.text = curr_health.ToString();   ///
     }
 
     /// <summary>
@@ -81,6 +81,7 @@ public class GhostHealth : ParentHealth
         base.TakeDamage(damage);
 
         _opacity = 1f;
+
     }
 
     [PunRPC]
@@ -123,7 +124,7 @@ public class GhostHealth : ParentHealth
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit))
         {
-            if (!hit.CompareTag("Player")) return;
+            // if (!hit.CompareTag("Player")) return;
         }
 
         if (collision.tag == "Flashlight")
@@ -170,8 +171,6 @@ public class GhostHealth : ParentHealth
                 iframe_buildup = 0f;
             }
             
-
-
 
         }
     }
