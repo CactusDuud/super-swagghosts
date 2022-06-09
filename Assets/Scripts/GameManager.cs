@@ -124,7 +124,7 @@ public class GameManager : MonoBehaviour
     protected void DoLightningRPC()
     {
         StartCoroutine(LightningFlashes());
-        _ghost.TakeDamage(0);
+        _ghost.SetOpacity(1f);
     }
 
     IEnumerator LightningFlashes()

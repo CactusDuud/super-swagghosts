@@ -71,8 +71,14 @@ public class GhostHealth : ParentHealth
     {
         base.TakeDamage(damage);
 
-        _opacity = 1f;
+        SetOpacity(1f);
     }
+
+    public void SetOpacity(float opacity)
+    {
+        _opacity = opacity;
+    }
+
 
     [PunRPC]
     private void DecreaseOpacity()
