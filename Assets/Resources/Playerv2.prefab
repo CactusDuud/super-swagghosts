@@ -111,6 +111,7 @@ Transform:
   m_Children:
   - {fileID: 691964715441157619}
   - {fileID: 255257509174647646}
+  - {fileID: 8736853837417952596}
   m_Father: {fileID: 8785083144454512462}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -230,12 +231,12 @@ MonoBehaviour:
   m_Color: {r: 0.4, g: 0.67450976, b: 0.8117647, a: 1}
   m_Intensity: 2
   m_LightVolumeOpacity: 0
-  m_ApplyToSortingLayers: 00000000292c42c7335ef6a2
+  m_ApplyToSortingLayers: 00000000292c42c7bdf9e353335ef6a2
   m_LightCookieSprite: {fileID: 0}
   m_UseNormalMap: 0
   m_LightOrder: 0
   m_AlphaBlendOnOverlap: 0
-  m_ShadowIntensity: 0.5
+  m_ShadowIntensity: 1
   m_ShadowVolumeIntensity: 0
   m_PointLightInnerAngle: 30
   m_PointLightOuterAngle: 45
@@ -396,6 +397,65 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &2595308583530859528
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8736853837417952596}
+  - component: {fileID: 5089824606594257751}
+  m_Layer: 6
+  m_Name: Shadow
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8736853837417952596
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2595308583530859528}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8772577006205314962}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5089824606594257751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2595308583530859528}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShadowGroup: 0
+  m_HasRenderer: 0
+  m_UseRendererSilhouette: 1
+  m_CastsShadows: 1
+  m_SelfShadows: 0
+  m_ApplyToSortingLayers: 00000000292c42c7bdf9e353335ef6a2
+  m_ShapePath:
+  - {x: -0.2, y: -0.5, z: 0}
+  - {x: 0.2, y: -0.5, z: 0}
+  - {x: 0.25, y: -0.45, z: 0}
+  - {x: 0.2, y: -0.4, z: 0}
+  - {x: -0.2, y: -0.4, z: 0}
+  - {x: -0.25, y: -0.45, z: 0}
+  m_ShapePathHash: -529800395
+  m_Mesh: {fileID: 0}
+  m_InstanceId: -173874
 --- !u!1 &3368869831022713115
 GameObject:
   m_ObjectHideFlags: 0
@@ -1007,12 +1067,12 @@ MonoBehaviour:
   m_Color: {r: 1, g: 0.8915726, b: 0.740566, a: 1}
   m_Intensity: 1
   m_LightVolumeOpacity: 0
-  m_ApplyToSortingLayers: 00000000292c42c7335ef6a2
+  m_ApplyToSortingLayers: 00000000292c42c7bdf9e353335ef6a2
   m_LightCookieSprite: {fileID: 0}
   m_UseNormalMap: 0
   m_LightOrder: 0
   m_AlphaBlendOnOverlap: 0
-  m_ShadowIntensity: 0.2
+  m_ShadowIntensity: 1
   m_ShadowVolumeIntensity: 0
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
