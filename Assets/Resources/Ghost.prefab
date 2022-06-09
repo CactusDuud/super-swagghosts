@@ -226,7 +226,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 218b8c72615c285428fa5e697c02d240, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pauseMenu: {fileID: 0}
   speed: 5
   _minMoveThreshhold: 0.01
   _spookBox: {fileID: 9160570681613881095}
