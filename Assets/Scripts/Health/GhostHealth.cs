@@ -16,9 +16,7 @@ public class GhostHealth : ParentHealth
     private GhostController _controller;
     private SpriteRenderer _sprite;
 
-    [SerializeField] private GameObject _healthTextObj;  
-
-    [SerializeField] private LayerMask _terrainLayer;
+    [SerializeField] private GameObject _healthTextObj;
 
     [PunRPC]
     protected override void RPC_SetHealth(int health)
@@ -70,6 +68,7 @@ public class GhostHealth : ParentHealth
     {
         _controller.enabled = true;
         _controller.EnableSpookBox();   
+        iframe_buildup = 0f;
     }
 
     public override void TakeDamage(int damage)
@@ -107,57 +106,39 @@ public class GhostHealth : ParentHealth
             );
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
+    public void TouchLight()
     {
-
         // If the ghost collides with a light ray, then it freezes up and 
         // takes damage for each second it is in the flashlight ray
         // Once it has taken enough damage, it gets temporary invincibility
         // to escape
-        if (collision.gameObject.CompareTag("Flashlight"))
+        if (iframe_buildup < 1f)
         {
-            // Shoots a ray towards the player. If it collides with a wall,
-            //  the rest of this function does nothing.
-            RaycastHit2D hit = Physics2D.Raycast(
-                transform.position,
-                (collision.transform.parent.transform.position - transform.position),
-                Vector2.Distance(transform.position, collision.transform.parent.transform.position),
-                _terrainLayer
-            );
-            if (hit.collider != null)
-            {
-                if (!hit.collider.CompareTag("Player")) return;
-            }
-
-            if (iframe_buildup < 1f)
-            {
-                
-                _controller.enabled = false;
-                _controller.DisableSpookBox();
-                rb.velocity = new Vector3(0, 0, 0);
-                TakeDamage(1);
-                iframe_buildup = iframe_buildup + (Time.deltaTime / 2f);
-            }
-            else if (iframe_buildup < 2f)
-            {
-                
-                ActivateInvincibility();
-                iframe_buildup = iframe_buildup + (Time.deltaTime/2f);
-            }
-            else
-            {
-                _controller.enabled = false;
-                _controller.DisableSpookBox();
-                rb.velocity = new Vector3(0, 0, 0);
-                iframe_buildup = 0f;
-            }
+            
+            _controller.enabled = false;
+            _controller.DisableSpookBox();
+            rb.velocity = new Vector3(0, 0, 0);
+            TakeDamage(1);
+            iframe_buildup = iframe_buildup + (Time.deltaTime / 2f);
+        }
+        else if (iframe_buildup < 2f)
+        {
+            
+            ActivateInvincibility();
+            iframe_buildup = iframe_buildup + (Time.deltaTime/2f);
+        }
+        else
+        {
+            _controller.enabled = false;
+            _controller.DisableSpookBox();
+            rb.velocity = new Vector3(0, 0, 0);
+            iframe_buildup = 0f;
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         // Trigger invincibility immediately if the ghosts leaves the light ray
-        ActivateInvincibility();
-        iframe_buildup = 0f;
+        if (collision.gameObject.CompareTag("Flashlight")) ActivateInvincibility();
     }
 }

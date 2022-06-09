@@ -190,6 +190,7 @@ GameObject:
   - component: {fileID: 630837749399305924}
   - component: {fileID: 2466773734656587915}
   - component: {fileID: 6042223981339123395}
+  - component: {fileID: 7021201905190142973}
   m_Layer: 6
   m_Name: Focused Light
   m_TagString: Flashlight
@@ -297,6 +298,21 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
   m_UseLocal: 0
+--- !u!114 &7021201905190142973
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2161803169597464691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 996ca003a07c22948a4e02213775cfb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _terrainLayer:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &2523073826806753043
 GameObject:
   m_ObjectHideFlags: 0
@@ -1286,6 +1302,9 @@ MonoBehaviour:
   - Type: 9
     SynchronizeType: 0
     Name: isDead
+  - Type: 9
+    SynchronizeType: 0
+    Name: isAlive
   m_SynchronizeLayers:
   - SynchronizeType: 1
     LayerIndex: 0

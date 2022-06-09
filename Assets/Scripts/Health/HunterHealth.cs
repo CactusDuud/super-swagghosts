@@ -43,16 +43,10 @@ public class HunterHealth : ParentHealth
         }
     }
 
-    private void OnTriggerStay2D(Collider2D other)
+    public void Revive()
     {
-        if (is_down && other.gameObject.CompareTag("Flashlight"))
+        if (is_down)
         {
-            RaycastHit2D hit = Physics2D.Raycast( transform.position, Vector2.up, 0.4f);
-            if (hit.collider != null)
-            {
-                if (!hit.collider.CompareTag("Flashlight")) return;
-            }
-
             if (_reviveCount < _reviveThreshold) _reviveCount++;
             else
             {
