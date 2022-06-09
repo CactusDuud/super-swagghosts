@@ -144,7 +144,7 @@ Transform:
   - {fileID: 2870585595418110233}
   - {fileID: 9119643401171205909}
   m_Father: {fileID: 8785083144454512462}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2161803169597464691
 GameObject:
@@ -347,55 +347,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &3363712363055306723
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4146936064619904035}
-  - component: {fileID: 4322025655038581035}
-  m_Layer: 6
-  m_Name: Ghost Detector
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4146936064619904035
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3363712363055306723}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 2098674743642995402}
-  - {fileID: 5898016492818465028}
-  m_Father: {fileID: 8785083144454512462}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4322025655038581035
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3363712363055306723}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b72686322975490419503b30b2baaa39, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  indicator: {fileID: 4569089941604791018}
-  miniIndicators: {fileID: 1511486495163478706}
-  innerCircle: {fileID: 4231940696588240167}
-  outerCircle: {fileID: 3557067924854341238}
 --- !u!1 &3557067924854341238
 GameObject:
   m_ObjectHideFlags: 0
@@ -406,6 +357,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2098674743642995402}
   - component: {fileID: 6753166060340693048}
+  - component: {fileID: 3920940324042419922}
   m_Layer: 0
   m_Name: Ghost Detector (Outer Circle)
   m_TagString: Untagged
@@ -424,8 +376,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 4146936064619904035}
-  m_RootOrder: 0
+  m_Father: {fileID: 8785083144454512462}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!58 &6753166060340693048
 CircleCollider2D:
@@ -443,6 +395,18 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 4
+--- !u!114 &3920940324042419922
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3557067924854341238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2664d79fd90721498ce861fdd9ae7ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4231940696588240167
 GameObject:
   m_ObjectHideFlags: 0
@@ -471,8 +435,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 4146936064619904035}
-  m_RootOrder: 1
+  m_Father: {fileID: 8785083144454512462}
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!58 &2870764109907400292
 CircleCollider2D:
@@ -601,7 +565,7 @@ Transform:
   m_LocalScale: {x: 1.28, y: 1.28, z: 1.28}
   m_Children: []
   m_Father: {fileID: 8785083144454512462}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1708276348203582737
 SpriteRenderer:
@@ -765,9 +729,10 @@ Transform:
   m_Children:
   - {fileID: 9145537700947648032}
   - {fileID: 8772577006205314962}
-  - {fileID: 4146936064619904035}
   - {fileID: 7626060305396731192}
   - {fileID: 1084197622781784202}
+  - {fileID: 2098674743642995402}
+  - {fileID: 5898016492818465028}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -865,6 +830,7 @@ MonoBehaviour:
   max_health: 100
   is_down: 0
   _hearts: []
+  _reviveThreshold: 100
 --- !u!114 &2052007292895768186
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -883,7 +849,6 @@ MonoBehaviour:
   _lightFuelMax: 20
   _lightFuel: 0
   _minimumLight: 0.34
-  _refuelAmount: 10
 --- !u!114 &7025737679981220458
 MonoBehaviour:
   m_ObjectHideFlags: 0

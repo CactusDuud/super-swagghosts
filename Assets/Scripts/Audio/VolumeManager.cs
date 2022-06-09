@@ -16,7 +16,7 @@ public class VolumeManager : MonoBehaviour
     {
         if (firstPlayInt == 0)
         {
-            volumeFloat = .25f;
+            volumeFloat = .125f;
             volumeSlider.value = volumeFloat;
             PlayerPrefs.SetFloat(VolumePref, volumeFloat);
             PlayerPrefs.SetInt(FirstPlay, -1);

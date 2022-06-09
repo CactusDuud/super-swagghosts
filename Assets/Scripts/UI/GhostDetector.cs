@@ -5,58 +5,21 @@ using UnityEngine;
 public class GhostDetector : MonoBehaviour
 {
     [SerializeField] GameObject indicator;
-    [SerializeField] GameObject miniIndicators;
+    AudioSource heartbeat;
 
-    [SerializeField] GameObject innerCircle;
-    [SerializeField] GameObject outerCircle;
-
+    void Start()
+    {
+        AudioSource heartbeat = GetComponent<AudioSource>();
+    }
 
     // Start is called before the first frame update
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (this == innerCircle)
-        {
-            if (collision.tag == "Ghost")
-            {
-                indicator.SetActive(true);
-            }
-        }
-        else if (this == outerCircle)
-        {
-            if (collision.tag == "Ghost")
-            {
-                miniIndicators.SetActive(true);
-            }
-        }
-        
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (this == innerCircle)
-        {
-            if (collision.tag == "Ghost")
-            {
-                indicator.SetActive(false);
-            }
-        }
-        else if (this == outerCircle)
-        {
-            if (collision.tag == "Ghost")
-            {
-                miniIndicators.SetActive(false);
-            }
-        }
-    }
-
-    //Originals in case things break
-    /*
-    private void OnTriggerStay2D(Collider2D collision)
-    {
         if (collision.tag == "Ghost")
         {
-            Debug.DrawLine(transform.position, collision.transform.position, Color.red);
+            //Debug.DrawLine(transform.position, collision.transform.position, Color.red);
             indicator.SetActive(true);
+            heartbeat.Play();
         }
     }
 
@@ -65,7 +28,7 @@ public class GhostDetector : MonoBehaviour
         if (collision.tag == "Ghost")
         {
             indicator.SetActive(false);
+            heartbeat.Stop();
         }
     }
-    */
 }
