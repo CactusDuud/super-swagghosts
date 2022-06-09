@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float _flashTimeVariance;
     [SerializeField] private int _flashIntensityMulti;
     [ReadOnly] private float _flashCurrentTime;
+    private GhostHealth _ghost;
 
     public static GameManager Instance { get; private set; }
 
@@ -48,6 +49,7 @@ public class GameManager : MonoBehaviour
         if (PhotonNetwork.IsMasterClient)
         {
             _spawned = PhotonNetwork.Instantiate(_ghostPrefab.name, _ghostSpawn.position, _ghostSpawn.rotation);
+            _ghost = _spawned.GetComponent<GhostHealth>();
             Debug.Log($"{name}: instantiated {_spawned.name}");
         }
         else
@@ -67,11 +69,12 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
+        
         if (PhotonNetwork.IsMasterClient)
         {
             SpawnBattery();
+            DoLightning();
 
-            _view.RPC("DoLightning", RpcTarget.All);
             _ghostUI.SetActive(true); ///
 
             // int downCount = 0;
@@ -106,16 +109,22 @@ public class GameManager : MonoBehaviour
     }
 
 
-    [PunRPC]
     protected void DoLightning()
     {
         if (_flashCurrentTime <= 0)
         {
-            Debug.Log("lightning execute");
-            StartCoroutine(LightningFlashes());
+            _view.RPC("DoLightningRPC", RpcTarget.All);
             _flashCurrentTime = _flashMinTime + (_flashTimeVariance * Random.Range(0f, 1f));
         }
         else _flashCurrentTime -= 1f * Time.deltaTime;
+    }
+
+
+    [PunRPC]
+    protected void DoLightningRPC()
+    {
+        StartCoroutine(LightningFlashes());
+        _ghost.TakeDamage(0);
     }
 
     IEnumerator LightningFlashes()
