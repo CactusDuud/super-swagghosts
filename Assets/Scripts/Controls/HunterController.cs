@@ -23,22 +23,6 @@ public class HunterController : ParentController
 
 
 
-    
-    //public void ActivateIndicators(GameObject indicator, bool on)
-    //{
-    //    this.photonView.RPC("ActivateIndicatorsRPC", RpcTarget.All, indicator, on);
-    //}
-
-    //[PunRPC]
-    //private void ActivateIndicatorsRPC(GameObject indicator, bool on)
-    //{
-    //    indicator.SetActive(on);
-    //}
-
-
-
-
-
     protected override void Awake()
     {
         base.Awake();
@@ -60,6 +44,15 @@ public class HunterController : ParentController
         parentControls.Player.Special.canceled += _ => SwitchLight(false);
 
         // Turn off light just in case
+        SwitchLight(false);
+    }
+
+    /// <summary>
+    /// This function is called when the behaviour becomes disabled or inactive.
+    /// </summary>
+    private void OnDisable()
+    {
+        // Turn off light in case it was on.
         SwitchLight(false);
     }
 
