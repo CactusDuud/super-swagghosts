@@ -7,7 +7,8 @@ public class GhostController : ParentController
     private float baseSpeed;
     [SerializeField] float fleeSpeedBoost = 1.5f;
     [SerializeField] float fleeDuration = 5f;
-
+    
+    // private Animator _anim; ///
 
 
     protected override void Awake()
@@ -15,6 +16,7 @@ public class GhostController : ParentController
         base.Awake();
 
         baseSpeed = base.speed;
+        // _anim = GetComponent<Animator>();
     }
 
     protected override void MoveEntity()
@@ -28,7 +30,15 @@ public class GhostController : ParentController
                 Vector3.forward, 
                 Vector3.Angle(-_spookBox.transform.up, rb.velocity)
                 );
+            
         }
+        float angle = Mathf.Atan2(base.move.y, base.move.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        // if(base.move.y > 1){transform.Rotate (Vector3.back * 90);}
+        // else if (base.move.y < 1){transform.Rotate (Vector3.back * -90);}
+        // else if(base.move.x > 1){transform.Rotate (Vector3.forward * 90);}
+        // else if(base.move.x < 1){transform.Rotate (Vector3.forward * -90);}
+
     }
 
     /// <summary>
