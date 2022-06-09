@@ -109,7 +109,7 @@ public class GhostHealth : ParentHealth
             RaycastHit2D hit = Physics2D.Raycast(
                 transform.position,
                 collision.transform.parent.transform.position,
-                Mathf.Infinity,
+                Vector2.Distance(transform.position, collision.transform.parent.transform.position),
                 _terrainLayer
             );
             if (hit.collider != null)
