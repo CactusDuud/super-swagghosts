@@ -64,7 +64,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _wiggleDistance: 0.1
-  _wiggleSpeed: 0.1
+  _wiggleSpeed: 1
   _refuelAmount: 10
 --- !u!114 &-329736413062125507
 MonoBehaviour:
