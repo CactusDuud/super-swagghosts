@@ -91,7 +91,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8772577006205314962}
-  - component: {fileID: 1550850455311468575}
   m_Layer: 6
   m_Name: Lights
   m_TagString: Untagged
@@ -116,22 +115,6 @@ Transform:
   m_Father: {fileID: 8785083144454512462}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1550850455311468575
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 828910934991253413}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SynchronizePosition: 0
-  m_SynchronizeRotation: 1
-  m_SynchronizeScale: 0
-  m_UseLocal: 0
 --- !u!1 &1511486495163478706
 GameObject:
   m_ObjectHideFlags: 0
@@ -207,6 +190,7 @@ GameObject:
   - component: {fileID: 691964715441157619}
   - component: {fileID: 630837749399305924}
   - component: {fileID: 2466773734656587915}
+  - component: {fileID: 6042223981339123395}
   - component: {fileID: 7021201905190142973}
   m_Layer: 6
   m_Name: Focused Light
@@ -299,6 +283,22 @@ PolygonCollider2D:
       - {x: 0, y: 3}
       - {x: -1.14, y: 2.76}
       - {x: 0, y: 0}
+--- !u!114 &6042223981339123395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2161803169597464691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 0
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
+  m_UseLocal: 0
 --- !u!114 &7021201905190142973
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -455,7 +455,7 @@ MonoBehaviour:
   - {x: -0.25, y: -0.45, z: 0}
   m_ShapePathHash: -529800395
   m_Mesh: {fileID: 0}
-  m_InstanceId: 74640
+  m_InstanceId: 70538
 --- !u!1 &3368869831022713115
 GameObject:
   m_ObjectHideFlags: 0
@@ -1193,7 +1193,7 @@ MonoBehaviour:
   - {fileID: 1732884974039032681}
   - {fileID: 7025737679981220458}
   - {fileID: -8791103500490441223}
-  - {fileID: 0}
+  - {fileID: 6042223981339123395}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
