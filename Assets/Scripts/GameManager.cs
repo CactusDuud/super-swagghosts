@@ -31,12 +31,15 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private GameObject _ghostUI;   ///
     [SerializeField] private GameObject _hunterUI;   ///
+    private PhotonView _view;
 
     private void Awake()
     {
         //! Singleton insurance
         if (Instance != null && Instance != this) { Destroy(this); }
         else { Instance = this; }
+
+        _view = GetComponent<PhotonView>();
 
         // Works like instantiate locally, but tells other clients to spawn a player in their view.
         // Basically, call once for yourself and everyone else will also see you.
@@ -67,8 +70,8 @@ public class GameManager : MonoBehaviour
         if (PhotonNetwork.IsMasterClient)
         {
             SpawnBattery();
-            DoLightning();
 
+            _view.RPC("DoLighting", RpcTarget.All);
             _ghostUI.SetActive(true); ///
 
             // int downCount = 0;
@@ -102,6 +105,8 @@ public class GameManager : MonoBehaviour
         else _batteryCurrentTime -= 1f * Time.deltaTime;
     }
 
+
+    [PunRPC]
     private void DoLightning()
     {
         if (_flashCurrentTime <= 0)
@@ -115,7 +120,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator LightningFlashes()
     {
-        int _flashCount = Random.Range(1, 3);
+        int _flashCount = 3;
 
         for (int i = 0; i < _flashCount; i++)
         {
