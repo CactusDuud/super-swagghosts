@@ -114,6 +114,7 @@ public class GhostHealth : ParentHealth
             );
             if (hit.collider != null)
             {
+                Debug.Log($"hit: {hit.transform.position} double parent: {collision.transform.parent.transform.position} parent: {collision.transform.parent.transform.parent.transform.position}");
                 Debug.DrawLine(transform.position, hit.transform.position, Color.green);
                 Debug.Log($"{name}: Flashlight hit {hit.transform.name}");
                 if (!hit.collider.CompareTag("Player")) return;
