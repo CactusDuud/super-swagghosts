@@ -83,6 +83,7 @@ public class HunterHealth : ParentHealth
             _rb.isKinematic = true;
             _controller.enabled = false;
             _anim.SetTrigger("isDead");
+            _anim.ResetTrigger("isAlive");
         }
 
         if (curr_health == max_health)
@@ -91,6 +92,7 @@ public class HunterHealth : ParentHealth
             _rb.isKinematic = false;
             _controller.enabled = true;
             _anim.ResetTrigger("isDead");
+            _anim.SetTrigger("isAlive");
         }
     }
 }
