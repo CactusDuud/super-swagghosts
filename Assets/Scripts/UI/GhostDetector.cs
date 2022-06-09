@@ -5,11 +5,12 @@ using UnityEngine;
 public class GhostDetector : MonoBehaviour
 {
     [SerializeField] GameObject indicator;
-    AudioSource heartbeat;
+    [SerializeField] AudioSource heartbeat;
 
     void Start()
     {
         AudioSource heartbeat = GetComponent<AudioSource>();
+        heartbeat.Stop();
     }
 
     // Start is called before the first frame update
@@ -19,6 +20,14 @@ public class GhostDetector : MonoBehaviour
         {
             //Debug.DrawLine(transform.position, collision.transform.position, Color.red);
             indicator.SetActive(true);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "Ghost")
+        {
+            //Debug.DrawLine(transform.position, collision.transform.position, Color.red);
             heartbeat.Play();
         }
     }
