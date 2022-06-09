@@ -108,14 +108,13 @@ public class GhostHealth : ParentHealth
             //  the rest of this function does nothing.
             RaycastHit2D hit = Physics2D.Raycast(
                 transform.position,
-                collision.transform.parent.transform.position,
+                (collision.transform.parent.transform.position - transform.position),
                 Vector2.Distance(transform.position, collision.transform.parent.transform.position),
                 _terrainLayer
             );
             if (hit.collider != null)
             {
-                Debug.DrawRay(transform.position, hit.collider.transform.position, Color.green);
-                Debug.DrawRay(transform.position, hit.transform.position, Color.green);
+                Debug.DrawRay(transform.position, hit.collider.transform.position - transform.position, Color.green);
                 Debug.Log($"{name}: Flashlight hit {hit.transform.name}");
                 if (!hit.collider.CompareTag("Player")) return;
             }
