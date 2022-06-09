@@ -9,7 +9,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8791103500490441223, guid: d77042d1e1f911b459e5918f8b396e30, type: 3}
       propertyPath: m_SynchronizeParameters.Array.size
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: -8791103500490441223, guid: d77042d1e1f911b459e5918f8b396e30, type: 3}
       propertyPath: m_SynchronizeParameters.Array.data[4].Name
