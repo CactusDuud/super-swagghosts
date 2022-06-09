@@ -474,6 +474,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   indicator: {fileID: 4569089941604791018}
   heartbeat: {fileID: 3697545336329595872}
+  _view: {fileID: 473197985743239266}
 --- !u!82 &3697545336329595872
 AudioSource:
   m_ObjectHideFlags: 0
@@ -633,6 +634,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   indicator: {fileID: 1511486495163478706}
   heartbeat: {fileID: 7252291184220847095}
+  _view: {fileID: 473197985743239266}
 --- !u!82 &7252291184220847095
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1235,6 +1237,9 @@ MonoBehaviour:
   - Type: 4
     SynchronizeType: 1
     Name: isMoving
+  - Type: 9
+    SynchronizeType: 0
+    Name: isDead
   m_SynchronizeLayers:
   - SynchronizeType: 1
     LayerIndex: 0

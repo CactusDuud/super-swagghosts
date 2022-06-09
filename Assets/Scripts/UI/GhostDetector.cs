@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
+using Photon.Realtime;
 
 public class GhostDetector : MonoBehaviour
 {
     [SerializeField] GameObject indicator;
     [SerializeField] AudioSource heartbeat;
+    [SerializeField] PhotonView _view;
 
     void Start()
     {
@@ -25,7 +28,7 @@ public class GhostDetector : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Ghost")
+        if (collision.tag == "Ghost" && _view.IsMine)
         {
             //Debug.DrawLine(transform.position, collision.transform.position, Color.red);
             heartbeat.Play();
@@ -34,7 +37,7 @@ public class GhostDetector : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.tag == "Ghost")
+        if (collision.tag == "Ghost" && _view.IsMine)
         {
             indicator.SetActive(false);
             heartbeat.Stop();
