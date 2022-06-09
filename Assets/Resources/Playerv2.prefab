@@ -310,6 +310,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 996ca003a07c22948a4e02213775cfb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _player: {fileID: 8785083144454512462}
   _terrainLayer:
     serializedVersion: 2
     m_Bits: 64
