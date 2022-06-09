@@ -107,7 +107,7 @@ public class GameManager : MonoBehaviour
         if (_flashCurrentTime <= 0)
         {
             Debug.Log("lightning execute");
-            LightningFlashes();
+            StartCoroutine(LightningFlashes());
             _flashCurrentTime = _flashMinTime + (_flashTimeVariance * Random.Range(0f, 1f));
         }
         else _flashCurrentTime -= 1f * Time.deltaTime;
