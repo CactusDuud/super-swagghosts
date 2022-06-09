@@ -50,7 +50,7 @@ public class HunterController : ParentController
     /// <summary>
     /// This function is called when the behaviour becomes disabled or inactive.
     /// </summary>
-    private void OnDisable()
+    public override void OnDisable()
     {
         // Turn off light in case it was on.
         SwitchLight(false);
