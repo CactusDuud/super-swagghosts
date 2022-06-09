@@ -32,10 +32,12 @@ public class GhostController : ParentController
                 );
             
         }
-        if(base.move.y > 1){transform.Rotate (Vector3.back * 90);}
-        else if (base.move.y < 1){ transform.Rotate (Vector3.back * -90);}
-        if(base.move.x > 1){transform.Rotate (Vector3.forward * 90);}
-        else if(base.move.x < 1){transform.Rotate (Vector3.forward * -90);}
+        float angle = Mathf.Atan2(base.move.y, base.move.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        // if(base.move.y > 1){transform.Rotate (Vector3.back * 90);}
+        // else if (base.move.y < 1){transform.Rotate (Vector3.back * -90);}
+        // else if(base.move.x > 1){transform.Rotate (Vector3.forward * 90);}
+        // else if(base.move.x < 1){transform.Rotate (Vector3.forward * -90);}
 
     }
 
