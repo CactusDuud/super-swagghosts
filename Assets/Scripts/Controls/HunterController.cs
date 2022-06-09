@@ -54,6 +54,8 @@ public class HunterController : ParentController
     {
         // Turn off light in case it was on.
         SwitchLight(false);
+
+        base.OnDisable();
     }
 
     protected override void MoveEntity()
