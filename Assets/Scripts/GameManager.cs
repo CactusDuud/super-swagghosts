@@ -114,6 +114,7 @@ public class GameManager : MonoBehaviour
         if (_flashCurrentTime <= 0)
         {
             _view.RPC("DoLightningRPC", RpcTarget.All);
+            _ghost.SetOpacity(1f);
             _flashCurrentTime = _flashMinTime + (_flashTimeVariance * Random.Range(0f, 1f));
         }
         else _flashCurrentTime -= 1f * Time.deltaTime;
@@ -124,7 +125,6 @@ public class GameManager : MonoBehaviour
     protected void DoLightningRPC()
     {
         StartCoroutine(LightningFlashes());
-        _ghost.SetOpacity(1f);
     }
 
     IEnumerator LightningFlashes()

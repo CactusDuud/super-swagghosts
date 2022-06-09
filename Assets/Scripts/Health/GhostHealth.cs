@@ -71,9 +71,10 @@ public class GhostHealth : ParentHealth
     {
         base.TakeDamage(damage);
 
-        SetOpacity(1f);
+        this.photonView.RPC("SetOpacity", RpcTarget.All, 1f);
     }
 
+    [PunRPC]
     public void SetOpacity(float opacity)
     {
         _opacity = opacity;
