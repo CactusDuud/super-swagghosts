@@ -9,6 +9,7 @@ public class GhostDetector : MonoBehaviour
     [SerializeField] GameObject indicator;
     [SerializeField] AudioSource heartbeat;
     [SerializeField] PhotonView _view;
+    [SerializeField] HunterController _controller;
 
     void Start()
     {
@@ -19,10 +20,10 @@ public class GhostDetector : MonoBehaviour
     // Start is called before the first frame update
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.tag == "Ghost")
+        if (collision.tag == "Ghost" && _view.IsMine)
         {
             //Debug.DrawLine(transform.position, collision.transform.position, Color.red);
-            _view.RPC("ActivateIndicators", RpcTarget.All, true);
+            _controller.ActivateIndicators(indicator, true);
         }
     }
 
@@ -39,15 +40,8 @@ public class GhostDetector : MonoBehaviour
     {
         if (collision.tag == "Ghost" && _view.IsMine)
         {
-            _view.RPC("ActivateIndicators", RpcTarget.All, false);
+            _controller.ActivateIndicators(indicator, false);
             heartbeat.Stop();
         }
-    }
-
-
-    [PunRPC]
-    private void ActivateIndicators(bool on)
-    {
-        indicator.SetActive(on);
     }
 }
