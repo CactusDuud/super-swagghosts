@@ -98,7 +98,6 @@ GameObject:
   - component: {fileID: 2974735930679030581}
   - component: {fileID: 2974735930679030578}
   - component: {fileID: -3634163329717842706}
-  - component: {fileID: 7214728165481415466}
   m_Layer: 0
   m_Name: Ghost
   m_TagString: Ghost
@@ -180,6 +179,7 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 2974735930679030580}
   - {fileID: -3634163329717842706}
+  - {fileID: 0}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -196,7 +196,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_SynchronizePosition: 1
-  m_SynchronizeRotation: 0
+  m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
   m_UseLocal: 1
 --- !u!114 &2974735930679030581
@@ -248,22 +248,6 @@ MonoBehaviour:
   m_SynchronizeAngularVelocity: 0
   m_TeleportEnabled: 0
   m_TeleportIfDistanceGreaterThan: 3
---- !u!114 &7214728165481415466
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2974735930679030579}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b8c4a61274f60b4ea5fb4299cfdbf14, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ShowLayerWeightsInspector: 1
-  ShowParameterInspector: 1
-  m_SynchronizeParameters: []
-  m_SynchronizeLayers: []
 --- !u!1 &5343677343164499149
 GameObject:
   m_ObjectHideFlags: 0
