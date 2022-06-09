@@ -6,6 +6,8 @@ public class FuelBehavior : MonoBehaviour
 {
     [SerializeField] private float _wiggleDistance = 1;
     [SerializeField] private float _wiggleSpeed = 1;
+
+    [SerializeField] private float _refuelAmount = 10f;
     private Transform _sprite;
 
     private void Awake()
@@ -23,6 +25,7 @@ public class FuelBehavior : MonoBehaviour
     {
         if(collision.tag == "Player")
         {
+            collision.GetComponent<HunterController>().Refuel(_refuelAmount);
             Destroy(gameObject);
         }
     }

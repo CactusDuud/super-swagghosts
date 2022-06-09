@@ -26,17 +26,21 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float _flashTimeVariance;
     [SerializeField] private int _flashIntensityMulti;
     [ReadOnly] private float _flashCurrentTime;
+    private GhostHealth _ghost;
 
     public static GameManager Instance { get; private set; }
 
     [SerializeField] private GameObject _ghostUI;   ///
     [SerializeField] private GameObject _hunterUI;   ///
+    private PhotonView _view;
 
     private void Awake()
     {
         //! Singleton insurance
         if (Instance != null && Instance != this) { Destroy(this); }
         else { Instance = this; }
+
+        _view = GetComponent<PhotonView>();
 
         // Works like instantiate locally, but tells other clients to spawn a player in their view.
         // Basically, call once for yourself and everyone else will also see you.
@@ -45,6 +49,7 @@ public class GameManager : MonoBehaviour
         if (PhotonNetwork.IsMasterClient)
         {
             _spawned = PhotonNetwork.Instantiate(_ghostPrefab.name, _ghostSpawn.position, _ghostSpawn.rotation);
+            _ghost = _spawned.GetComponent<GhostHealth>();
             Debug.Log($"{name}: instantiated {_spawned.name}");
         }
         else
@@ -64,6 +69,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
+        
         if (PhotonNetwork.IsMasterClient)
         {
             SpawnBattery();
@@ -102,19 +108,28 @@ public class GameManager : MonoBehaviour
         else _batteryCurrentTime -= 1f * Time.deltaTime;
     }
 
-    private void DoLightning()
+
+    protected void DoLightning()
     {
         if (_flashCurrentTime <= 0)
         {
-            LightningFlashes();
+            _view.RPC("DoLightningRPC", RpcTarget.All);
+            _ghost?.TakeDamage(0);
             _flashCurrentTime = _flashMinTime + (_flashTimeVariance * Random.Range(0f, 1f));
         }
         else _flashCurrentTime -= 1f * Time.deltaTime;
     }
 
+
+    [PunRPC]
+    protected void DoLightningRPC()
+    {
+        StartCoroutine(LightningFlashes());
+    }
+
     IEnumerator LightningFlashes()
     {
-        int _flashCount = Random.Range(1, 3);
+        int _flashCount = 3;
 
         for (int i = 0; i < _flashCount; i++)
         {

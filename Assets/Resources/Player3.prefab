@@ -8,6 +8,18 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -8791103500490441223, guid: d77042d1e1f911b459e5918f8b396e30, type: 3}
+      propertyPath: m_SynchronizeParameters.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: -8791103500490441223, guid: d77042d1e1f911b459e5918f8b396e30, type: 3}
+      propertyPath: m_SynchronizeParameters.Array.data[4].Name
+      value: isDead
+      objectReference: {fileID: 0}
+    - target: {fileID: -8791103500490441223, guid: d77042d1e1f911b459e5918f8b396e30, type: 3}
+      propertyPath: m_SynchronizeParameters.Array.data[4].Type
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: -8791103500490441223, guid: d77042d1e1f911b459e5918f8b396e30, type: 3}
       propertyPath: m_SynchronizeParameters.Array.data[4].SynchronizeType
       value: 0
       objectReference: {fileID: 0}
@@ -17,7 +29,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 473197985743239266, guid: d77042d1e1f911b459e5918f8b396e30, type: 3}
       propertyPath: ObservedComponents.Array.size
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 473197985743239266, guid: d77042d1e1f911b459e5918f8b396e30, type: 3}
       propertyPath: ObservedComponents.Array.data[2]
@@ -26,7 +38,7 @@ PrefabInstance:
     - target: {fileID: 473197985743239266, guid: d77042d1e1f911b459e5918f8b396e30, type: 3}
       propertyPath: ObservedComponents.Array.data[3]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 6721573953419855425}
     - target: {fileID: 473197985743239266, guid: d77042d1e1f911b459e5918f8b396e30, type: 3}
       propertyPath: ObservedComponents.Array.data[4]
       value: 
@@ -35,6 +47,14 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 7e86ae0d54d3944c299b8bcc1a13381c, type: 2}
+    - target: {fileID: 723443831284470581, guid: d77042d1e1f911b459e5918f8b396e30, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 828910934991253413, guid: d77042d1e1f911b459e5918f8b396e30, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2052007292895768186, guid: d77042d1e1f911b459e5918f8b396e30, type: 3}
       propertyPath: dimImage
       value: 
@@ -43,10 +63,26 @@ PrefabInstance:
       propertyPath: optionsMenu
       value: 
       objectReference: {fileID: 5652935064288510696, guid: f9feb392f46349140b867da4d61e29c7, type: 3}
+    - target: {fileID: 2161803169597464691, guid: d77042d1e1f911b459e5918f8b396e30, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3363712363055306723, guid: d77042d1e1f911b459e5918f8b396e30, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4569089941604791018, guid: d77042d1e1f911b459e5918f8b396e30, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4902120737922480370, guid: d77042d1e1f911b459e5918f8b396e30, type: 3}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: a0cc4c5a001594d8c8a2d22814924b67, type: 3}
+    - target: {fileID: 5269897410204849370, guid: d77042d1e1f911b459e5918f8b396e30, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5473547924024818039, guid: d77042d1e1f911b459e5918f8b396e30, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -54,6 +90,10 @@ PrefabInstance:
     - target: {fileID: 8785083144454512461, guid: d77042d1e1f911b459e5918f8b396e30, type: 3}
       propertyPath: m_Name
       value: Player3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8785083144454512461, guid: d77042d1e1f911b459e5918f8b396e30, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8785083144454512462, guid: d77042d1e1f911b459e5918f8b396e30, type: 3}
       propertyPath: m_RootOrder

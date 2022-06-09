@@ -16,19 +16,12 @@ public class HunterController : ParentController
     [SerializeField] private float _lightFuelMax;
     [ReadOnly] [SerializeField] private float _lightFuel;
     [SerializeField] private float _minimumLight;
-    [SerializeField] private float _refuelAmount;
     private float _focusedLightDefaultDistance;
     private bool _isLightOn;
 
     private Animator _anim;
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if(collision.tag == "Fuel")
-        {
-                Refuel(_refuelAmount);
-        }
-    }
+    
 
     protected override void Awake()
     {
@@ -96,9 +89,6 @@ public class HunterController : ParentController
 
     private void SwitchLight(bool isLightOn)
     {
-        // Do nothing if this isn't my view
-        if (!_view.IsMine) return;
-
         _isLightOn = isLightOn;
     }
 
@@ -118,8 +108,6 @@ public class HunterController : ParentController
                 _lightFuel -= Time.deltaTime;
                 if (_lightFuel < 0) { _lightFuel = 0; }
             }
-
-            //Debug.Log(_lightFuel);
 
             // Set size of beam 
             // Assumes default scale for hitbox is 1

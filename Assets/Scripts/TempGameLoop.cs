@@ -65,11 +65,16 @@ public class TempGameLoop : MonoBehaviour
             // Iterate through all human scripts to check if they are down
             for (int h = 0; h < num_hunters; h++)
             {
-                if (hunter_healths[h].is_down == true) down_count++;
+                if (hunter_healths[h] == null || hunter_healths[h].is_down == true) down_count++;
             }
 
             // if total number of dead pp == total num of humans, then ghost wins
             if (down_count >= num_hunters) return "ghost";
+        }
+
+        if(ghost_health == null)
+        {
+            return "humans";
         }
 
         return "none";
