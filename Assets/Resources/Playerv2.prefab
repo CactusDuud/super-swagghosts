@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9145537700947648032}
   - component: {fileID: 4902120737922480370}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Player Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -91,7 +91,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8772577006205314962}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Lights
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -126,7 +126,7 @@ GameObject:
   - component: {fileID: 630837749399305924}
   - component: {fileID: 2466773734656587915}
   - component: {fileID: 6042223981339123395}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Focused Light
   m_TagString: Flashlight
   m_Icon: {fileID: 0}
@@ -244,7 +244,7 @@ GameObject:
   - component: {fileID: 4146936064619904035}
   - component: {fileID: 7345934667523892907}
   - component: {fileID: 4322025655038581035}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Ghost Detector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -304,7 +304,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7626060305396731192}
   - component: {fileID: 1708276348203582737}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Ghost Indicator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -386,7 +386,7 @@ GameObject:
   m_Component:
   - component: {fileID: 255257509174647646}
   - component: {fileID: 8258790089751901017}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Ambient Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -467,7 +467,7 @@ GameObject:
   - component: {fileID: 5473547924024818039}
   - component: {fileID: 476991229559664805}
   - component: {fileID: -8791103500490441223}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Playerv2
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -585,6 +585,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   max_health: 100
   is_down: 0
+  _hearts: []
+  _reviveThreshold: 100
 --- !u!114 &2052007292895768186
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -597,14 +599,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc491c8b0d565f645b0d50f2165cdd6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pauseMenu: {fileID: 0}
   speed: 3.5
   _minMoveThreshhold: 0.01
   _lights: {fileID: 828910934991253413}
   _lightFuelMax: 20
   _lightFuel: 0
   _minimumLight: 0.34
-  _refuelAmount: 10
 --- !u!114 &7025737679981220458
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -718,6 +718,9 @@ MonoBehaviour:
   - Type: 4
     SynchronizeType: 1
     Name: isMoving
+  - Type: 9
+    SynchronizeType: 0
+    Name: isDead
   m_SynchronizeLayers:
   - SynchronizeType: 1
     LayerIndex: 0

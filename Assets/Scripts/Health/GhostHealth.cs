@@ -114,11 +114,11 @@ public class GhostHealth : ParentHealth
             );
             if (hit.collider != null)
             {
+                Debug.DrawLine(transform.position, hit.transform.position, Color.green);
                 Debug.Log($"{name}: Flashlight hit {hit.transform.name}");
                 if (!hit.collider.CompareTag("Player")) return;
             }
 
-            Debug.DrawLine(transform.position, collision.transform.parent.transform.position, Color.yellow);
             if (iframe_buildup < 1f)
             {
                 
