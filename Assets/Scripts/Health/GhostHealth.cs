@@ -106,17 +106,17 @@ public class GhostHealth : ParentHealth
         {
             // Shoots a ray towards the player. If it collides with a wall,
             //  the rest of this function does nothing.
-            // RaycastHit2D hit = Physics2D.Raycast(
-            //     transform.position,
-            //     collision.transform.parent.transform.position, 
-            //     Mathf.Infinity,
-            //     _terrainLayer
-            // );
-            // if (hit.collider != null)
-            // {
-            //     Debug.Log($"{name}: Flashlight hit {hit.transform.name}");
-            //     if (!hit.collider.CompareTag("Player")) return;
-            // }
+            RaycastHit2D hit = Physics2D.Raycast(
+                transform.position,
+                collision.transform.parent.transform.position,
+                Mathf.Infinity,
+                _terrainLayer
+            );
+            if (hit.collider != null)
+            {
+                Debug.Log($"{name}: Flashlight hit {hit.transform.name}");
+                if (!hit.collider.CompareTag("Player")) return;
+            }
 
             Debug.DrawLine(transform.position, collision.transform.parent.transform.position, Color.yellow);
             if (iframe_buildup < 1f)
