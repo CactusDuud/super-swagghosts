@@ -69,8 +69,7 @@ public class GhostHealth : ParentHealth
     private void ActivateInvincibility()
     {
         _controller.enabled = true;
-        _controller.EnableSpookBox();
-        //_controller.Flee();   
+        _controller.EnableSpookBox();   
     }
 
     public override void TakeDamage(int damage)

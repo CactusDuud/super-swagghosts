@@ -25,8 +25,6 @@ public class HunterHealth : ParentHealth
         _controller = GetComponent<HunterController>();
 
         _hearts.Add(GameObject.Find("Full Heart1"));
-        _hearts.Add(GameObject.Find("Full Heart2"));
-        _hearts.Add(GameObject.Find("Full Heart3"));
         _currHeartNum = 1;
     }
 
@@ -49,6 +47,12 @@ public class HunterHealth : ParentHealth
     {
         if (is_down && other.gameObject.CompareTag("Flashlight"))
         {
+            RaycastHit2D hit = Physics2D.Raycast( transform.position, Vector2.up, 0.4f);
+            if (hit.collider != null)
+            {
+                if (!hit.collider.CompareTag("Flashlight")) return;
+            }
+
             if (_reviveCount < _reviveThreshold) _reviveCount++;
             else
             {
