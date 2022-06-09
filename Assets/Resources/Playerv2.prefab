@@ -423,6 +423,7 @@ GameObject:
   - component: {fileID: 6753166060340693048}
   - component: {fileID: 3920940324042419922}
   - component: {fileID: 3697545336329595872}
+  - component: {fileID: 5390283464084788937}
   m_Layer: 0
   m_Name: Ghost Detector (Outer Circle)
   m_TagString: Untagged
@@ -474,8 +475,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   indicator: {fileID: 4569089941604791018}
   heartbeat: {fileID: 3697545336329595872}
-  _view: {fileID: 473197985743239266}
-  _controller: {fileID: 2052007292895768186}
+  _view: {fileID: 5390283464084788937}
 --- !u!82 &3697545336329595872
 AudioSource:
   m_ObjectHideFlags: 0
@@ -572,6 +572,28 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &5390283464084788937
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3557067924854341238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &4231940696588240167
 GameObject:
   m_ObjectHideFlags: 0
@@ -584,6 +606,7 @@ GameObject:
   - component: {fileID: 2870764109907400292}
   - component: {fileID: 686963203490178116}
   - component: {fileID: 7252291184220847095}
+  - component: {fileID: 3205351824008704368}
   m_Layer: 0
   m_Name: Ghost Detector (Inner Circle)
   m_TagString: Untagged
@@ -635,8 +658,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   indicator: {fileID: 1511486495163478706}
   heartbeat: {fileID: 7252291184220847095}
-  _view: {fileID: 473197985743239266}
-  _controller: {fileID: 2052007292895768186}
+  _view: {fileID: 3205351824008704368}
 --- !u!82 &7252291184220847095
 AudioSource:
   m_ObjectHideFlags: 0
@@ -733,6 +755,28 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &3205351824008704368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4231940696588240167}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &4248339053217192491
 GameObject:
   m_ObjectHideFlags: 0

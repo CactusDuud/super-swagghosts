@@ -24,16 +24,16 @@ public class HunterController : ParentController
 
 
     
-    public void ActivateIndicators(GameObject indicator, bool on)
-    {
-        this.photonView.RPC("ActivateIndicatorsRPC", RpcTarget.All, indicator, on);
-    }
+    //public void ActivateIndicators(GameObject indicator, bool on)
+    //{
+    //    this.photonView.RPC("ActivateIndicatorsRPC", RpcTarget.All, indicator, on);
+    //}
 
-    [PunRPC]
-    private void ActivateIndicatorsRPC(GameObject indicator, bool on)
-    {
-        indicator.SetActive(on);
-    }
+    //[PunRPC]
+    //private void ActivateIndicatorsRPC(GameObject indicator, bool on)
+    //{
+    //    indicator.SetActive(on);
+    //}
 
 
 
