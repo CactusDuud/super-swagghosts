@@ -55,7 +55,7 @@ public class TempGameLoop : MonoBehaviour
     private string CheckWinner()
     {
         // If ghost is dead then humans win
-        if (ghost_health == null || ghost_health.is_down) return "humans";
+        if (ghost_health != null && ghost_health.is_down) return "humans";
 
         // Check if hunters are dead
         else
@@ -70,6 +70,11 @@ public class TempGameLoop : MonoBehaviour
 
             // if total number of dead pp == total num of humans, then ghost wins
             if (down_count >= num_hunters) return "ghost";
+        }
+
+        if(ghost_health == null)
+        {
+            return "humans";
         }
 
         return "none";
