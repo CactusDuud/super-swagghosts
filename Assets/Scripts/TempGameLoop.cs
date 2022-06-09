@@ -54,13 +54,8 @@ public class TempGameLoop : MonoBehaviour
     //  none of us know how to get that to work lol
     private string CheckWinner()
     {
-        if(ghost_health.gameObject == null)
-        {
-            return "humans";
-        }
-
         // If ghost is dead then humans win
-        if (ghost_health != null && ghost_health.is_down) return "humans";
+        if (ghost_health == null || ghost_health.is_down) return "humans";
 
         // Check if hunters are dead
         else
@@ -70,7 +65,7 @@ public class TempGameLoop : MonoBehaviour
             // Iterate through all human scripts to check if they are down
             for (int h = 0; h < num_hunters; h++)
             {
-                if (hunter_healths[h].gameObject == null || hunter_healths[h].is_down == true) down_count++;
+                if (hunter_healths[h] == null || hunter_healths[h].is_down == true) down_count++;
             }
 
             // if total number of dead pp == total num of humans, then ghost wins
