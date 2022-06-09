@@ -90,6 +90,7 @@ public class HunterHealth : ParentHealth
             is_down = false;
             _rb.isKinematic = false;
             _controller.enabled = true;
+            _anim.ResetTrigger("isDead");
         }
     }
 }
