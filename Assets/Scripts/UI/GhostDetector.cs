@@ -22,7 +22,7 @@ public class GhostDetector : MonoBehaviour
         if (collision.tag == "Ghost")
         {
             //Debug.DrawLine(transform.position, collision.transform.position, Color.red);
-            indicator.SetActive(true);
+            _view.RPC("ActivateIndicators", RpcTarget.All, true);
         }
     }
 
@@ -39,8 +39,15 @@ public class GhostDetector : MonoBehaviour
     {
         if (collision.tag == "Ghost" && _view.IsMine)
         {
-            indicator.SetActive(false);
+            _view.RPC("ActivateIndicators", RpcTarget.All, false);
             heartbeat.Stop();
         }
+    }
+
+
+    [PunRPC]
+    private void ActivateIndicators(bool on)
+    {
+        indicator.SetActive(on);
     }
 }
