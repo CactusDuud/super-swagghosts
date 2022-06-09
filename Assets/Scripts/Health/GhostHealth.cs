@@ -35,8 +35,11 @@ public class GhostHealth : ParentHealth
         rb = GetComponent<Rigidbody2D>();
         iframe_buildup = 0f;
 
-        _healthTextObj = GameObject.Find("Ghost Health Num");
-        _healthTextObj.GetComponent<Text>().text = curr_health.ToString();
+        if(PhotonNetwork.IsMasterClient)
+        {
+            _healthTextObj = GameObject.Find("Ghost Health Num");
+            _healthTextObj.GetComponent<Text>().text = curr_health.ToString();
+        }
     }
 
     private void Update()
@@ -50,7 +53,10 @@ public class GhostHealth : ParentHealth
         }
 
         this.photonView.RPC("DecreaseOpacity", RpcTarget.All);
-        _healthTextObj.GetComponent<Text>().text = curr_health.ToString();
+        if(PhotonNetwork.IsMasterClient)
+        {
+            _healthTextObj.GetComponent<Text>().text = curr_health.ToString();
+        }
 
     }
 
