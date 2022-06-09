@@ -71,7 +71,7 @@ public class GameManager : MonoBehaviour
         {
             SpawnBattery();
 
-            _view.RPC("DoLighting", RpcTarget.All);
+            _view.RPC("DoLightning", RpcTarget.All);
             _ghostUI.SetActive(true); ///
 
             // int downCount = 0;
@@ -107,7 +107,7 @@ public class GameManager : MonoBehaviour
 
 
     [PunRPC]
-    private void DoLightning()
+    protected void DoLightning()
     {
         if (_flashCurrentTime <= 0)
         {
