@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class LightBehaviour : MonoBehaviour
 {
+    [SerializeField] private Transform _player;
     [SerializeField] private LayerMask _terrainLayer;
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -13,9 +14,9 @@ public class LightBehaviour : MonoBehaviour
             // Shoots a ray towards the player. If it collides with a wall,
             //  the rest of this function does nothing.
             RaycastHit2D hit = Physics2D.Raycast(
-                transform.position,
-                (collision.transform.parent.transform.position - transform.position),
-                Vector2.Distance(transform.position, collision.transform.parent.transform.position),
+                _player.position,
+                (collision.transform.position - _player.position),
+                Vector2.Distance(_player.position, collision.transform.position),
                 _terrainLayer
             );
             if (hit.collider != null)
