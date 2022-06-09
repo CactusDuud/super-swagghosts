@@ -108,7 +108,7 @@ public class GhostHealth : ParentHealth
             //  the rest of this function does nothing.
             RaycastHit2D hit = Physics2D.Raycast(
                 transform.position,
-                collision.transform.parent.transform.position,
+                collision.transform.parent.transform.parent.transform.position,
                 Vector2.Distance(transform.position, collision.transform.parent.transform.position),
                 _terrainLayer
             );
